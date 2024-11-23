@@ -1,10 +1,37 @@
 {
   "shouldConfirmBeforeCreate": true,
+  "localeOverride": "zh-cn",
   "weekStart": "locale",
+  "showWeeklyNote": true,
+  "sourceSettings": {
+    "wordCount": {
+      "color": "#ebcb8b",
+      "display": "none",
+      "wordsPerDot": 250
+    },
+    "tasks": {
+      "color": "#d08770",
+      "display": "none",
+      "maxIncompleteTaskDots": 1
+    },
+    "links": {
+      "color": "#a3be8c",
+      "display": "none"
+    },
+    "backlinks": {
+      "color": "#5e81ac",
+      "display": "none"
+    },
+    "zettels": {
+      "color": "#b48ead",
+      "display": "none"
+    },
+    "emoji-tags": {
+      "display": "none"
+    }
+  },
   "wordsPerDot": 250,
-  "showWeeklyNote": false,
   "weeklyNoteFormat": "",
   "weeklyNoteTemplate": "",
-  "weeklyNoteFolder": "",
-  "localeOverride": "system-default"
+  "weeklyNoteFolder": "Record 记录/周记"
 }

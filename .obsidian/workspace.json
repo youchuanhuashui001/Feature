@@ -1,36 +1,50 @@
 {
   "main": {
-    "id": "7092dbafb7e4116d",
+    "id": "5324373015726ba8",
     "type": "split",
     "children": [
       {
-        "id": "913ad68fd4ed82f5",
+        "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
           {
-            "id": "c7db3710b000f3f4",
+            "id": "c06c4bc3f99c2448",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Home.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Home"
+            }
+          },
+          {
+            "id": "518b76ec86d2569c",
+            "type": "leaf",
+            "state": {
+              "type": "thino_view",
+              "state": {},
+              "icon": "Memos",
+              "title": "Thino"
+            }
+          },
+          {
+            "id": "e388c3fc176d0d6c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AXI-DMA.md",
+                "file": "00 日记/2024/2024-11/2024-11-23-星期六.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "AXI-DMA"
-            }
-          },
-          {
-            "id": "f689ef67993b8001",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "dma_test_preppare.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "dma_test_preppare"
+              "title": "2024-11-23-星期六"
             }
           }
         ]
@@ -86,10 +100,26 @@
             }
           }
         ]
+      },
+      {
+        "id": "f616935bdd087f68",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cfbda819ae6c4fe9",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 312.5
   },
   "right": {
     "id": "329513b606a31f86",
@@ -105,16 +135,17 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "AXI-DMA.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "反向链接"
+              "title": "AXI-DMA 的反向链接列表"
             }
           },
           {
@@ -123,11 +154,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "AXI-DMA.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "出链"
+              "title": "AXI-DMA 的出链列表"
             }
           },
           {
@@ -149,10 +181,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "AXI-DMA.md"
+                "file": "Home.md"
               },
               "icon": "lucide-list",
-              "title": "AXI-DMA 的大纲"
+              "title": "Home 的大纲"
             }
           }
         ],
@@ -160,7 +192,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 384.5
+    "width": 306.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -170,44 +202,58 @@
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "markdown-importer:打开 Markdown 格式转换器": false,
-      "obsidian-excalidraw-plugin:新建绘图文件": false,
-      "pkmer:Open Pkmer Market": false,
       "i18n:I18N": false,
-      "outliner-md:New outliner file": false
+      "pkmer:Open Pkmer Market": false,
+      "homepage:Open homepage": false,
+      "obsidian-memos:Thino": false,
+      "obsidian-excalidraw-plugin:新建绘图文件": false,
+      "obsidian-kanban:创建新看板": false
     }
   },
-  "active": "c7db3710b000f3f4",
+  "active": "0b9e162c9e91de0f",
   "lastOpenFiles": [
-    "image/Pasted image 20241121170003.png",
+    "00 日记/2024/2024-11/2024-11-23-星期六.md",
+    "Home.md",
+    "03 备忘/周小结.md",
+    "01 项目/Chiptest/Virgo/Virgo 启动出现 Receive FIFO Overflow.md",
+    "Drawing 2024-11-23 10.08.46.excalidraw.md",
     "dma_test_preppare.md",
-    "image/Pasted Image 20241121165750_201.png",
-    "image/Pasted Image 20241121165707_879.png",
-    "image/Pasted Image 20241121165618_891.png",
-    "image/Pasted Image 20241121165550_625.png",
-    "AXI-DMA.md",
-    "image/Pasted image 20241121162714.png",
-    "image/Pasted Image 20241121161916_975.png",
-    "image/Pasted image 20241121160620.png",
-    "image/Pasted Image 20241121160125_321.png",
-    "image/Pasted Image 20241121155540_651.png",
-    "image/Pasted Image 20241121155434_415.png",
-    "未命名.md",
-    "dmatest_func.excalidraw",
-    "first.excalidraw.md",
-    "outliner-20241121141008.md",
-    "outliner-20241121141007.md",
-    "Virgo 启动出现 Receive FIFO Overflow.md",
-    "PKMer/obsidian-pkmer/styles.css",
-    "PKMer/obsidian-pkmer/manifest.json",
-    "PKMer/obsidian-pkmer/main.js",
-    "PKMer/obsidian-pkmer",
-    "PKMer/obsidian-pkmer.zip",
-    "PKMer",
-    "image",
-    "first.excalidraw",
-    "未命名.canvas",
+    "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.excalidraw.md",
+    "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.md",
+    "01 项目/Chiptest/Virgo/axi-dma",
+    "01 项目/Chiptest/Virgo",
     "欢迎.md",
-    "file"
+    "未命名.md",
+    "未命名看板 1.md",
+    "未命名看板.md",
+    "要做的所有事情：.md",
+    "2024-11-23(周六).md",
+    "06 资源/模板/日记模板.md",
+    "00 日记/2024/2024-11/2024-11-21-星期四.md",
+    "00 日记/2024",
+    "00 日记/2024-11/周记/日记/2024-11-23-星期六.md",
+    "00 日记/日记模板.md",
+    "06 资源/模板",
+    "Calendar/周记/日记/2024-11-23.md",
+    "02 学习",
+    "03 备忘",
+    "01 项目/Common/RISCV",
+    "01 项目/Common/ARM",
+    "01 项目/Robots",
+    "01 项目/Goxceed",
+    "Head.md",
+    "未命名.canvas",
+    "06 资源/image/Pasted image 20241121153856.png",
+    "06 资源/image/Pasted image 20241121170003.png",
+    "06 资源/image/Pasted Image 20241121165750_201.png",
+    "06 资源/image/Pasted Image 20241121165707_879.png",
+    "06 资源/image/Pasted Image 20241121165618_891.png",
+    "06 资源/image/Pasted Image 20241121165550_625.png",
+    "06 资源/image/Pasted image 20241121162714.png",
+    "06 资源/image/Pasted Image 20241121161916_975.png",
+    "06 资源/image/Pasted image 20241121160620.png",
+    "06 资源/image/Pasted Image 20241121160125_321.png",
+    "outliner-20241121141008.md",
+    "outliner-20241121141007.md"
   ]
 }

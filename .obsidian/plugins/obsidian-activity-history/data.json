@@ -1,0 +1,57 @@
+{
+  "firstRun": false,
+  "initialized": [
+    {
+      "path": "/",
+      "initialized": true
+    },
+    {
+      "path": "00 日记",
+      "initialized": true
+    }
+  ],
+  "trackedProjects": [
+    "/",
+    "00 日记"
+  ],
+  "checkpointList": [
+    {
+      "path": "/",
+      "date": "2024-11-23",
+      "size": 249285
+    },
+    {
+      "path": "00 日记",
+      "date": "2024-11-23",
+      "size": 4008
+    }
+  ],
+  "activityHistory": [
+    {
+      "path": "/",
+      "size": [
+        {
+          "date": "2024-11-23",
+          "value": 48891
+        }
+      ]
+    },
+    {
+      "path": "00 日记",
+      "size": [
+        {
+          "date": "2024-11-23",
+          "value": 6755
+        }
+      ]
+    }
+  ],
+  "activityColor1": "#c6e48b",
+  "activityColor2": "#7bc96f",
+  "activityColor3": "#239a3b",
+  "activityColor4": "#196127",
+  "textColor": "#000000",
+  "emptyColor": "#ecedf0",
+  "cellRadius": 1,
+  "type": "yearly"
+}

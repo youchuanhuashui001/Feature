@@ -2,5 +2,13 @@
   "obsidian-excalidraw-plugin",
   "obsidian-vimrc-support",
   "cm-editor-syntax-highlight-obsidian",
-  "obsidian-git"
+  "calendar",
+  "dataview",
+  "i18n",
+  "pkmer",
+  "homepage",
+  "obsidian-activity-history",
+  "calendar-beta",
+  "obsidian-memos",
+  "cmenu-plugin"
 ]
