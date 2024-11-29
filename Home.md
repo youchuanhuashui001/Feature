@@ -1,17 +1,16 @@
 
 今天是 **`=dateformat(date(today),"DD")`**，`=date(today).year` 年已经过去了 `=(date(today)-date(date(today).year + "-01-01")).days` 天.
 
-## TODO
 
 
-### 备忘录
+## 备忘录
 ```dataview
 list
 from "03 备忘"
 sort file.ctime desc
 ```
 
-### list
+## Todo                                                                                                                          
 ```dataview
 TASK
 WHERE !completed

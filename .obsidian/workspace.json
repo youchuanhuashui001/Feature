@@ -8,9 +8,8 @@
         "type": "tabs",
         "children": [
           {
-            "id": "c06c4bc3f99c2448",
+            "id": "e7a7b303c61786dc",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -18,13 +17,12 @@
                 "mode": "source",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "Home"
             }
           },
           {
-            "id": "518b76ec86d2569c",
+            "id": "f24cccd55b468c67",
             "type": "leaf",
             "state": {
               "type": "thino_view",
@@ -34,20 +32,35 @@
             }
           },
           {
-            "id": "e388c3fc176d0d6c",
+            "id": "3e63d0e03bb4781c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2024/2024-11/2024-11-23-星期六.md",
+                "file": "00 日记/2024/2024-11/2024-11-29-星期五.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2024-11-23-星期六"
+              "title": "2024-11-29-星期五"
+            }
+          },
+          {
+            "id": "c9869661f08ee6d8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "周记.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "周记"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -100,26 +113,10 @@
             }
           }
         ]
-      },
-      {
-        "id": "f616935bdd087f68",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "cfbda819ae6c4fe9",
-            "type": "leaf",
-            "state": {
-              "type": "calendar",
-              "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
-    "width": 312.5
+    "width": 262.5
   },
   "right": {
     "id": "329513b606a31f86",
@@ -135,7 +132,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AXI-DMA.md",
+                "file": "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -145,7 +142,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "AXI-DMA 的反向链接列表"
+              "title": "AXI-DMA Linux 驱动 的反向链接列表"
             }
           },
           {
@@ -154,12 +151,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "AXI-DMA.md",
+                "file": "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "AXI-DMA 的出链列表"
+              "title": "AXI-DMA Linux 驱动 的出链列表"
             }
           },
           {
@@ -181,10 +178,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Home.md"
+                "file": "周记.md"
               },
               "icon": "lucide-list",
-              "title": "Home 的大纲"
+              "title": "周记 的大纲"
+            }
+          },
+          {
+            "id": "cfbda819ae6c4fe9",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           }
         ],
@@ -206,54 +213,57 @@
       "pkmer:Open Pkmer Market": false,
       "homepage:Open homepage": false,
       "obsidian-memos:Thino": false,
-      "obsidian-excalidraw-plugin:新建绘图文件": false,
-      "obsidian-kanban:创建新看板": false
+      "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "0b9e162c9e91de0f",
+  "active": "c9869661f08ee6d8",
   "lastOpenFiles": [
-    "00 日记/2024/2024-11/2024-11-23-星期六.md",
     "Home.md",
-    "03 备忘/周小结.md",
-    "01 项目/Chiptest/Virgo/Virgo 启动出现 Receive FIFO Overflow.md",
-    "Drawing 2024-11-23 10.08.46.excalidraw.md",
-    "dma_test_preppare.md",
-    "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.excalidraw.md",
+    "周记.md",
+    "00 日记/2024/2024-11/2024-11-29-星期五.md",
+    "01 项目/Chiptest/Virgo/Final/Flash_SPI 模块 RC 验证.md",
     "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.md",
+    "01 项目/Chiptest/Virgo/Final",
+    "01 项目/Common/Flash/Nor Flash.md",
+    "01 项目/Common/Note.md",
+    "01 项目/Common/Flash",
+    "01 项目/Chiptest/Virgo/axi-dma/Virgo AXI-DMA Lowpoer.md",
+    "00 日记/2024/2024-11/2024-11-28-星期四.md",
+    "03 备忘/咨询 GD、Winbond 等大厂，flash 是否存在过期一说.md",
+    "01 项目/Goxceed/ZB25VQ32B 客户开关机测试时写保护区域被破坏.md",
+    "欢迎.md",
+    "03 备忘/AXI-DMA-Linux.md",
+    "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.excalidraw.md",
+    "01 项目/Goxceed/Scorpio && Taurus 使用同一个 bin.md",
+    "image/Pasted image 20241128141821.png",
+    "00 日记/2024/2024-11/2024-11-27-星期三.md",
+    "01 项目/Goxceed/Note.md",
+    "05 生活/密码.md",
+    "06 资源/file/photo.jpg",
+    "01 项目/Robots/Leo_mini 支持 UC25WQ16.md",
+    "image/Pasted Image 20241127153500_594.png",
+    "image/Pasted Image 20241127153223_822.png",
+    "image/Pasted Image 20241127150740_302.png",
+    "未命名.canvas",
+    "01 项目/Robots/Note.md",
+    "image/Pasted Image 20241127145028_176.png",
+    "image/Pasted Image 20241127145004_940.png",
+    "image/Pasted Image 20241127143709_599.png",
+    "image/Pasted Image 20241127143647_230.png",
+    "image/Pasted Image 20241127143303_456.png",
+    "00 日记/2024/2024-11/2024-11-26-星期二.md",
+    "00 日记/2024/2024-11/2024-11-25-星期一.md",
+    "01 项目/Common/Bugs/UC25WQ16 使能四倍速时读到错误的值后写入SR2，导致 flash 被写保护.md",
+    "00 日记/2024/2024-11/2024-11-23-星期六.md",
+    "03 备忘/Virgo AXI DMA 驱动程序修改(重复链表需要清除 LAST 位).md",
+    "01 项目/Common/Bugs",
+    "outliner-20241125154138.md",
+    "image",
     "01 项目/Chiptest/Virgo/axi-dma",
     "01 项目/Chiptest/Virgo",
-    "欢迎.md",
-    "未命名.md",
-    "未命名看板 1.md",
-    "未命名看板.md",
-    "要做的所有事情：.md",
-    "2024-11-23(周六).md",
-    "06 资源/模板/日记模板.md",
-    "00 日记/2024/2024-11/2024-11-21-星期四.md",
     "00 日记/2024",
-    "00 日记/2024-11/周记/日记/2024-11-23-星期六.md",
-    "00 日记/日记模板.md",
     "06 资源/模板",
-    "Calendar/周记/日记/2024-11-23.md",
     "02 学习",
-    "03 备忘",
-    "01 项目/Common/RISCV",
-    "01 项目/Common/ARM",
-    "01 项目/Robots",
-    "01 项目/Goxceed",
-    "Head.md",
-    "未命名.canvas",
-    "06 资源/image/Pasted image 20241121153856.png",
-    "06 资源/image/Pasted image 20241121170003.png",
-    "06 资源/image/Pasted Image 20241121165750_201.png",
-    "06 资源/image/Pasted Image 20241121165707_879.png",
-    "06 资源/image/Pasted Image 20241121165618_891.png",
-    "06 资源/image/Pasted Image 20241121165550_625.png",
-    "06 资源/image/Pasted image 20241121162714.png",
-    "06 资源/image/Pasted Image 20241121161916_975.png",
-    "06 资源/image/Pasted image 20241121160620.png",
-    "06 资源/image/Pasted Image 20241121160125_321.png",
-    "outliner-20241121141008.md",
-    "outliner-20241121141007.md"
+    "03 备忘"
   ]
 }

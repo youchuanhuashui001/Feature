@@ -1,7 +1,6 @@
 [
   "obsidian-excalidraw-plugin",
   "obsidian-vimrc-support",
-  "cm-editor-syntax-highlight-obsidian",
   "calendar",
   "dataview",
   "i18n",
@@ -10,5 +9,8 @@
   "obsidian-activity-history",
   "calendar-beta",
   "obsidian-memos",
-  "cmenu-plugin"
+  "cm-editor-syntax-highlight-obsidian",
+  "editing-toolbar",
+  "obsidian-markmind",
+  "easy-typing-obsidian"
 ]
