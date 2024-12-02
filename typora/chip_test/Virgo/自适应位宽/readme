@@ -1,0 +1,2 @@
+dw_spi_v2_ok.c :对接 flash gen_spi、flash_spi 都是通的。gen_spi 要分频到 16，flash_spi 要分频到 64
+dw_spi_v2.c:修改 dw_spi_v2_ok.c 带的一些 bug，不过也没有调通，放弃自适应位宽

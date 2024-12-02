@@ -32,20 +32,63 @@
             }
           },
           {
-            "id": "3e63d0e03bb4781c",
+            "id": "f3f16cc148809ba5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2024/2024-11/2024-11-29-星期五.md",
+                "file": "01 项目/Chiptest/Virgo/Final/IRR 模块 Final 验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2024-11-29-星期五"
+              "title": "IRR 模块 Final 验证"
+            }
+          },
+          {
+            "id": "7dbe3673ee719537",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Common/Flash/Nor Flash.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Nor Flash"
+            }
+          },
+          {
+            "id": "45f73e6ded633bae",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "typora/README.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          },
+          {
+            "id": "36c71a567d26e976",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Chiptest/Virgo/Final/AXI-DMA 模块 Final 验证.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "AXI-DMA 模块 Final 验证"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -163,10 +206,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Home.md"
+                "file": "typora/README.md"
               },
               "icon": "lucide-list",
-              "title": "Home 的大纲"
+              "title": "README 的大纲"
             }
           },
           {
@@ -201,54 +244,54 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "45f73e6ded633bae",
   "lastOpenFiles": [
-    "00 日记/2024/2024-11/周记.md",
-    "Home.md",
-    "00 日记/2024/2024-11/2024-11-29-星期五.md",
-    "01 项目/Chiptest/Virgo/Final/Flash_SPI 模块 RC 验证.md",
-    "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.md",
-    "01 项目/Chiptest/Virgo/Final",
-    "01 项目/Common/Flash/Nor Flash.md",
-    "01 项目/Common/Note.md",
-    "01 项目/Common/Flash",
-    "01 项目/Chiptest/Virgo/axi-dma/Virgo AXI-DMA Lowpoer.md",
-    "00 日记/2024/2024-11/2024-11-28-星期四.md",
-    "03 备忘/咨询 GD、Winbond 等大厂，flash 是否存在过期一说.md",
-    "01 项目/Goxceed/ZB25VQ32B 客户开关机测试时写保护区域被破坏.md",
-    "欢迎.md",
-    "03 备忘/AXI-DMA-Linux.md",
-    "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.excalidraw.md",
-    "01 项目/Goxceed/Scorpio && Taurus 使用同一个 bin.md",
-    "image/Pasted image 20241128141821.png",
-    "00 日记/2024/2024-11/2024-11-27-星期三.md",
-    "01 项目/Goxceed/Note.md",
-    "05 生活/密码.md",
-    "06 资源/file/photo.jpg",
-    "01 项目/Robots/Leo_mini 支持 UC25WQ16.md",
-    "image/Pasted Image 20241127153500_594.png",
-    "image/Pasted Image 20241127153223_822.png",
-    "image/Pasted Image 20241127150740_302.png",
-    "未命名.canvas",
-    "01 项目/Robots/Note.md",
-    "image/Pasted Image 20241127145028_176.png",
-    "image/Pasted Image 20241127145004_940.png",
-    "image/Pasted Image 20241127143709_599.png",
-    "image/Pasted Image 20241127143647_230.png",
-    "image/Pasted Image 20241127143303_456.png",
-    "00 日记/2024/2024-11/2024-11-26-星期二.md",
-    "00 日记/2024/2024-11/2024-11-25-星期一.md",
-    "01 项目/Common/Bugs/UC25WQ16 使能四倍速时读到错误的值后写入SR2，导致 flash 被写保护.md",
-    "00 日记/2024/2024-11/2024-11-23-星期六.md",
-    "03 备忘/Virgo AXI DMA 驱动程序修改(重复链表需要清除 LAST 位).md",
-    "01 项目/Common/Bugs",
-    "outliner-20241125154138.md",
-    "image",
-    "01 项目/Chiptest/Virgo/axi-dma",
-    "01 项目/Chiptest/Virgo",
-    "00 日记/2024",
-    "06 资源/模板",
-    "02 学习",
-    "03 备忘"
+    "typora/note.md",
+    "01 项目/Chiptest/Virgo/Final/AXI-DMA 模块 Final 验证.md",
+    "01 项目/Common/Flash/Nand Flash.md",
+    "typora/image_no_need/选区_636.png",
+    "typora/image_no_need/选区_635-1726889369132-2.png",
+    "typora/image_no_need/选区_608.png",
+    "typora/image_no_need/选区_536.png",
+    "typora/image_no_need/选区_483.png",
+    "typora/image_no_need/选区_482.png",
+    "typora/image_no_need/选区_444.png",
+    "typora/image_no_need/选区_440.png",
+    "typora/image_no_need/选区_439.png",
+    "typora/image_no_need/选区_438.png",
+    "typora/image_no_need",
+    "typora/ZB35Q01A_ECC_TESTCASE.md",
+    "typora/XTX_bug处理.md",
+    "typora/ubuntu_back_config/vimrc_fzf",
+    "typora/ubuntu_back_config/tmux.conf",
+    "typora/ubuntu_back_config/vimrc",
+    "typora/ubuntu_back_config",
+    "typora/uboot_dm.md",
+    "typora/todo_list.md",
+    "typora/tmp_code/111",
+    "typora/tmp_code/spinand/spinand_ids.c",
+    "typora/tmp_code/spinand/spinand_otp.c",
+    "typora/tmp_code/spinand",
+    "typora/tmp_code/canopus/loader-spinand.bin",
+    "typora/text/答辩.md",
+    "typora/text/2022年终总结.md",
+    "typora/text/2023年终总结.md",
+    "typora/text/总结.md",
+    "typora/terminal.md",
+    "typora/tanxzh/五一.md",
+    "typora/tanxzh/备忘录.md",
+    "typora/study/RT-Smart移植.md",
+    "typora/study/ESP8266刷回正点原子固件.md",
+    "typora/study/Linux--Q.md",
+    "typora/study/存储器.md",
+    "typora/study/嵌入式C语言自我修养：从芯片、编译器到操作系统.md",
+    "typora/study/uboot/uboot.md",
+    "typora/study/linux_spi驱动子系统.md",
+    "typora/study/Linux_SPI_NAND_驱动梳理.md",
+    "typora/README.md",
+    "typora/plan.md",
+    "typora/other/装机问题总结.md",
+    "typora/other/杂记.md",
+    "未命名.canvas"
   ]
 }

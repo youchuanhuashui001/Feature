@@ -1,0 +1,17 @@
+set nu          "number
+noremap h i
+noremap i k
+noremap k j
+noremap j h
+set ts=4        "tab size = 4
+set expandtab
+set autoindent
+set hlsearch    "high light search
+set ic          "ignorecase
+set incsearch   "increase search
+hi MatchParen ctermbg=blue ctermfg=white    "括号匹配颜色
+set cursorcolumn    "curent column high light
+set cursorline      "curent line high light
+highlight CursorLine cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+
+highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE

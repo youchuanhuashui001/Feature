@@ -1,0 +1,93 @@
+  1 CFLAGS  := -I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>" -DLOCALE -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer
+	CFLAGS:指定头文件的路径
+	-Wall ：警告选项
+
+  2 LDFLAGS := -lncurses       
+	链接器参数。（如：“ld”）链接ncurses库
+	库文件：在编译时需指定路径，运行时仍需指定路径。
+	ncurses库：它提供了一系列的函数以便使用者调用它们去生成基于文本的用户界面。 
+  
+  3
+  4 cc := gcc
+	定义变量	
+
+  5 
+  6 all : prepare mconf conf   
+  	终极目标为all 会生成多个目标 prepare mconf conf
+
+  7 
+	目标		依赖
+		命令
+  8 %.o : %.c
+	所有的.o依赖于所有的.c
+  9 ▸   gcc -c $(CFLAGS) $(LDFLAGS) $< -o $@
+ 	gcc -c:编译但不链接
+	$<:符合模式的一系列的文件集合
+	-o：指定输出格式为规则中的目标集合
+	即把所有的文件集合输出为规则中的目标集合 .c-->.o
+ 10 
+ 11 prepare :
+	相当于c语言中的一个标签-->目标
+ 12 ▸   cp zconf.hash.c_shipped zconf.hash.c
+ 13 ▸   cp zconf.lex.c_shipped zconf.lex.c
+ 14 ▸   cp zconf.tab.c_shipped zconf.tab.c
+	拷贝一份
+ 15 
+ 16 mconf : lxdialog/menubox.o lxdialog/yesno.o lxdialog/textbox.o  \
+ 17 ▸   lxdialog/inputbox.o lxdialog/util.o lxdialog/checklist.o \
+ 18 ▸   mconf.o zconf.tab.o
+	目标--依赖
+ 19 ▸   gcc -o $@ $^ $(LDFLAGS)
+	规则中的目标集合 所有依赖文件的集合  链接lncurses库
+	输出指定目标文件
+20 
+ 21 conf : lxdialog/menubox.o lxdialog/yesno.o lxdialog/textbox.o  \
+ 22 ▸   lxdialog/inputbox.o lxdialog/util.o lxdialog/checklist.o \
+ 23 ▸   conf.o zconf.tab.o     
+ 24 ▸   gcc -o $@ $^ $(LDFLAGS)
+ 25   
+ 26 clean :
+ 27 ▸   @-find -name "*.o" -exec rm "{}" \;
+		@不显示指令 
+		在当前目录下(包含子目录)，查找所有的.o文件并删除 
+
+ 28 ▸   @-rm mconf             
+		删除mconf文件
+ 29    
+
+	理解：
+1.指定头文件路径、库文件路径
+2.声明目标：all(伪目标) -- prepare mconf conf
+3.根据所有的.c文件生成.o文件
+4.根据各个目标执行对应的命令，gcc -o .o-->目标文件
+5.清除工程文件
+
+
+
+
+
+
+1 LIBGCC_PATH = $(shell $(CC) -print-file-name=ck803)/hard-fp
+	shell 函数：就是shell的命令
+	gcc的库路径：
+
+2 LIBGCC_PATH += $(shell $(CC) -print-file-name=ck803)/../../../../../csky-elfabiv2/lib/ck803/hard-fp/
+3 
+4 CFLAGS += -mcpu=ck804ef -mhard-float
+5 ASFLAGS += -mcpu=ck804ef -Wa,--defsym=ck804=1 -EL -mhard-float
+6 LDFLAGS += $(LIBGCC_PATH)
+7 ARFLAGS = -rcs
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
