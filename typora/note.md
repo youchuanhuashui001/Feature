@@ -2994,18 +2994,18 @@ Cache-read 会将最近从 flash 读取的数据复制到 page register。
 ### 新增 Flash
 
 - 测试项：
-  - [ ] 双线读写擦
+  - 双线读写擦
     - `drivers/legacy/mtd/spinor/spi_nor_ids.c` 添加驱动
     - `make menuconfig` 中开启 `FLASH_SPI frame format (Dual speed )` 
-  - [ ] 四线读写擦
+  - 四线读写擦
     - `flash_spi.c` 中确认使能四倍速方法
     - `make menuconfig` 中开启 `FLASH_SPI frame format (Quad speed ) `
-  - [ ] XIP
+  - XIP
     - XIP 带 Cache 地址：0x30000000；XIP 不带 Cache 地址：0x50000000
     - `arch/csky/mach-leo_mini/spinor/spinor.c` stage1 代码去掉 xip 初始化
     - stage2 不开启 xip 初始化，访问 0x30000000、0x50000000 挂掉；开启 xip 初始化，能够正常访问 0x30000000、0x50000000
     - `make menuconfig` 中开启`[*]     Support flash spi xip`
-  - [ ] 不需要 UID、写保护、OTP
+  - 不需要 UID、写保护、OTP
 
 - `make menuconfig` 中开启 `[*]   MTD tests support` 用于执行测试
 
