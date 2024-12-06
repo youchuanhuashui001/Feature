@@ -116,7 +116,7 @@ repo start imx-4.1.15-1.0.0_ga --all
     
       repo upload –replace 404
     
-      出现文件以后去掉第 1 行的 #，中括号里面填上 change-id
+      出现文件以后去掉第 1 行的#，中括号里面填上 change-id
   
   - repo upload 的时候出错或者忘记 repo start 的时候怎么办？
     

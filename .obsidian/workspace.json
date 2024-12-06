@@ -15,96 +15,12 @@
               "type": "markdown",
               "state": {
                 "file": "Home.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
               "title": "Home"
-            }
-          },
-          {
-            "id": "541dd48cf855bda9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "typora/note.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "note"
-            }
-          },
-          {
-            "id": "2eeeabb91a653c39",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "typora/note.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "note"
-            }
-          },
-          {
-            "id": "58e1aceb4cf9dc77",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02 学习/study/学习计划.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "学习计划"
-            }
-          },
-          {
-            "id": "637afeb5204d8b37",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Chiptest/Lepus/Lepus.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Lepus"
-            }
-          },
-          {
-            "id": "0812c3936d59853a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2024/2024-12/2024-12-02-星期一.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2024-12-02-星期一"
-            }
-          },
-          {
-            "id": "2c4cad671b1228e4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Chiptest/Virgo/Final/Flash_SPI 模块 Final 验证.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Flash_SPI 模块 Final 验证"
             }
           },
           {
@@ -118,35 +34,63 @@
             }
           },
           {
-            "id": "15e3c65ee3d58a6c",
+            "id": "5d7ce809564d2828",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2024/2024-12/2024-12-02-星期一.md",
+                "file": "01 项目/Chiptest/Virgo/Final/Flash_SPI 模块 Final 验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2024-12-02-星期一"
+              "title": "Flash_SPI 模块 Final 验证"
             }
           },
           {
-            "id": "1fc8d5b6c9cc0a03",
+            "id": "62221c35c494c0f6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "typora/Note_study.md",
+                "file": "01 项目/Common/Flash/文件系统.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Note_study"
+              "title": "文件系统"
+            }
+          },
+          {
+            "id": "069a82c3b0708463",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Goxceed_Common_Note"
+            }
+          },
+          {
+            "id": "7d2f593d0b461b31",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 日记/2024/2024-12/2024-12-06-星期五.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2024-12-06-星期五"
             }
           }
         ],
-        "currentTab": 9
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -177,7 +121,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#excalidraw",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -196,6 +140,16 @@
               "state": {},
               "icon": "lucide-bookmark",
               "title": "书签"
+            }
+          },
+          {
+            "id": "cfbda819ae6c4fe9",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           }
         ]
@@ -218,7 +172,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.md",
+                "file": "00 日记/2024/2024-12/2024-12-06-星期五.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -228,7 +182,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "AXI-DMA Linux 驱动 的反向链接列表"
+              "title": "2024-12-06-星期五 的反向链接列表"
             }
           },
           {
@@ -264,24 +218,14 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "typora/Note_study.md"
+                "file": "00 日记/2024/2024-12/2024-12-06-星期五.md"
               },
               "icon": "lucide-list",
-              "title": "Note_study 的大纲"
-            }
-          },
-          {
-            "id": "cfbda819ae6c4fe9",
-            "type": "leaf",
-            "state": {
-              "type": "calendar",
-              "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "title": "2024-12-06-星期五 的大纲"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -303,54 +247,54 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "1fc8d5b6c9cc0a03",
+  "active": "7d2f593d0b461b31",
   "lastOpenFiles": [
-    "typora/gx/Grus更新flash.md",
-    "typora/Note_study.md",
-    "typora/gx/gxmisc-大小写冲突-change_Win10.md",
-    "typora/note.md",
-    "typora/记录问题.md",
-    "typora/常见问题及解决方法.md",
-    "Home.md",
-    "04 其它/年终总结/答辩.md",
-    "02 学习/study/学习计划.md",
-    "01 项目/Chiptest/Lepus/Lepus.md",
-    "00 日记/2024/2024-12/2024-12-02-星期一.md",
-    "typora/plan.md",
+    "02 学习/cursor/自动生成支持列表/SPI_NOR_FLASH_V20.xlsx",
+    "02 学习/cursor/自动生成支持列表/test.sh",
+    "02 学习/cursor/自动生成支持列表/libspinor.so",
+    "02 学习/cursor/自动生成支持列表/spinor_wrapper.c",
+    "02 学习/cursor/自动生成支持列表/drivers/spinor/spinor_ids.c",
+    "02 学习/cursor/自动生成支持列表/drivers/spinor/spinor_base.h",
+    "02 学习/cursor/自动生成支持列表/drivers/spinor/spinor_base.c",
+    "02 学习/cursor/自动生成支持列表/drivers/spinor",
+    "02 学习/cursor/自动生成支持列表/drivers/spino",
+    "02 学习/cursor/自动生成支持列表/drivers",
+    "02 学习/cursor/自动生成支持列表/__pycache__/uniqueid.cpython-38.pyc",
+    "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
+    "01 项目/Common/Bugs/Virgo Final SPINand 开启中断后随机出现总线卡死的情况.md",
+    "06 资源/image/2024-12-06_15-44.png",
+    "06 资源/image/2024-12-06_14-40.png",
     "01 项目/Chiptest/Virgo/Final/Flash_SPI 模块 Final 验证.md",
-    "05 生活/备忘录.md",
-    "04 其它/ppt",
-    "04 其它/年终总结",
-    "typora/tanxzh/五一.md",
-    "04 其它/terminal.md",
-    "01 项目/Goxceed/Common/Nand_driver.md",
-    "01 项目/Common/ARM/GIC_V2.md",
-    "typora/mtd_debug到flash.md",
-    "01 项目/Common/IP/IR.md",
-    "01 项目/Common/IP/AXI_DMA.md",
-    "01 项目/Common/IP",
-    "01 项目/Goxceed/未命名",
-    "02 学习/study",
-    "typora/README.md",
-    "typora/canopus_firewall.md",
-    "typora/Driver_Read.md",
-    "01 项目/Chiptest/Lepus",
-    "02 学习/english/English.md",
-    "02 学习/english",
-    "02 学习/imx6ull/IMX6ULL.md",
-    "02 学习/imx6ull",
-    "01 项目/Robots/Redmine",
-    "01 项目/Robots/Common",
-    "typora/chip_test/Aquila/image/选区_479.png",
-    "typora/chip_test/Aquila/image/微信图片_20240520152854.png",
-    "06 资源/image/f9c7098b84e4c21a78bc3cb54882e86.png",
-    "06 资源/image/选区_479.png",
-    "06 资源/image/选区_479-1716190755359-4.png",
-    "06 资源/image/选区_478.png",
-    "06 资源/image/选区_425.png",
-    "06 资源/image/微信图片_20240520152854.png",
-    "typora/chip_test/Aquila/image/选区_478.png",
-    "typora/chip_test/Aquila/image/选区_425.png",
+    "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.excalidraw.md",
+    "typora/note.md",
+    "typora/gx/note.md",
+    "01 项目/Chiptest/Aquila/test.md",
+    "01 项目/Common/Common_Note.md",
+    "typora/gx/Grus.md",
+    "00 日记/2024/2024-12/2024-12-06-星期五.md",
+    "00 日记/2024/2024-12/2024-12-05-星期四.md",
+    "00 日记/2024/2024-12/学习计划.md",
+    "02 学习/schedule/学习计划.md",
+    "06 资源/image/Pasted image 20241206100153.png",
+    "typora/gx/gxdemo.md",
+    "00 日记/2024/2024-12/2024-12-04-星期三.md",
+    "Home.md",
+    "typora/gx/NAND_FLASH.md",
+    "typora/gx/Nor_Flash_Nand_Flash_并行Nand.md",
+    "typora/gx/GxMisc.md",
+    "typora/gx/Cache.md",
+    "typora/gx/DMA控制器.md",
+    "typora/gx/机器学习.md",
+    "typora/gx/数字音频基础.md",
+    "typora/gx/根文件系统.md",
+    "02 学习/sdio/SDIO.md",
+    "06 资源/image/image.png",
+    "06 资源/image/image-20240226160155133.png",
+    "06 资源/image/image-20240226160137973.png",
+    "06 资源/image/image-20240226153220598.png",
+    "06 资源/image/image-20240226145627212.png",
+    "06 资源/image/image-20240226145153855.png",
+    "06 资源/image/image-20240226144817549.png",
     "未命名.canvas"
   ]
 }

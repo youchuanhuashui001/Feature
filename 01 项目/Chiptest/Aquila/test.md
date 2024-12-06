@@ -771,14 +771,16 @@ dll0_delay  = ratio0 /256 * master
 # ddr 测试：
 
 1. 读正确的一组配置：comtest 4100 时会出错
+
+```c
+	#if 1
+			val |= 1 << 18;
+			gx_hal_dw_writel(dws, 0x1080, 1<<11 | 1<<10);
+			gx_hal_dw_writel(dws, 0x1090, 127<<8 | 1<<4 | 1);
+			gx_hal_dw_writel(dws, 0x1094, 0<<8 | 4);
+	#endif
 ```
-#if 1
-		val |= 1 << 18;
-		gx_hal_dw_writel(dws, 0x1080, 1<<11 | 1<<10);
-		gx_hal_dw_writel(dws, 0x1090, 127<<8 | 1<<4 | 1);
-		gx_hal_dw_writel(dws, 0x1094, 0<<8 | 4);
-#endif
-```
+
 
 # 4.22 测试情况：
 

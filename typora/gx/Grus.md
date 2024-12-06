@@ -32,10 +32,13 @@
    1. 在IO模式和PWM模式均可以产生中断
    2. 配置寄存器`GPIO_INIT_HI_EN`等配置成对应的中断(H、L、H2L、L2H)
 - gx8002 芯片的GPIO模块有一组，总共32个，其中每个GPIO还提供了管脚复用来使用其它功能
+```c
+#define readl(addr) ({ unsigned int __v = (*(volatile unsigned int *) (addr)); __v; }) //从addr的地址开始读取long长度的数据，把addr强转成volatile unsinged int * 然后取值，并返回这个值
 
-- #define readl(addr) ({ unsigned int __v = (*(volatile unsigned int *) (addr)); __v; }) ：从addr的地址开始读取long长度的数据，把addr强转成volatile unsinged int * 然后取值，并返回这个值
+#define writel(b,addr) (void)((*(volatile unsigned int *) (addr)) = (b)) // 从addr的地址开始写unsigned int 长度的数据b，把addr强转成volatile unsigned int *然后把b赋给\*addr
+```
 
-- #define writel(b,addr) (void)((*(volatile unsigned int *) (addr)) = (b)) ：从addr的地址开始写unsigned int 长度的数据b，把addr强转成volatile unsigned int *然后把b赋给\*addr
+
 
 - 每个IO口均支持中断
 

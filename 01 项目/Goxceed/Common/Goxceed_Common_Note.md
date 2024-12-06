@@ -1,0 +1,119 @@
+
+
+## Common
+
+
+
+
+
+
+
+## Gxloader
+
+### Gxloader 如何关 Icache、Dcache、MMU？
+- 参考 `boot.c` 中的接口 `boot_close_module()` 接口，其中包含了这些接口
+
+> [!tips]  `virgo`  芯片验证时测试可以关掉 `Icache、Dcache`  运行，但是不能关闭 `mmu`  运行 
+
+
+### Gxloader 不同大小的 DDR 可以通用驱动吗？
+>  背景：事业部给了一个 `6607H2 xxx .boot ` 在 ` loader ` 中找不到对应的板级，只有相似的一个板级 `6607H1 xxx`，可以用 `H1 .boot` 在客户的板子上。
+
+- 一般后缀名 `2/1` 代表的是 `ddr` 的容量是 `2G/1G bit`
+- 不同大小的 `ddr` 相位一般是可以通用的，普通测试没什么问题，高低温测试或拷机会有问题
+-  **对于内置和外置的不可通用，因为内置的走线短，外置的走线长，相位不一致**
+
+
+### Gxloader 中的 `.boot` 如何执行？
+> 背景：想要直接跑 `flash` 的测试代码，不跑从 `flash` 启动的那套流程
+
+- 直接跑 flash 的测试程序：**这里的程序不是从 flash 加载的，而是用 boot 工具拿到的** 
+	- 先将 `.boot 的 stage1` 灌到 `sram`，`.boot 的 stage1` 会初始化 `ddr、时钟树` 等等  
+	- 然后将 `.boot 的 stage2` 灌到 `ddr`，`.boot 的 stage2` 起来再执行命令 
+		![[Pasted image 20241204142355.png]] 
+
+### Gxloader 不打开 `DEBUG` 选项编译出来的 `.elf` 为什么不能直接跑起来？
+> 背景：想要直接跑 `flash` 的测试代码，不跑从 `flash` 启动的那套流程，想直接把 `.elf` 用 `gdb` 加载到内存跑起来 
+
+- `.elf` 中有所有的信息，包含 `Stage1、Stage2、符号表等等`
+- `.bin` 就是根据 `.elf` 再进行处理，`objcopy` 成二进制，去掉 `bss 段、mmu_table 段` 等等得到的 
+- 为什么不打开 `DEBUG` 宏，直接加载 `.elf` 无法启动？
+	- 因为 `Stage1` 里面会处理，如果没开 `DEBUG` 宏就会从 `flash` 拷贝 ` Stage2 `
+	- 所以直接 `load` 的话，还是会从 `flash` 启动，而不是从 `.elf` 拿 `Stage2`
+
+
+
+
+### Gxloader 中 Stage2 的代码会访问 SRAM 吗？
+> 背景：`Virgo SPINand`  开中断后直接灌 `.boot`  到内存，跑到 `Stage2`  的 `flash`  测试代码发现访问了 `SRAM` 
+
+- 查看链接脚本：
+	```linkscript
+	MEMORY
+	 {
+	  stage1 : ORIGIN = 0xf0400000, LENGTH = 0x4000 - 32
+	  mmutable : ORIGIN = 0xf0408000, LENGTH = 0x8000
+	  stage2 : ORIGIN = 0x07b40000, LENGTH = 0xc0000
+	 }
+	 ENTRY(ResetEntry)
+	 SECTIONS {
+	  . = ALIGN(4);
+	  .text :
+	  {
+	   _stage1_start_ = .;
+	   cpu/arm/virgo/virgo_start.o(.text*)
+	   cpu/arm/virgo/virgo_pll_mini.o(.text*)
+	   cpu/arm/virgo/virgo_pll_full.o(.text*)
+	   cpu/arm/virgo/virgo_sdram.o(.text*)
+	   cpu/arm/cpu/armv7/cache-cp15.o(.text*)
+	   cpu/copy.o(.text*)
+	   common/secure/common.o(.text*)
+	   cpu/arm/virgo/virgo_start.o(.rodata*)
+	   cpu/arm/virgo/virgo_pll_mini.o(.rodata*)
+	   cpu/arm/virgo/virgo_sdram.o(.rodata*)
+	   cpu/arm/cpu/armv7/cache-cp15.o(.rodata*)
+	   cpu/copy.o(.rodata*)
+	   common/secure/common.o(.rodata*)
+	   cpu/arm/virgo/virgo_start.o(.data*)
+	   cpu/arm/virgo/virgo_pll_mini.o(.data*)
+	   cpu/arm/virgo/virgo_pll_full.o(.data*)
+	   cpu/arm/virgo/virgo_sdram.o(.data*)
+	   cpu/arm/cpu/armv7/cache-cp15.o(.data*)
+	   cpu/copy.o(.data*)
+	   common/secure/common.o(.data*)
+	   *(.cache_section)
+	   *(.reset_patch)
+	   *(.sram_text)
+	   *(.sram)
+	   _stage1_end_ = .;
+	  } > stage1
+	  .mmu_tables :{. = ALIGN(0x4000); *(.mmu_tables) } > mmutable
+	```
+- 发现  `Stage1` 的代码都是跑在 `SRAM` 上的， `Stage2` 的代码都是跑在 `DDR` 上的
+- 现在在跑 `flash` 的测试程序，那么应该不会访问 ` SRAM ` 才对
+	- `Stage2` 中的 ` cache ` 相关代码放在 ` sram `
+	- 中断向量表相关代码放在 `Start.S` 中，所以也是在 `sram`
+	- 现在没有用到 `dma `，所以也不会处理 ` cache ` 相关操作，但是用了 ` irq ` 所以会用到中断向量表，所以 ` Stage2 ` 代码会访问 ` sram ` 
+
+
+> [!tips]
+> - <font color="#245bdb">具体什么代码跑在哪里，依据链接脚本 </font> 
+
+
+
+
+## Linux
+
+### Linux 如何以 O0 方式编译某个 .c 文件
+- 移植高版本 `axi-dma` 驱动到 `Linux4.9` 时发现使用 `GDB` 调试某些变量看不到，Linux 默认是以比较高的优化等级编译的，可以单独以 `O0` 来编译某个 `.c` 文件来方便调试
+- 通过修改 `Makefile` 实现：
+	```Makefile
+	CFLAGS_dw-axi-dmac-platform.o = -O0 -g
+	obj-$(CONFIG_DW_AXI_DMAC) += dw-axi-dmac-platform.o
+	```
+
+
+
+## eCos
+
+

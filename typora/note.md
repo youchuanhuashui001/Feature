@@ -10,9 +10,9 @@ http://www.deansys.com/doc/ldd3/index.html	--linux driver
 
 http://git.nationalchip.com/redmine/issues/304240 --- boot命令如何使用的redmine
 
-支持 #262662：gxmisc已发布版本后续Flash支持更新记录
+支持 `#262662` ：gxmisc已发布版本后续Flash支持更新记录
 
-功能 #258756：添加串并行 nand 坏块标记
+功能 `#258756` ：添加串并行 nand 坏块标记
 
 http://git.nationalchip.com/redmine/projects/robot_os/wiki/Bootx工具  — Bootx工具
 
@@ -110,7 +110,8 @@ repo start imx-4.1.15-1.0.0_ga --all
 
    恢复前面的工作 本方法同样适用于分支切换 该问题最大可能是 git 版本不对，根据实验 1.9.1 版本可能会出该问题，但是 1.7.1 或者 2.9.5 没有发生该问题，可以通过重新安装 git 来解决。
 
-  - repo upload 以后后悔了，怎么办？ 在原有分支上修改文件 git commit –amend repo upload –replace 404 出现文件以后去掉第 1 行的 #，中括号里面填上 change-id
+  - repo upload 以后后悔了，怎么办？ 
+	  - 在原有分支上修改文件 git commit –amend repo upload –replace 404 出现文件以后去掉第 1 行的中括号里面填上 change-id
   - repo upload 的时候出错或者忘记 repo start 的时候怎么办？ 重新 repo init 一个工程
 
 ```text
@@ -3811,11 +3812,11 @@ index 7950ef6d..fcb39ec2 100644
     - 是的，因为跑的都是同一个 rom，程序都是一样的
 
 
-# .h 调试手段，使用 #error 在编译时生成一个错误信息，用在不确定宏是否有效时使用
+# .h 调试手段，使用 ` #error ` 在编译时生成一个错误信息，用在不确定宏是否有效时使用
 
-#error 是一个预处理指令，用于在编译时生成一个错误消息。当编译器遇到 #error 指令时，会立即停止编译，并显示指定的错误消息。这通常用于在特定条件下终止编译，或者提醒开发者注意某些重要信息。
+` #error ` 是一个预处理指令，用于在编译时生成一个错误消息。当编译器遇到 ` #error ` 指令时，会立即停止编译，并显示指定的错误消息。这通常用于在特定条件下终止编译，或者提醒开发者注意某些重要信息。
 
-以下是一个简单的示例，演示如何在代码中使用 #error：
+以下是一个简单的示例，演示如何在代码中使用 ` #error ` ：
 
 ```c
 #ifdef CONFIG_DEBUG
@@ -3825,7 +3826,7 @@ index 7950ef6d..fcb39ec2 100644
 #endif
 ```
 
-在上面的示例中，如果 CONFIG_DEBUG 宏未定义，则编译器会遇到 #error 指令，停止编译，并显示错误消息 "Debugging is disabled. Enable CONFIG_DEBUG for debugging." 这样可以确保在必要的情况下，开发者会收到明确的错误提示，以便采取相应的措施。
+在上面的示例中，如果 CONFIG_DEBUG 宏未定义，则编译器会遇到 ` #error ` 指令，停止编译，并显示错误消息 "Debugging is disabled. Enable CONFIG_DEBUG for debugging." 这样可以确保在必要的情况下，开发者会收到明确的错误提示，以便采取相应的措施。
 
 
 
