@@ -24,6 +24,20 @@
             }
           },
           {
+            "id": "464e8cc7af4b6960",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Chiptest/Virgo/Final/Flash_SPI 模块 Final 验证.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Flash_SPI 模块 Final 验证"
+            }
+          },
+          {
             "id": "f24cccd55b468c67",
             "type": "leaf",
             "state": {
@@ -89,8 +103,7 @@
               "title": "2024-12-06-星期五"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -172,7 +185,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "00 日记/2024/2024-12/2024-12-06-星期五.md",
+                "file": "Home.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -182,7 +195,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "2024-12-06-星期五 的反向链接列表"
+              "title": "Home 的反向链接列表"
             }
           },
           {
@@ -218,14 +231,14 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00 日记/2024/2024-12/2024-12-06-星期五.md"
+                "file": "Home.md"
               },
               "icon": "lucide-list",
-              "title": "2024-12-06-星期五 的大纲"
+              "title": "Home 的大纲"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -247,8 +260,11 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "7d2f593d0b461b31",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "01 项目/Chiptest/Virgo/Final/Flash_SPI 模块 Final 验证.md",
+    "Home.md",
+    "00 日记/2024/2024-12/2024-12-06-星期五.md",
     "02 学习/cursor/自动生成支持列表/SPI_NOR_FLASH_V20.xlsx",
     "02 学习/cursor/自动生成支持列表/test.sh",
     "02 学习/cursor/自动生成支持列表/libspinor.so",
@@ -259,26 +275,22 @@
     "02 学习/cursor/自动生成支持列表/drivers/spinor",
     "02 学习/cursor/自动生成支持列表/drivers/spino",
     "02 学习/cursor/自动生成支持列表/drivers",
-    "02 学习/cursor/自动生成支持列表/__pycache__/uniqueid.cpython-38.pyc",
     "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
     "01 项目/Common/Bugs/Virgo Final SPINand 开启中断后随机出现总线卡死的情况.md",
     "06 资源/image/2024-12-06_15-44.png",
     "06 资源/image/2024-12-06_14-40.png",
-    "01 项目/Chiptest/Virgo/Final/Flash_SPI 模块 Final 验证.md",
     "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.excalidraw.md",
     "typora/note.md",
     "typora/gx/note.md",
     "01 项目/Chiptest/Aquila/test.md",
     "01 项目/Common/Common_Note.md",
     "typora/gx/Grus.md",
-    "00 日记/2024/2024-12/2024-12-06-星期五.md",
     "00 日记/2024/2024-12/2024-12-05-星期四.md",
     "00 日记/2024/2024-12/学习计划.md",
     "02 学习/schedule/学习计划.md",
     "06 资源/image/Pasted image 20241206100153.png",
     "typora/gx/gxdemo.md",
     "00 日记/2024/2024-12/2024-12-04-星期三.md",
-    "Home.md",
     "typora/gx/NAND_FLASH.md",
     "typora/gx/Nor_Flash_Nand_Flash_并行Nand.md",
     "typora/gx/GxMisc.md",
