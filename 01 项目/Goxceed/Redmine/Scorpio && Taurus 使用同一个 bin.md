@@ -1,4 +1,3 @@
-#doing 
 
 事业部想要使用同一个软件能够同时在 scorpio、taurus 两颗芯片上跑。
 
@@ -41,6 +40,23 @@
 > 
 > 1. 如果编的是 scorpio 需要修改 .config 中的 CONFIG_SPI_TYPE = DW 为 GX；编的是 taurus 的话没关系
 > 2. scorpio 芯片需要配置 0xa030a000+0x70c = 0x0(用于选择 GXSPI/DWSPI)；taurus 中这个寄存器没被使用
+
+
+
+### 确认目前 loader 的改动是否合理
+- stage1、stage2 都需要使用 gx_spi
+	- 使用新的板级 `CONFIG_ARCH_CKMMU_SCORPIO_TAURUS` ，在 `script/rule_scorpio_taurus.mk`  和 `conf/scorpio_taurus/3113XX/xxx.config`  中不要定义 `CONFIG_SPI_TYPE = DW` 
+	- 使用新的板级 `CONFIG_ARCH_CKMMU_SCORPIO_TAURUS` ，在 `cpu/copy.c`  中根据 `chip id`  判断，`scorpio`  芯片需要配置 `0xa030a000+0x70c = 0x0`  (用于选择 `GXSPI/DWSPI` )
+
+#### 问题 1：目前没有定义 `CONFIG_SPI_TYPE = DW`，`xxx.config` 中也不应该有 `SPI_QUAD = n` 的配置 
+![[Pasted image 20241212152204.png]]
+
+#### 问题 2：Stage1 配置反了，dw_spi 的时候不用管，因为不会进；gx_spi 的时候需要根据 chip_id 来判断 
+![[Pasted image 20241212152339.png]]
+
+![[Pasted image 20241212152530.png]]
+
+
 
 
 

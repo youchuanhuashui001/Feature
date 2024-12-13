@@ -1789,14 +1789,15 @@ sudo ./jlink_gdb_server -select USB -device Cortex-A7 -endian little -if JTAG -s
 
 # IRR Virgo 测试编译
 
-- Gxloader:
+## Gxloader:
 
   - 打开 `.config` 中的 `ENABLE_IRR=y`选项和 `ENABLE_IRQ=y` 选项
   - v0:`drivers/irr/gx_irr.c`
-    - 中断方式获取键值：
+    - 中断方式获取键值
   - v1:
 
-- Linux：
+
+## Linux：
 
   - 挑选用例：在 `gxtest/stb/goxceed` 目录下打开 `confs/def_config` 文件中的 `USE_SHELL_CLI_SHELL=y` 选项
   - 编译用例模块：`./build config -m irr`
@@ -1806,5 +1807,6 @@ sudo ./jlink_gdb_server -select USB -device Cortex-A7 -endian little -if JTAG -s
 
   > 编译 gxtest 之前需要先将基础库都编译通过，建议使用 `./make.sh gxtest-bus arm virgo fpga linux dvbs bin`
 
-- eCos:
+
+## eCos:
   - 与 linux 相同的测试方法，只是编译更改成 ecos 即可
