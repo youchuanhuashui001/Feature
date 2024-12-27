@@ -81,3 +81,35 @@ MINIX 文件系统由 6 个主要部分组成：
 #### 高速缓冲区
 
 高速缓冲区是文件系统访问块设备中数据的必经要道。为了访问块设备上文件系统中的数据，内核可以每次都访问块设备，进行读或写操作。但是每次 I/O 操作的时间与内存和 CPU 的处理速度相比是非常慢的。为了提高系统的性能，内核就在内存中开辟了一个高速数据缓冲区 `buffer cache`，并将其划分成一个个与磁盘数据块大小相等的缓冲块来使用和管理，以期减少访问块设备的次数。
+
+
+
+
+
+
+
+# Bochs 环境搭建
+## 从 Bochs 官网下载 bochs
+
+
+## 下载 linux-0.12-080324. zip
+
+
+## 启动
+
+- 按照文档描述启动显示报错
+	- `bochs -f bochsrc-0.12-hd.bxrc`
+```shell
+00000000000p[      ] >>PANIC<< bochsrc-0.12-hd.bxrc:125: directive 'vga_update_interval' not understood
+```
+- 修改 `bochsrc-0.12-hd.bxrc` 去掉 `vga_update_interval`
+	- 问 `gpt` 说这个选项是老的，现在已经不支持了
+- 修改 `bochsrc-0.12-hd.bxrc` 为 `display_library: sdl`
+	- 看网上说的可以用这个，但是还是不行
+- 修改 `bochsrc-0.12-hd.bxrc` 为 `disaply_library: x, options="gui_debug"`
+	- ok
+
+
+- 敲入命令：`bochs -f bochsrc-0.12-hd.bxrc`
+	- 选择 `6. Begin simulation`
+	- 启动之后在 `Debugger` 中敲入 `c`，即可在另一个窗口中看到 `linux-0.12` 启动成功 

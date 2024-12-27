@@ -1118,7 +1118,7 @@ sudo boot -b canopus-6631SH1A-sflash.boot -c serialdown 0x0 download_linux.bin
 
   - 打开 UBI 宏：
 
-    ```diff
+```diff
     -ENABLE_SPIFLASH = y
     -ENABLE_SPINAND = n
     +ENABLE_SPIFLASH = n
@@ -1147,145 +1147,145 @@ sudo boot -b canopus-6631SH1A-sflash.boot -c serialdown 0x0 download_linux.bin
      ENABLE_ROOTFS_CRAMFS = y
     -ENABLE_ROOTFS_UBIFS = n
     +ENABLE_ROOTFS_UBIFS = y
-    ```
+```
 
 - kernel：使用 `sirius_nand_defconfig`文件，默认已打开 UBI 及 UBIFS 编译选项，需要用到 `nfs`
 
-  ```diff
-  --- a/arch/arm/configs/sirius_nand_defconfig
-  +++ b/arch/arm/configs/sirius_nand_defconfig
-  @@ -167,7 +167,9 @@ CONFIG_SQUASHFS_XATTR=y
-   CONFIG_SQUASHFS_LZ4=y
-   CONFIG_SQUASHFS_LZO=y
-   CONFIG_SQUASHFS_XZ=y
-  -# CONFIG_NETWORK_FILESYSTEMS is not set
-  +CONFIG_NFS_FS=y
-  +CONFIG_NFS_V3_ACL=y
-  +CONFIG_NFS_V4=y
-  ```
+```diff
+--- a/arch/arm/configs/sirius_nand_defconfig
++++ b/arch/arm/configs/sirius_nand_defconfig
+@@ -167,7 +167,9 @@ CONFIG_SQUASHFS_XATTR=y
+CONFIG_SQUASHFS_LZ4=y
+CONFIG_SQUASHFS_LZO=y
+CONFIG_SQUASHFS_XZ=y
+-# CONFIG_NETWORK_FILESYSTEMS is not set
++CONFIG_NFS_FS=y
++CONFIG_NFS_V3_ACL=y
++CONFIG_NFS_V4=y
+```
 
 - rootfs：
 
   - `mkfs.ubifs`用于将根文件系统打包成 UBIFS 文件系统镜像
 
-    ```shell
-    mkfs.ubifs -r root -m 0x1000 -e 0x3e000 -c 2048 -x none -o root.img
-    mkfs.ubifs -r root -m 2048 -e 126976 -c 160 -x none -o root.img
-    #-m最小输入输出大小为2KiB(2048bytes)，一般为页大小 
-    #-e逻辑可擦除块大小为124KiB=(每块的页数-2)*页大小=（64-2）*2KiB=124KiB 
-    #-c最多逻辑可擦除块数目为160(160*128KiB=20MiB),这个可根据ubi volume来设置，b并非指定文件系统的大小，而是限制其最大值
-    ```
+```shell
+mkfs.ubifs -r root -m 0x1000 -e 0x3e000 -c 2048 -x none -o root.img
+mkfs.ubifs -r root -m 2048 -e 126976 -c 160 -x none -o root.img
+#-m最小输入输出大小为2KiB(2048bytes)，一般为页大小 
+#-e逻辑可擦除块大小为124KiB=(每块的页数-2)*页大小=（64-2）*2KiB=124KiB 
+#-c最多逻辑可擦除块数目为160(160*128KiB=20MiB),这个可根据ubi volume来设置，b并非指定文件系统的大小，而是限制其最大值
+```
   
-    |         OPTIONS         |                             说明                             |                   备注                   |
-    | :---------------------: | :----------------------------------------------------------: | :--------------------------------------: |
-    |   -r, -d, --root=DIR    |                    从目录DIR构建文件系统                     |                                          |
-    | -m, --min-io-size=SIZE  |                        最小IO单元大小                        |    flash编程的最小单位，一般=pagesize    |
-    |   -e, --leb-size=SIZE   |                        逻辑擦除块大小                        |                                          |
-    | -c, --max-leb-cnt=COUNT |                        最大逻辑块数量                        | 并非指定文件系统的大小，而是限制其最大值 |
-    |    -o, --output=FILE    |                          输出到文件                          |                                          |
-    |   -j, --jrn-size=SIZE   |                           日志大小                           |                                          |
-    |   -R, --reserved=SIZE   |                  应该为超级用户保留多少空间                  |                                          |
-    |    -x, --compr=TYPE     | 压缩算法 “lzo”, “favor_lzo”, “zlib” or “none” (默认: “lzo”)  |                                          |
-    |    -f, --fanout=NUM     |                    扇出 NUM（默认值：8）                     |                                          |
-    |    -F, --space-fixup    | 文件系统可用空间必须在首次挂载时修复（需要内核版本 3.0 或更高版本 |                                          |
-    |  -p, --orph-lebs=COUNT  |               孤立块的擦除块计数（默认值：1）                |                                          |
-    |   -D, --devtable=FILE   |                        使用设备表FILE                        |                                          |
-    |    -U, --squash-uids    |              squash所有者使所有文件都归root所有              |                                          |
-    |  -l, --log-lebs=COUNT   |                日志的擦除块计数（仅用于调试）                |                                          |
-    |        -y, --yes        |                 假设所有问题的答案都是“yes”                  |                                          |
-    |    -g, --debug=LEVEL    | 显示调试信息（0 - 无，1 - 统计信息，2 - 文件，3 - 更多详细信息） |                                          |
+|         OPTIONS         |                          说明                           |            备注            |
+| :---------------------: | :---------------------------------------------------: | :----------------------: |
+|   -r, -d, --root=DIR    |                     从目录DIR构建文件系统                      |                          |
+| -m, --min-io-size=SIZE  |                       最小IO单元大小                        | flash编程的最小单位，一般=pagesize |
+|   -e, --leb-size=SIZE   |                        逻辑擦除块大小                        |                          |
+| -c, --max-leb-cnt=COUNT |                        最大逻辑块数量                        |   并非指定文件系统的大小，而是限制其最大值   |
+|    -o, --output=FILE    |                         输出到文件                         |                          |
+|   -j, --jrn-size=SIZE   |                         日志大小                          |                          |
+|   -R, --reserved=SIZE   |                     应该为超级用户保留多少空间                     |                          |
+|    -x, --compr=TYPE     | 压缩算法 “lzo”, “favor_lzo”, “zlib” or “none” (默认: “lzo”) |                          |
+|    -f, --fanout=NUM     |                     扇出 NUM（默认值：8）                     |                          |
+|    -F, --space-fixup    |          文件系统可用空间必须在首次挂载时修复（需要内核版本 3.0 或更高版本          |                          |
+|  -p, --orph-lebs=COUNT  |                   孤立块的擦除块计数（默认值：1）                    |                          |
+|   -D, --devtable=FILE   |                       使用设备表FILE                       |                          |
+|    -U, --squash-uids    |                squash所有者使所有文件都归root所有                 |                          |
+|  -l, --log-lebs=COUNT   |                    日志的擦除块计数（仅用于调试）                    |                          |
+|        -y, --yes        |                   假设所有问题的答案都是“yes”                    |                          |
+|    -g, --debug=LEVEL    | 显示调试信息（0 - 无，1 - 统计信息，2 - 文件，3 - 更多详细信息） |                                          |
   
   - `ubinize`用于将 UBIFS 文件系统镜像转换成可直接在FLASH上烧写的格式（带有UBI文件系统镜像卷标)
   
-    ```shell
-    ubinize -o rootfs.bin -m 2048 -p 128KiB -s 2048 -O 2048 ./ubinize.cfg
-    #-o：输出文件名
-    #-m：最小输入输出大小为2KiB(2048bytes)，一般为页大小 
-    #-p：物理可擦出块大小为128KiB=每块的页数*页大小=64*2KiB=128KiB 
-    #-s：用于UBI头部信息的最小输入输出单元，一般与最小输入输出单元(-m参数)大小一样
-    #-O：VID头部偏移量,默认是512
-    ```
+```shell
+ubinize -o rootfs.bin -m 2048 -p 128KiB -s 2048 -O 2048 ./ubinize.cfg
+#-o：输出文件名
+#-m：最小输入输出大小为2KiB(2048bytes)，一般为页大小 
+#-p：物理可擦出块大小为128KiB=每块的页数*页大小=64*2KiB=128KiB 
+#-s：用于UBI头部信息的最小输入输出单元，一般与最小输入输出单元(-m参数)大小一样
+#-O：VID头部偏移量,默认是512
+```
   
   - `ubinize.cfg`
   
-    ```
-    [ubifs]
-    mode=ubi
-    image=root.img
-    vol_id=0
-    vol_size=20MiB
-    vol_type=dynamic
-    vol_name=rootfs
-    vol_flags=autoresize
-    ```
+```
+[ubifs]
+mode=ubi
+image=root.img
+vol_id=0
+vol_size=20MiB
+vol_type=dynamic
+vol_name=rootfs
+vol_flags=autoresize
+```
   
-  
+
   - flash.conf：修改 data 分区为 UBIFS
   
-    ```
-    flash_size    0x8000000
-    #flash_size    0x1000000
-    block_size    0x020000
-    #write_protect true
-    crc32         true
-    dtb_file      sirius_generic.dtb
-    table_version 2
-    
-    # 1) NAME field:
-    #	"BOOT"   : gxloader
-    #	"TABLE"  : partition table
-    #	"LOGO"   : gxloader show logo
-    #	"KERNEL" : application program
-    #	"ROOT"   : root file system
-    #
-    # 2) The FS field have these types:
-    #           "RAW": self definition file system type;
-    #           "SQUASHFS":  cram_file_system type;
-    #           "MINIFS":  mini_file_system type;
-    # 3) The partition have 2 mode "ro" and "rw":
-    #           "ro": means that this partition could not been modified at runtime;
-    #           "rw": means that this partition could modify at runtime
-    # 4) UPDATE:
-    # 	0: don't update
-    # 	1: always update
-    # 	2: auto update, while version > old version
-    # 	3: clear partition data
-    #
-    # 5) VERSION 0 - 65535 (0x0000 - 0xFFFF)
-    # 6) The size of "auto" means the size of partition is determined by source file size, but for
-    #    the final partition (example "DATA") it means the size is last to the end of flash.
-    #
-    ## NOTE:
-    #
-    # 1) The size of source file could not exceed the max size of partition.
-    # 2) The start addr of "BOOT" and "LOGO" should never be modified whenever you are
-    #    modifying this file (configure file) or running a program.
-    # 3) The 1K bytes blank befor the "LOGO" partition is reserved for partition table,
-    #    so do not use these space.
-    # 4)
-    #
-    # NAME  FILE                    CRC     FS      MODE    UPDATE VERSION  ADDRESS   SIZE   RES_SIZE
-    #---------------------------------------------------------------------------------------------------
-    BOOT    loader-spinand.bin      false   RAW       ro      1      0        0x0000000  0x100000  0xc800
-    TABLE   NULL                    true    RAW       ro      2      1        0x0100000  0x100000  0xc800
-    LOGO    logo.bin                false   RAW       ro      1      0        0x0200000  0x100000  0xc800
-    KERNEL  uImage                  true    RAW       ro      1      1        0x0300000  0x1000000  0x80000
-    ROOTFS  rootfs.bin              true    UBIFS     rw      1      1        auto       0x2800000  0x140000
-    APP     app.bin                 true    UBIFS     rw      1      1        auto       0x2800000  0x140000
-    DATA    NULL                    false   UBIFS     rw      1      0        auto       auto       0x100000
-    ```
+```
+flash_size    0x8000000
+#flash_size    0x1000000
+block_size    0x020000
+#write_protect true
+crc32         true
+dtb_file      sirius_generic.dtb
+table_version 2
+
+# 1) NAME field:
+#	"BOOT"   : gxloader
+#	"TABLE"  : partition table
+#	"LOGO"   : gxloader show logo
+#	"KERNEL" : application program
+#	"ROOT"   : root file system
+#
+# 2) The FS field have these types:
+#           "RAW": self definition file system type;
+#           "SQUASHFS":  cram_file_system type;
+#           "MINIFS":  mini_file_system type;
+# 3) The partition have 2 mode "ro" and "rw":
+#           "ro": means that this partition could not been modified at runtime;
+#           "rw": means that this partition could modify at runtime
+# 4) UPDATE:
+# 	0: don't update
+# 	1: always update
+# 	2: auto update, while version > old version
+# 	3: clear partition data
+#
+# 5) VERSION 0 - 65535 (0x0000 - 0xFFFF)
+# 6) The size of "auto" means the size of partition is determined by source file size, but for
+#    the final partition (example "DATA") it means the size is last to the end of flash.
+#
+## NOTE:
+#
+# 1) The size of source file could not exceed the max size of partition.
+# 2) The start addr of "BOOT" and "LOGO" should never be modified whenever you are
+#    modifying this file (configure file) or running a program.
+# 3) The 1K bytes blank befor the "LOGO" partition is reserved for partition table,
+#    so do not use these space.
+# 4)
+#
+# NAME  FILE                    CRC     FS      MODE    UPDATE VERSION  ADDRESS   SIZE   RES_SIZE
+#---------------------------------------------------------------------------------------------------
+BOOT    loader-spinand.bin      false   RAW       ro      1      0        0x0000000  0x100000  0xc800
+TABLE   NULL                    true    RAW       ro      2      1        0x0100000  0x100000  0xc800
+LOGO    logo.bin                false   RAW       ro      1      0        0x0200000  0x100000  0xc800
+KERNEL  uImage                  true    RAW       ro      1      1        0x0300000  0x1000000  0x80000
+ROOTFS  rootfs.bin              true    UBIFS     rw      1      1        auto       0x2800000  0x140000
+APP     app.bin                 true    UBIFS     rw      1      1        auto       0x2800000  0x140000
+DATA    NULL                    false   UBIFS     rw      1      0        auto       auto       0x100000
+```
   
   - 重新生成分区表：table.bin
   
-    ```
-    genflash mkflash flash.conf flash.bin
-    ```
+```
+genflash mkflash flash.conf flash.bin
+```
   
   - 烧写：
   
-    ```
-    sudo boot -b sirius-6633H1-spinand.boot -c load_conf_down flash.conf netdown -p 192.168.108.112 -s 192.168.108.10
-    ```
+```
+sudo boot -b sirius-6633H1-spinand.boot -c load_conf_down flash.conf netdown -p 192.168.108.112 -s 192.168.108.10
+```
   
     
 
@@ -1309,21 +1309,21 @@ sudo boot -b canopus-6631SH1A-sflash.boot -c serialdown 0x0 download_linux.bin
 
 - 若需要先更新 gxmisc 的库
 
-  ```
-  ./build arm ecos
-  ```
+```
+./build arm ecos
+```
 
 - 更新 ecos
 
-  ```
-  ./build arm
-  ```
+```
+./build arm
+```
 
 - 更新应用
 
-  ```
-  ./build xxx
-  ```
+```
+./build xxx
+```
 
 
 
@@ -1339,61 +1339,61 @@ sudo boot -b canopus-6631SH1A-sflash.boot -c serialdown 0x0 download_linux.bin
 
 - GDB_SERVER 脚本：
 
-  ```
-  void InitTarget(void) {
-    Report("Connect to 2nd A7 core");
-    JTAG_DRPre             = 0;
-    JTAG_DRPost            = 0;
-    JTAG_IRPre             = 0;
-    JTAG_IRPost            = 0;
-    JTAG_IRLen             = 4;
-    CPU                    = CORTEX_A7;
-    JTAG_AllowTAPReset     = 1;
-    // Base address of debug registers differs from device to device, so this needs to be adapted
-    CORESIGHT_CoreBaseAddr = 0x80112000;  // Base address of debug registers of second core.
-    // Manually configure which APs are present on the CoreSight device
-    //CORESIGHT_AddAP(0, CORESIGHT_AHB_AP);
-    CORESIGHT_AddAP(1, CORESIGHT_APB_AP);
-  }
-  ```
+```
+void InitTarget(void) {
+Report("Connect to 2nd A7 core");
+JTAG_DRPre             = 0;
+JTAG_DRPost            = 0;
+JTAG_IRPre             = 0;
+JTAG_IRPost            = 0;
+JTAG_IRLen             = 4;
+CPU                    = CORTEX_A7;
+JTAG_AllowTAPReset     = 1;
+// Base address of debug registers differs from device to device, so this needs to be adapted
+CORESIGHT_CoreBaseAddr = 0x80112000;  // Base address of debug registers of second core.
+// Manually configure which APs are present on the CoreSight device
+//CORESIGHT_AddAP(0, CORESIGHT_AHB_AP);
+CORESIGHT_AddAP(1, CORESIGHT_APB_AP);
+}
+```
 
 
 
 - 开启 两个 gdb_server：
 
-  ```shell
-  # 第一个
-  sudo ./JLinkGDBServerCLExe -select USB -device Cortex-A7 -endian little -if JTAG -speed 4000 -noir -LocalhostOnly -port 2331
-  
-  # 第二个
-  sudo ./JLinkGDBServerCLExe -select USB -device Cortex-A7 -endian little -if JTAG -speed 4000 -noir -LocalhostOnly -jlinkscriptfile ./ConnectSecondCore.JLinkScript -port 2341
-  ```
+```shell
+# 第一个
+sudo ./JLinkGDBServerCLExe -select USB -device Cortex-A7 -endian little -if JTAG -speed 4000 -noir -LocalhostOnly -port 2331
+
+# 第二个
+sudo ./JLinkGDBServerCLExe -select USB -device Cortex-A7 -endian little -if JTAG -speed 4000 -noir -LocalhostOnly -jlinkscriptfile ./ConnectSecondCore.JLinkScript -port 2341
+```
 
   
 
 - 开启 gbd：
 
-  ```shell
-  # 第一个
-  arm-none-eabi-gdb
-  target remote 127.0.0.1:2331
-  
-  # 第二个
-  arm-none-eabi-gdb
-  target remote 127.0.0.1:2341
-  ```
+```shell
+# 第一个
+arm-none-eabi-gdb
+target remote 127.0.0.1:2331
+
+# 第二个
+arm-none-eabi-gdb
+target remote 127.0.0.1:2341
+```
 
   
 
 - 指令：
 
-  ```
-  # 加载符号表
-  file out.elf
-  
-  # 查看寄存器
-  i r
-  ```
+```
+# 加载符号表
+file out.elf
+
+# 查看寄存器
+i r
+```
 
   
 
@@ -1430,9 +1430,9 @@ GX3215B板级，BGA封装，nfc控制器管脚复用如下：
 
 - 使用 `make.sh` 一键编译脚本编译生成 `solution` 代码
 
-  ```shell
-  ./make.sh solution arm linux
-  ```
+```shell
+./make.sh solution arm linux
+```
 
   - 选择板级为 `canopus_pnand`
 
@@ -1444,15 +1444,15 @@ GX3215B板级，BGA封装，nfc控制器管脚复用如下：
 
 - 修改 `flash.conf` 中的`boot`文件名称为 `loader-nand.bin`，然后使用 `genflash` 工具生成`整bin`，发现报错`BOOT区域`过大，修改 `flash.conf`，继续生成`整 bin`
 
-  ```
-  BOOT    loader-nand.bin         false   RAW       ro      0      0        0x000000  auto
-  TABLE   NULL                    true    RAW       ro      2      1        0x030000  64k
-  LOGO    logo.bin                false   RAW       ro      0      0        0x040000  64k
-  KERNEL  uImage                  true    RAW       ro      1      1        0x050000  auto
-  ROOTFS  rootfs.bin              true    SQUASHFS  ro      1      1        auto      auto
-  APP     app.bin                 true    SQUASHFS  ro      1      1        auto      auto
-  DATA    NULL                    false   MINIFS     rw      0      0       0xDC0000      auto
-  ```
+```
+BOOT    loader-nand.bin         false   RAW       ro      0      0        0x000000  auto
+TABLE   NULL                    true    RAW       ro      2      1        0x030000  64k
+LOGO    logo.bin                false   RAW       ro      0      0        0x040000  64k
+KERNEL  uImage                  true    RAW       ro      1      1        0x050000  auto
+ROOTFS  rootfs.bin              true    SQUASHFS  ro      1      1        auto      auto
+APP     app.bin                 true    SQUASHFS  ro      1      1        auto      auto
+DATA    NULL                    false   MINIFS     rw      0      0       0xDC0000      auto
+```
 
 - 使用 `.boot` 根据 `flash.conf` 文件下载`整bin`
 
@@ -1474,27 +1474,27 @@ GX3215B板级，BGA封装，nfc控制器管脚复用如下：
 
 - 根据根文件系统生成的`root`目录制作 `ubifs` 格式的根文件系统
 
-  ```shell
-  mkfs.ubifs -r root -m 2048 -e 126976 -c 2048 -x none -o root.img
-  ubinize -o rootfs.bin -m 2048 -p 128KiB -s 2048 -O 2048 ./ubinize.cfg
-  ```
+```shell
+mkfs.ubifs -r root -m 2048 -e 126976 -c 2048 -x none -o root.img
+ubinize -o rootfs.bin -m 2048 -p 128KiB -s 2048 -O 2048 ./ubinize.cfg
+```
 
-  ```
-  [ubifs]
-  mode=ubi
-  image=root.img
-  vol_id=0
-  vol_size=30MiB
-  vol_type=dynamic
-  vol_name=rootfs
-  vol_flags=autoresize
-  ```
+```
+[ubifs]
+mode=ubi
+image=root.img
+vol_id=0
+vol_size=30MiB
+vol_type=dynamic
+vol_name=rootfs
+vol_flags=autoresize
+```
 
 - 根据新生成的 `loader、rootfs.bin`生成`整 bin`，然后使用命令下载
 
-  ```shell
-  sudo boot -b canopus-6631SHNG-nand.boot -c load_conf_down flash.conf netdown -p 192.168.108.118 -s 192.168.108.10
-  ```
+```shell
+sudo boot -b canopus-6631SHNG-nand.boot -c load_conf_down flash.conf netdown -p 192.168.108.118 -s 192.168.108.10
+```
 
   - 下载后无法启动 `loader`，使用串口重新下载 `loader`
 
@@ -1504,25 +1504,25 @@ GX3215B板级，BGA封装，nfc控制器管脚复用如下：
 
   - 更换 `flash.conf` 为` 版本2` 的再试一下，启动成功
 
-    ```shell
-    flash_size    0x8000000
-    #flash_size    0x1000000
-    block_size    0x020000
-    #write_protect true
-    crc32         true
-    dtb_file      canopus_generic.dtb
-    table_version 2
-    
-    # NAME  FILE                    CRC     FS      MODE    UPDATE VERSION  ADDRESS   SIZE   RES_SIZE
-    #---------------------------------------------------------------------------------------------------
-    BOOT    loader-nand-ubifs.bin         false   RAW       ro      1      0        0x0000000  0x100000  0xc800
-    TABLE   NULL                    true    RAW       ro      2      1        0x0100000  0x100000  0xc800
-    #LOGO    logo.bin                false   RAW       ro      1      0        0x0200000  0x100000  0xc800
-    KERNEL  uImage                  true    RAW       ro      1      1        0x0300000  0x1000000  0x80000
-    ROOTFS  rootfs.img              true    UBIFS     rw      1      1        auto       0x2800000       0x140000
-    ##APP     app.bin                 true    UBIFS     rw      1      1        auto       0x2800000  0x140000
-    DATA    NULL                    false   UBIFS     rw      1      0        auto       auto       0x100000
-    ```
+```shell
+flash_size    0x8000000
+#flash_size    0x1000000
+block_size    0x020000
+#write_protect true
+crc32         true
+dtb_file      canopus_generic.dtb
+table_version 2
+
+# NAME  FILE                    CRC     FS      MODE    UPDATE VERSION  ADDRESS   SIZE   RES_SIZE
+#---------------------------------------------------------------------------------------------------
+BOOT    loader-nand-ubifs.bin         false   RAW       ro      1      0        0x0000000  0x100000  0xc800
+TABLE   NULL                    true    RAW       ro      2      1        0x0100000  0x100000  0xc800
+#LOGO    logo.bin                false   RAW       ro      1      0        0x0200000  0x100000  0xc800
+KERNEL  uImage                  true    RAW       ro      1      1        0x0300000  0x1000000  0x80000
+ROOTFS  rootfs.img              true    UBIFS     rw      1      1        auto       0x2800000       0x140000
+##APP     app.bin                 true    UBIFS     rw      1      1        auto       0x2800000  0x140000
+DATA    NULL                    false   UBIFS     rw      1      0        auto       auto       0x100000
+```
 
     
 
@@ -1565,93 +1565,93 @@ sudo ./jlink_gdb_server -select USB -device Cortex-A7 -endian little -if JTAG -s
 
 6. 修改 `ecos_shell/scriput/config.mk`
 
-   ```diff
-   --- a/ecos_shell/prj/spi_cramfs_jffs2/include/gxcore_ecos_module.hxx
-   +++ b/ecos_shell/prj/spi_cramfs_jffs2/include/gxcore_ecos_module.hxx
-   @@ -20,8 +20,8 @@ cramfs_init_class         cramfs0    CYGBLD_ATTRIB_INIT_PRI(60360);
-    //cyg_serial_init_class     gxserial   CYGBLD_ATTRIB_INIT_PRI(60600);
-    //cyg_norflash_init_class   norflash0  CYGBLD_ATTRIB_INIT_PRI(60800);
-    //cyg_gx_spinor_flash_init_class   spinorflash0   CYGBLD_ATTRIB_INIT_PRI(60900);
-   -cyg_dw_spinor_flash_init_class   spinorflash0   CYGBLD_ATTRIB_INIT_PRI(60900);
-   -//cyg_gx_spinand_flash_init_class  spinandflash0  CYGBLD_ATTRIB_INIT_PRI(60910);
-   +//cyg_dw_spinor_flash_init_class   spinorflash0   CYGBLD_ATTRIB_INIT_PRI(60900);
-   +cyg_gx_spinand_flash_init_class  spinandflash0  CYGBLD_ATTRIB_INIT_PRI(60910);
-    //cyg_dw_spinand_flash_init_class  spinandflash0  CYGBLD_ATTRIB_INIT_PRI(60910);
-    cyg_flashio_init_class    flashio    CYGBLD_ATTRIB_INIT_PRI(61000);
-    //nand_init_class           nandflash0 CYGBLD_ATTRIB_INIT_PRI(61110);
-   diff --git a/ecos_shell/profile/flash b/ecos_shell/profile/flash
-   index 1df1fd86..2ce3da3e 100644
-   --- a/ecos_shell/profile/flash
-   +++ b/ecos_shell/profile/flash
-   @@ -3,4 +3,3 @@ i2c
-    spi_cramfs_jffs2
-    gpio
-    uart
-   -partition
-   diff --git a/ecos_shell/script/config.mk b/ecos_shell/script/config.mk
-   index 271636cb..b40e07a9 100755
-   --- a/ecos_shell/script/config.mk
-   +++ b/ecos_shell/script/config.mk
-   @@ -1,4 +1,4 @@
-   -ARCH = csky
-   +ARCH = arm
-    #########################
-    
-    ifeq ($(ARCH),csky)
-   diff --git a/env.sh b/env.sh
-   index d80f735c..54ea9024 100644
-   --- a/env.sh
-   +++ b/env.sh
-   @@ -14,6 +14,7 @@ CROSS_PATH=$ARCH-$OS
-    export ENABLE_MEMWATCH=yes
-    unset ENABLE_MEMWATCH
-    
-   +export GX_PREFIX=$(pwd)/../../library/goxceed
-    if [ -z $GX_PREFIX ]; then
-        GX_PREFIX=/opt/goxceed
-   ```
+```diff
+--- a/ecos_shell/prj/spi_cramfs_jffs2/include/gxcore_ecos_module.hxx
++++ b/ecos_shell/prj/spi_cramfs_jffs2/include/gxcore_ecos_module.hxx
+@@ -20,8 +20,8 @@ cramfs_init_class         cramfs0    CYGBLD_ATTRIB_INIT_PRI(60360);
+//cyg_serial_init_class     gxserial   CYGBLD_ATTRIB_INIT_PRI(60600);
+//cyg_norflash_init_class   norflash0  CYGBLD_ATTRIB_INIT_PRI(60800);
+//cyg_gx_spinor_flash_init_class   spinorflash0   CYGBLD_ATTRIB_INIT_PRI(60900);
+-cyg_dw_spinor_flash_init_class   spinorflash0   CYGBLD_ATTRIB_INIT_PRI(60900);
+-//cyg_gx_spinand_flash_init_class  spinandflash0  CYGBLD_ATTRIB_INIT_PRI(60910);
++//cyg_dw_spinor_flash_init_class   spinorflash0   CYGBLD_ATTRIB_INIT_PRI(60900);
++cyg_gx_spinand_flash_init_class  spinandflash0  CYGBLD_ATTRIB_INIT_PRI(60910);
+//cyg_dw_spinand_flash_init_class  spinandflash0  CYGBLD_ATTRIB_INIT_PRI(60910);
+cyg_flashio_init_class    flashio    CYGBLD_ATTRIB_INIT_PRI(61000);
+//nand_init_class           nandflash0 CYGBLD_ATTRIB_INIT_PRI(61110);
+diff --git a/ecos_shell/profile/flash b/ecos_shell/profile/flash
+index 1df1fd86..2ce3da3e 100644
+--- a/ecos_shell/profile/flash
++++ b/ecos_shell/profile/flash
+@@ -3,4 +3,3 @@ i2c
+spi_cramfs_jffs2
+gpio
+uart
+-partition
+diff --git a/ecos_shell/script/config.mk b/ecos_shell/script/config.mk
+index 271636cb..b40e07a9 100755
+--- a/ecos_shell/script/config.mk
++++ b/ecos_shell/script/config.mk
+@@ -1,4 +1,4 @@
+-ARCH = csky
++ARCH = arm
+#########################
+
+ifeq ($(ARCH),csky)
+diff --git a/env.sh b/env.sh
+index d80f735c..54ea9024 100644
+--- a/env.sh
++++ b/env.sh
+@@ -14,6 +14,7 @@ CROSS_PATH=$ARCH-$OS
+export ENABLE_MEMWATCH=yes
+unset ENABLE_MEMWATCH
+
++export GX_PREFIX=$(pwd)/../../library/goxceed
+if [ -z $GX_PREFIX ]; then
+	GX_PREFIX=/opt/goxceed
+```
 
 7. 编译出来 `shell.bin`
 
 8. 可以使用 gdb 的方式加载：
 
-   ```shell
-   sudo ./jlink_gdb_server -select USB -device Cortex-A7 -endian little -if JTAG -speed 4000 -noir -LocalhostOnly -port 2331
-   
-   arm-none-eabi-gdb _build/shell.elf
-   ```
+```shell
+sudo ./jlink_gdb_server -select USB -device Cortex-A7 -endian little -if JTAG -speed 4000 -noir -LocalhostOnly -port 2331
+
+arm-none-eabi-gdb _build/shell.elf
+```
 
 9. 或者使用下载到 flash 中的方式加载：
 
    - 修改 `flash.conf`
 
-     ```
-     flash_size    0x8000000
-     block_size    0x020000
-     write_protect true
-     crc32         true
-     
-     # name   source file           CRC        file_system_type mode    update   version 	start addr   size
-     #---------------------------------------------------------------------------------------------------------
-     BOOT    loader-sflash.bin      true         RAW     	     ro		0	       0         0x000000     1024k
-     TABLE   table.bin              false        RAW              ro         0              0         0x0100000     1024k
-     LOGO    logo.bin               false        RAW     	     ro		0	       0         0x0200000     1024k
-     KERNEL  shell.bin              true         RAW     	     ro   	0	       0         0x0300000     16384k
-     ROOT    root_cramfs.img        false        CRAMFS  	     ro   	0	       0         auto         40960k
-     DATA    data.bin               false        YAFFS2  	     rw 	0	       0         auto         auto
-     ```
+ ```
+ flash_size    0x8000000
+ block_size    0x020000
+ write_protect true
+ crc32         true
+ 
+ # name   source file           CRC        file_system_type mode    update   version 	start addr   size
+ #---------------------------------------------------------------------------------------------------------
+ BOOT    loader-sflash.bin      true         RAW     	     ro		0	       0         0x000000     1024k
+ TABLE   table.bin              false        RAW              ro         0              0         0x0100000     1024k
+ LOGO    logo.bin               false        RAW     	     ro		0	       0         0x0200000     1024k
+ KERNEL  shell.bin              true         RAW     	     ro   	0	       0         0x0300000     16384k
+ ROOT    root_cramfs.img        false        CRAMFS  	     ro   	0	       0         auto         40960k
+ DATA    data.bin               false        YAFFS2  	     rw 	0	       0         auto         auto
+ ```
 
    - 根据 `flash.conf` 生成整 bin
 
-     ```shell
-     genflash mkflash flash.conf flash.bin
-     ```
+ ```shell
+ genflash mkflash flash.conf flash.bin
+ ```
 
    - 烧写
 
-     ```shell
-     sudo boot -b sirius-6633H1-spinand.boot -c netdown 0x0 flash.bin -p 192.168.108.118 -s 192.168.108.110
-     ```
+ ```shell
+ sudo boot -b sirius-6633H1-spinand.boot -c netdown 0x0 flash.bin -p 192.168.108.118 -s 192.168.108.110
+ ```
 
      
 
@@ -1688,15 +1688,15 @@ sudo ./jlink_gdb_server -select USB -device Cortex-A7 -endian little -if JTAG -s
 
   - 执行 `csky-linux-gdb vmlinux` 加载内核镜像，这里需要有 .gdbinit
 
-    ```
-    # csky linux
-    target jtag jtag://127.0.1.1:1025
-    set endian little
-    restore arch/csky/boot/dts/gx3211_generic.dtb binary 0x96200000
-    load vmlinux
-    file vmlinux
-    set $r3=0x96200000
-    ```
+```
+# csky linux
+target jtag jtag://127.0.1.1:1025
+set endian little
+restore arch/csky/boot/dts/gx3211_generic.dtb binary 0x96200000
+load vmlinux
+file vmlinux
+set $r3=0x96200000
+```
 
   - 然后即可正常执行 gdb 指令
 
@@ -1708,48 +1708,48 @@ sudo ./jlink_gdb_server -select USB -device Cortex-A7 -endian little -if JTAG -s
 
   - 需要在 `main.c` 中调用 `boot_close_module()` 接口来关掉 `cache、mmu` 等，来保证启动 Linux 时是干净的环境
 
-    ```diff
-    diff --git a/main.c b/main.c
-    index a30c84ac..34c69272 100644
-    --- a/main.c
-    +++ b/main.c
-    @@ -252,6 +252,7 @@ void __attribute__((section(".entry_text")))entry(uint32_t ddr_size)
-                    g_board_extend.func_usb_update();
-            }
-     
-    +       boot_close_module();
-     #ifdef CONFIG_ENABLE_LOGO
-            gx_show_logo();
-     #endif
-    ```
+```diff
+diff --git a/main.c b/main.c
+index a30c84ac..34c69272 100644
+--- a/main.c
++++ b/main.c
+@@ -252,6 +252,7 @@ void __attribute__((section(".entry_text")))entry(uint32_t ddr_size)
+				g_board_extend.func_usb_update();
+		}
+ 
++       boot_close_module();
+ #ifdef CONFIG_ENABLE_LOGO
+		gx_show_logo();
+ #endif
+```
 
 - linux:
 
-  - 编译成 debug 版本，修改设备树中的`chosen {bootargs = “xxx”}`
+	- 编译成 debug 版本，修改设备树中的 `chosen {bootargs = “xxx”}`
 
-- 将 loader 烧到 flash，在 linux kernel 目录下执行：`arm-none-eabi-gdb` ，然后 `c` 即可
+	- 将 loader 烧到 flash，在 linux kernel 目录下执行：`arm-none-eabi-gdb` ，然后 `c` 即可
 
-  - `.gdbinit`：
+	  - `.gdbinit`：
 
-    ```
-    # arm linux
-    target remote 127.0.0.1:2331
-    set endian little
-    monitor speed 10000
-    restore /home/tanxzh/goxceed/develop2/library/goxceed/kernel-arm/arch/arm/boot/dts/virgo_generic.dtb binary 0x00000100
-    restore /home/tanxzh/goxceed/develop2/library/goxceed/kernel-arm/arch/arm/boot/Image binary 0x8000
-    file /home/tanxzh/goxceed/develop2/library/goxceed/kernel-arm/vmlinux
-    set $r2=0x00000100
-    set $pc=0x00008000
-    ```
+```
+# arm linux
+target remote 127.0.0.1:2331
+set endian little
+monitor speed 10000
+restore /home/tanxzh/goxceed/develop2/library/goxceed/kernel-arm/arch/arm/boot/dts/virgo_generic.dtb binary 0x00000100
+restore /home/tanxzh/goxceed/develop2/library/goxceed/kernel-arm/arch/arm/boot/Image binary 0x8000
+file /home/tanxzh/goxceed/develop2/library/goxceed/kernel-arm/vmlinux
+set $r2=0x00000100
+set $pc=0x00008000
+```
 
 - 如果没有分区表，是因为 cmdline 中没有 mtdparts，在设备树中修改一下即可
 
-  ```dtd
-  		bootargs = "mem=68M videomem=48M fbmem=12M console=ttyS0,115200 init=/init root=/dev/nfs rw nfsroot=192.168.108.149:/opt/nfs/arm,v3 ip=192.168.108.150 \
-  			mtdparts=m25p80:128k@0m(BOOT),64k@128k(TABLE),2880k@192k(KERNEL),1792k@3m(ROOTFS),2368k@4864k(USER),960k@7232k(DATA) mtdparts_end";
-  
-  ```
+```dtd
+	bootargs = "mem=68M videomem=48M fbmem=12M console=ttyS0,115200 init=/init root=/dev/nfs rw nfsroot=192.168.108.149:/opt/nfs/arm,v3 ip=192.168.108.150 \
+		mtdparts=m25p80:128k@0m(BOOT),64k@128k(TABLE),2880k@192k(KERNEL),1792k@3m(ROOTFS),2368k@4864k(USER),960k@7232k(DATA) mtdparts_end";
+
+```
 
 - 如果打不上断点，可以在 def_config 文件中加入以下配置：
 

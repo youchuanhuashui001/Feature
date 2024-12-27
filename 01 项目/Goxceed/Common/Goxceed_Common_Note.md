@@ -2,8 +2,21 @@
 
 ## Common
 
-
-
+### nand flash 工厂如何烧录镜像
+- 需要用到 `2` 个工具：
+	- `gxtools/bin_utils`：
+		- 输入分区表 `flash.conf` 以及各个独立的文件
+		- 输出：按照 `flash.conf` 以及独立的文件合并后的整 `bin` + 烧录器要用的 `.def` 分区表
+	- `gxtools/nand_ecc_tool`：
+		- 输入整 `bin`
+		- 输出带 `ecc` 的整 `bin`
+		- 由于并行 `nand` 依赖我们控制器来生成，在烧录 `bin` 时会往 `oob` 区域写上对应的 `ecc`，而工厂的烧录器用的不是我们的控制器，自然也就不会为我们的 `oob` 区域写上对应的 `ecc`，所以需要我们将整 `bin` 中的数据读出来，计算出 `ecc` 填充到 `oob` 区域，这样工厂烧录时就可以直接将带 `ecc` 的 `bin` 烧到 `flash` 
+- 工厂按照 `.def` 文件来烧录，需要按照分区 `(.def)` 烧
+- 还有一个问题：烧录器怎么跳坏块，和我们相同的吗？统一的跳坏块方法都是这样的吗？
+	- 都是一个 block 一个 block 来操作的，统一的跳到下一个 block 的首地址
+	- 跳坏块的方法都是一样的 
+	- 因为 `nand flash` 在擦除或写入单个 `block` 时可能会产生坏块，所以只能按照 `block` 为单位操作 `nand flash` 
+https://git.nationalchip.com/redmine/issues/352665#note-3
 
 
 
@@ -101,6 +114,50 @@
 
 
 
+### Canopus 3215B nand flash 掉电测试脚本找不到字符串 Hit any key to stop autoboot
+- 默认 `Canopus 3215B` 的配置文件中配置 `bootdelay = 0`，所以不会显示这个字符串
+- 手动修改 `conf/canopus/3215B/debug.conf` 中的 `CONFIG_BOOTDELAY = 3` 即可 
+
+
+### GoXceed 3.2.1、3.2.2 都是特殊的分支，loader 会烧不进去
+- 如果要测试此分支的 `ecos、linux` 可以用其它分支的 `loader` 烧进去
+- 如果要在此分支上加 `flash`，可以用 `.boot` 来测试 
+
+
+### 为什么 loader 需要打开 UBIFS 的宏，否则 Linux kernel 在启动的时候不会去挂载 ubi 卷？
+- loader 在启动 Linux 的时候会根据这个宏来传递给 linux 的 cmdline
+```c
+	/* if no root=, add automatically */
+	if (strstr(params->u.cmdline.cmdline, "root=") == NULL) {
+		int len = 42;
+		char root[len];
+		memset(root, 0, len);
+		struct partition_info *p = all_partition_get("rootfs");
+		if (p == NULL)
+			p = all_partition_get("root");
+		if (p) {
+			flash_type = flash_get_type();
+			rootfs_mtdid = get_rootfs_mtd_id(p, flash_type);
+#ifdef CONFIG_ENABLE_ROOTFS_UBIFS
+			sprintf(root, "ubi.mtd=%d", rootfs_mtdid);
+			cmdline_add(root);
+			sprintf(root, "root=ubi0_0");
+			cmdline_add(root);
+			sprintf(root, "rootfstype=%s", p->file_system_type ? get_fstype(p->file_system_type) : "ubifs");
+			cmdline_add(root);
+#elif defined(CONFIG_ENABLE_ROOTFS_INITRD)
+			sprintf(root, "initrd=0x%x,0x%0x", INITRD_DRAM_START_ADDR, INITRD_DRAM_SIZE);
+			cmdline_add(root);
+			sprintf(root, "root=/dev/ram rw");
+			cmdline_add(root);
+#else
+			sprintf(root, "root=/dev/mtdblock%d", rootfs_mtdid);
+			cmdline_add(root);
+#endif
+		}
+	}
+```
+
 
 ## Linux
 
@@ -111,6 +168,27 @@
 	CFLAGS_dw-axi-dmac-platform.o = -O0 -g
 	obj-$(CONFIG_DW_AXI_DMAC) += dw-axi-dmac-platform.o
 	```
+
+
+### Linux2.6.27.55 编译失败
+- 需要使用老的那套编译工具链，在编译 `linux4.9` 或其它版本时用的是一套新的编译工具链
+- 修改完 `zshrc` 之后看一下 `gcc` 的版本就可以确认是哪套工具链 
+```bash
+# ck610 用于 Linux2.6/3.0 内核及应用程序编译
+export PATH=${PATH}:/opt/gxtools/csky-linux-tools-i386-uclibc-20170724_cross_compiler/csky-linux-tools-i386-uclibc-20170724/bin
+export PATH=${PATH}:/opt/gxtools/csky-linux-tools-i386-uclibc-20180905_cross_compiler/bin
+export PATH=${PATH}:/opt/gxtools/csky-linux-tools-i386-uclibc-20180905_cross_compiler/csky-linux/bin
+
+# ck610 用于 Linux4.9 内核及应用程序编译
+#export PATH=${PATH}:/opt/gxtools/csky-linux-gnu-tools-i386-glibc-linux-4.9.56-20190605_cross_compiler/csky-linux-gnu-tools-i386-glibc-linux-4.9.56-20190605/bin
+#export PATH=${PATH}:/opt/gxtools/csky-linux-gnu-tools-i386-glibc-linux-4.9.56-20190605_cross_compiler/csky-linux-gnu-tools-i386-glibc-linux-4.9.56-20190605/csky-linux-gnu/bin
+#export PATH=${PATH}:/opt/gxtools/csky-linux-uclibc-tools-i386-uclibc-linux-4.9.56-20190605_cross_compiler/csky-linux-uclibc-tools-i386-uclibc-linux-4.9.56-20190605/bin
+#export PATH=${PATH}:/opt/gxtools/csky-linux-uclibc-tools-i386-uclibc-linux-4.9.56-20190605_cross_compiler/csky-linux-uclibc-tools-i386-uclibc-linux-4.9.56-20190605/csky-linux-uclibc/bin
+
+```
+
+
+
 
 
 
