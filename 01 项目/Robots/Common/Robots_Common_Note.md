@@ -59,3 +59,8 @@ index 67a02638..429bd85f 100644
 
 
 
+
+# Apus、Aquila、Fornax 等芯片 Stage1 会读 ID，Stage1 用的是四倍速读 flash
+- `arch/riscv/mach-apus/spl/spl_spinor.c` 中初始化 flash 时会读 id，并使能 quad，以及读接口是用的 quad 模式。xip 模式也是四线模式 
+- Aquila 不知道 Stage1 有没有 QUAD 的宏，是不是用的四线
+- Fornax Stage1 用的是四倍速 

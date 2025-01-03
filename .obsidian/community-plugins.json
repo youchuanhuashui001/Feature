@@ -1,6 +1,5 @@
 [
   "obsidian-excalidraw-plugin",
-  "obsidian-vimrc-support",
   "calendar",
   "dataview",
   "i18n",
@@ -14,5 +13,6 @@
   "obsidian-markmind",
   "easy-typing-obsidian",
   "vscode-editor",
-  "open-in-new-tab"
+  "open-in-new-tab",
+  "obsidian-vimrc-support"
 ]

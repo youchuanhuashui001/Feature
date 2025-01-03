@@ -12,12 +12,14 @@ from "03 备忘"
 sort file.ctime desc
 ```
 
+
+
 ## Todo                                                                                                                          
+- Virgo 外设对接 
 ```dataview
 TASK
 WHERE !completed
 ```
-- [ ] 年终总结 
 
 
 
