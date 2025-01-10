@@ -1,3 +1,6 @@
+
+#doing 
+
 - key_scan 新模块：https://git.nationalchip.com/gerrit/#/c/86514/42
 # 背景知识
 
@@ -235,6 +238,24 @@
 - iomatrix 是 pinmux 的一个子功能
 - 首先在 pinmux 中配置，所有引脚的功能，如果 pinmux 中配不了，就选择功能是 `from_io_matrix`，然后在 `iomatrix` 中来配置某些引脚配成某个功能 (iomatrix 中所有功能可映射到任一 Pad)
 
+- 配置 0xb0910000 选择哪几个 gpio 来自 iomatrix
+	- `bit[3:0]` 用于表示复用的功能 
+	- 一个四字节的寄存器代表一个 gpio 吗？
+- iomatrix 中配置哪几个 gpio 的功能为其它功能 
+
+
+#### Q12：dma lite 的中断状态有什么意义？
+- iodma 要传 2k 数据，dma lite 四组最多有多少？
+	- dma lite 传完了，做一个回调，回调里面重新配置地址和长度组 
+- 对于 iodma 来说只需要查 done 中断，对于 dma lite 来说知道总共要传输多少数据，所以如果一轮四组寄存器不够，可以查询每一组的完成中断，中断里去重新赋值四组寄存器，直到完成 
+
+#### Q13：dma lite 的超时时间是什么单位？
+- `IODMA_TX_DELAY (0x18)` 是什么单位？
+- `DMALITE_TO_VALUE(0x3c)` 是什么单位？
+
+- dma_lite 超时要不要清一下
+- dma_lite 
+
 
 
 ### 核心功能
@@ -302,6 +323,175 @@ hal_status gx_hal_padmux_set(GX_HAL_PADMUX *dev, int pad_id, int function)
 - 判断 iodma 中断状态 
 	- `IODMA_ISR & 0x1` 
 
+## 芯片仿真说可以看到 iodma 和 dma lite 的中断，但是我这边一直看不到
+
+### 测试 1：换新的 bit，目前是 12-25 的 bit，换成 1-3 的 bit
+
+## iodma 用逻辑分析仪抓不到输出的波形，引脚复用把 P1_0、P1_1 配成了 iodma0、iodma1
+- 
+![[Pasted image 20250108090711.png]]
+- cache？
+	- 刷 cache 后还是一样的
+- cpu 不能直接写物理地址的，只能通过 ibus、dbus 来写
+
+- 测试的时候通过 cpu 往 0x20000 地址写数据，发现成功写进去了，并且 0x20020000 地址也有更新。从文档上看应该是写不到这个地址去的，也没有产生报错什么的。
+	- 0x20020000 可能是上次我写过，残留的数据？
+	- 是的，重新上电再写一次，是没有写到 0x20020000 地址的 
+
+## 波形分析如下：
+
+## 2 个引脚输出
+
+### 写数据 0x01
+![[Pasted image 20250108105946.png]]
+### 写数据 0x02
+![[Pasted image 20250108105843.png]]
+
+### 写数据 0x03
+![[Pasted image 20250108110019.png]]
+
+### 写数据 0x04
+![[Pasted image 20250108110057.png]]
+
+### 写数据 0x05
+![[Pasted image 20250108110218.png]]
+
+
+### 写数据 0x06
+![[Pasted image 20250108111014.png]]
+
+
+### 写数据 0x07
+![[Pasted image 20250108110938.png]]
+
+### 写数据 0x08
+![[Pasted image 20250108111259.png]]
+
+### 写数据 0x09
+![[Pasted image 20250108111344.png]]
+
+### 写数据 0x17
+![[Pasted image 20250108111551.png]]
+
+
+![[Pasted image 20250108112547.png]]
+![[Pasted image 20250108112944.png]]
+
+### 用 4 个引脚输出一个 word 
+![[Pasted image 20250110100934.png]]
+### 用 8 个引脚输出一个 word
+![[Pasted image 20250110102443.png]]
+
+
+
+### 写一个字节数据耗时约 12.6275us
+- 2 个引脚来输出波形：12.6275us
+- 4 个引脚：6.3125us
+- 8 个引脚：3.16us
+
+## 驱动框架
+
+```
+cmd                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+drv-sagitta -- 芯片相关的
+	src  
+		gx_iodma.c  
+			实现的都是提供给外部的接口，都是调用 hal 的驱动来的
+			申请中断，配置时钟什么的都是在这里
+			
+			
+			drv-sagitta 下面要过滤 tx_size，不允许不四字节对齐
+			或者这里不要过滤，最小就是 4 字节
+			判断最大不能超过 16M
+			if (!dev || !config) {
+				return -INVAL;
+			}
+			
+			判断最大的延时不能超过 1M，这里的单位是 1/iodma_clk
+			
+			
+	include  
+		gx_dma_ahb.h  
+			基本和 gx_hal_iodma.h 的定义一致，都是声明函数名称(用户用的函数)
+			外面用户配置的枚举什么的都在这里定义
+
+hal -- ip 相关的
+	src  
+		iodma  
+			gx_hal_iodma.c  
+				包括普通的小的功能接口
+				init
+				config
+					需要区分模式，fix/continue
+					fix:
+						IODMA_CTRL 输出数据位数，固定模式
+						IODMA_IER 使能所有中断？
+						IODMA_TX_NUM 配置要发的数据长度
+						IODMA_TX_DELAY 需要配置延时时间
+						
+						DMALITE_CTRL 读操作，并且 timeout 写1清0
+						DMALITE_IER 使能所有中断？
+						DMALITE_ADDR0 配置地址，要写物理地址
+						DMALITE_LEN0 一组最多 64k-1
+						DMALITE_ADDR1 配置地址，要写物理地址
+						DMALITE_LEN1 一组最多 64k-1
+						DMALITE_ADDR2 配置地址，要写物理地址
+						DMALITE_LEN2 一组最多 64k-1
+						DMALITE_ADDR3 配置地址，要写物理地址
+						DMALITE_LEN3 一组最多 64k-1
+						DMALITE_ADDR_LEN_USED_NUM :根据长度来配置要用几组
+							有个问题，上面传 16M，下面这还不到 1M，那么要怎么弄？
+							好像是可以循环的，四组传输完成之后，再配寄存器
+							传完最后一组会重新跳到第一组执行，那就是要在第三组传完就赋值？
+						DMALITE_TO_VALUE 配置超时时间，单位是 1/dmalite
+						
+					continue：
+						需要配置
+					
+					
+					
+				get_cur_transfer_status
+					DMA_LITE_IDX_AND_CNT 获取当前请求的地址和长度，以及第几组	
+					
+					
+					
+					
+					
+					
+				start
+					IODMA_DMALITE_EN  1
+					IODMA_EN   1
+				irq
+					调用 callback，这里由用户注册回调，从 drv-sagitta 传下来
+			gx_hal_iodma.h  
+				定义寄存器和 bit 宏定义
+				
+				定义 GX_HAL_IODMA 包括基地址
+				GX_HAL_INIT_CONFIG 不需要，初始化的时候全关
+				GX_HAL_TX_CONFIG 
+					输出的引脚数量
+					输出的模式：Fix、Var
+						Fix：
+							输出的数据长度是多少
+							中断需要打开 TX_DONE(配置的时候不用管，驱动根据mode来自己配)
+							数据发完后的等待时间
+						Var：
+							中断不用管，硬件自己清除
+							TX_DONE 是怎么做的？
+							数据发完后的等待时间？这里怎么做的
+
+				GX_HAL_IODMA_MODE：Fix、Var
+					中断要定义几个宏用来表示状态，FIFO_EMPTY、FIFO_FULL、TX_DONE
+						这个定义在 hal/src/gx_iodma.c 或者 hal/src/gx_iodma.h 就行
+					使能的时候直接写寄存器就可以
+				
+				
+	include  
+		gx_hal_iodma.h  
+			声明 iodma.c 中的方法，以及外面用户要配置的参数
+```
+
 
 
 
@@ -309,6 +499,23 @@ hal_status gx_hal_padmux_set(GX_HAL_PADMUX *dev, int pad_id, int function)
 # 测试用例
 
 ## 功能测试范围
+
+```
+
+功能测试：
+1. 输出位宽测试            2bit模式、4bit模式、8bit模式、16bit模式
+2. 传输模式测试            支持固定模式、无尽模式
+3. 寄存器对测试            固定模式下，单寄存器对；多寄存器对；多寄存器对循环；
+                           无尽模式下，需要怎么测试？
+4. 多次传输请求间间隔可配  IODMA Time out
+5. 中断测试                IODMA：FIFO Empty、FIFO Full、Tx done
+                           DMALITE：AHB Res ERR、Time out、每个寄存器对传输完成中断
+6. 边界测试                DMALITE 地址超过 16MB、地址非四字节对齐、
+
+
+```
+
+
 
 ### IODMA 功能测试范围
 
@@ -319,11 +526,14 @@ hal_status gx_hal_padmux_set(GX_HAL_PADMUX *dev, int pad_id, int function)
    - 16bit 模式：验证每 32bit 数据分 2 组输出
 
 2. 传输模式测试
-   - 固定长度模式：
+     - 固定长度模式：
      * 配置不同的传输长度
+		 - [ ] 固定模式，单寄存器对
+		 - [ ] 固定模式，多寄存器对
+		 - [ ] 固定模式，循环多寄存器对 
      * 验证传输完成后是否正确停止
      * 验证 IO 状态是否保持
-   - 无尽模式：
+     - 无尽模式：
      * 验证 FIFO 不满时持续请求数据
      * 验证 FIFO 满时暂停请求
      * 验证 FIFO 有空间时继续请求
@@ -352,6 +562,7 @@ hal_status gx_hal_padmux_set(GX_HAL_PADMUX *dev, int pad_id, int function)
 
 3. 传输控制测试
    - 读模式验证
+	   - 写模式无法验证 
    - 传输长度配置
    - 传输完成验证
 
@@ -430,3 +641,43 @@ hal_status gx_hal_padmux_set(GX_HAL_PADMUX *dev, int pad_id, int function)
      * IODMA_ISR & 0x1
    - 观察波形输出
    - 验证数据正确性 
+
+
+
+
+# 问题：
+### 疑问：输出波形是先发低位再发高位吗？
+
+
+### 对于 tx fifo 满中断和 tx fifo 空中断，是硬件自清的，是不是平时都不用打开？
+
+
+### 无尽模式，只要  dma lite 配置了寄存器对，就会发，没配置就不发了？
+- 无尽模式下，我怎么配置我想发的数据？全都配置到 dma lite 里面去 
+	- 是的 
+- 无尽模式的时候，是怎么发数据的？
+- 无尽模式，我要怎么让用户准备数据？sram 的数据要准备吧 
+
+
+
+### Q1：输出的波形要不要换下大小端？
+### Q2：根据最后一组长度寄存器对，在访问结束后，会重新跳转到第一组执行；这里是必须最后一组的长度配成 65535 才会继续跳到第一组执行吗？
+
+### Q3：无尽模式下，是怎么传输数据的？
+- iodma 这边不用配置长度，dma lite 需要配置地址和长度
+- sram 里面准备好了数据，dma lite 配置配 1 组寄存器对的时候怎么传？配 4 组寄存器对的时候怎么传？配成循环(很多的数据，还在传第四组的时候，第一组已经配好了)的寄存器对怎么传？
+
+#### 配置 1 组寄存器对：这里存在一个问题，我不知道会循环发多少遍；设计的就是这样的吗？启动的时候配置了第一组的地址和长度，后面完成了就把第一组的地址和长度寄存器清空了，没有影响吧？
+![[Pasted image 20250110144039.png]]
+
+![[Pasted image 20250110144159.png]]
+
+
+### Q5：无尽模式下，启动了之后，没法波形了，再去启动就没作用了 
+- 关了控制器，再去开也没用，依旧无法产生波形 
+- **必须把 iodma、dmalite 的配置都清掉之后重新启动才可以重发波形**
+
+
+### Q6：iodma 传输完成之后需要自己手动关，可不可以自动关？检测到 tx_done 之后就自己关掉？
+- 现在是异步的，中断里面才知道传输完成了 
+- 是不是驱动里面做一个变量，死等中断里面的值，做成同步的 

@@ -64,3 +64,67 @@ index 67a02638..429bd85f 100644
 - `arch/riscv/mach-apus/spl/spl_spinor.c` 中初始化 flash 时会读 id，并使能 quad，以及读接口是用的 quad 模式。xip 模式也是四线模式 
 - Aquila 不知道 Stage1 有没有 QUAD 的宏，是不是用的四线
 - Fornax Stage1 用的是四倍速 
+
+
+
+# bootx 工具烧写 grus 比烧写 apus、fornax 快
+
+> [!Note] 
+>  -  grus、apus/fornax 使用相同的 flash p25q80l，发现 grus 比 apus/fornax 烧写速度快
+>  - 原因是 grus 在烧写的时候做了策略，uart 收数据的时候采用 dma 异步收数据，边收边写 flash。而 apus/fornax 没有做这个策略，所以会等 uart 数据收完之后再去写 flash，所以会慢。
+
+
+
+- 使用 bootx 工具烧写 grus 约 940K 的数据，耗时约 12ms
+```
+-> % time ./bootx_debug_speed -m grus -t s -c download 0 ../.boot/222 -d /dev/ttyUSB1 -r 1000000 
+Version : v1.10.5-debug_2 (20250107)
+NationalChip AIoT Download Tools
+Copyright (C) 2001-2024 NationalChip Co., Ltd
+ALL RIGHTS RESERVED!
+
+wait ROM request... please power on or restart the board...
+Using Grus boot
+Found serial: /dev/ttyUSB1
+downloading [1/2] : 
+[==========][100%]
+downloading [2/2] : 
+[==========][100%]
+send boot coust : 4884 ms
+Excute cmd : download 0 ../.boot/222
+serialdown 0 960660 51200
+Flash JEDEC = 0x856014, model = p25q80l.
+spi_nor_calc_range get SR1:0x0, SR2:0xa 
+protect len: 0x0
+downloading [1/19]
+
+[==========][100%]
+done
+cmd coust : 11189 ms
+./bootx_debug_speed -m grus -t s -c download 0 ../.boot/222 -d /dev/ttyUSB1 -  0.20s user 0.30s system 3% cpu 16.080 total
+```
+- 使用 bootx 工具烧写 apus、fornax 同样大小的 bin，耗时约 20ms
+```
+-> % time ./bootx_debug_speed -m fornax -t s -c download 0 ../.boot/222 -d /dev/ttyUSB0 -r 1000000 
+Version : v1.10.5-debug_2 (20250107)
+NationalChip AIoT Download Tools
+Copyright (C) 2001-2024 NationalChip Co., Ltd
+ALL RIGHTS RESERVED!
+
+Baudrate adaptive interaction completed
+prepare cost : 1405 ms
+downloading [1/2] : 
+[==========][100%]
+stage1 cost : 441 ms
+downloading [2/2] : 
+[==========][100%]
+stage1 cost : 687ms
+----------------- Excute Command -----------------
+[CMD] String : download 0 ../.boot/222
+[==========][100%]
+[CMD] Result : SUCCESS
+stage1 cost : 17563
+./bootx_debug_speed -m fornax -t s -c download 0 ../.boot/222 -d /dev/ttyUSB0  0.11s user 0.31s system 2% cpu 20.098 total
+```
+
+

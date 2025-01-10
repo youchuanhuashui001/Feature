@@ -15,13 +15,8 @@ sort file.ctime desc
 
 
 ## Todo                                                                                                                          
-- Virgo 外设对接 
-```dataview
-TASK
-WHERE !completed
-```
-
-
+- [ ] Virgo 外设对接 
+- [ ] scpu flash 速度测试 case 不需要关心数据对错，所以直接测试整片 flash 即可，目前测试只测了 2 个 block，数据不准确 
 
 
 ## 进行中
