@@ -4,32 +4,168 @@ mindmap-plugin: basic
 
 ---
 
-# ahb dma
+# driver
 
-## cmd
-- init 已经在  common/main.c 中调了
-- 配置全部都是用 GX_DMA_AHB_CH_CONFIG 来做的，也就是 drv-xxx 中定义的
-- 调用的接口都是 drv-xxx 中实现的
+## ahb dma
+- cmd
+    - init 已经在  common/main.c 中调了
+    - 配置全部都是用 GX_DMA_AHB_CH_CONFIG 来做的，也就是 drv-xxx 中定义的
+    - 调用的接口都是 drv-xxx 中实现的
+- drv-apus
+    - .h
+        - 基本和 hal .h 中实现了一套相同的宏定义，这里是给上层用的，上层不能直接用 hal，需要用 drv-xxx 这套里面的东西
+    - .c
+        - 定义一个 GX_HAL_DMA_AHB dma_dev
+        - Debug 相关的代码
+        - init
+            - 定义一个 GX_HAL_DMA_AHB_INIT_CFG init_cfg = {0};
+            - 打开模块时钟
+            - 初始化 init_cfg
+            - 调用 gx_hal_dw_dma_ahb_init(&dma_dev, &init_cfg)
+            - gx_request_irq(IRQ_NUM_DMA, gx_dma_handler, &dma_dev);
+                - gx_hal_dw_dma_ahb_irq_handler(pdata);
+        - 这里面主要实现的是一些会提供给上层的接口，例如 init、select_channel、release_channel、xfer、wait_complete
+            - 这里的接口对应的功能也都是调用 hal 来实现的
+- hal
+    - .h
+        - 定义 GX_HAL_DMA_AHB、GX_HAL_DMA_AHB_INIT_CFG、GX_HAL_DMA_AHB_CONFIG
+    - .c
+        - 实现了所有的功能函数，函数的参数都是 GX_HAL_DMA_AHB *dev, GX_HAL_DMA_AHB_INIT_CFG *cfg 形式
+        - 函数全都是传一个 dev + 参数
 
-## drv-apus
-- .h
-    - 基本和 hal .h 中实现了一套相同的宏定义，这里是给上层用的，上层不能直接用 hal，需要用 drv-xxx 这套里面的东西
-- .c
-    - 定义一个 GX_HAL_DMA_AHB dma_dev
-    - Debug 相关的代码
-    - init
-        - 定义一个 GX_HAL_DMA_AHB_INIT_CFG init_cfg = {0};
-        - 打开模块时钟
-        - 初始化 init_cfg
-        - 调用 gx_hal_dw_dma_ahb_init(&dma_dev, &init_cfg)
-        - gx_request_irq(IRQ_NUM_DMA, gx_dma_handler, &dma_dev);
-            - gx_hal_dw_dma_ahb_irq_handler(pdata);
-    - 这里面主要实现的是一些会提供给上层的接口，例如 init、select_channel、release_channel、xfer、wait_complete
-        - 这里的接口对应的功能也都是调用 hal 来实现的
-
-## hal
-- .h
-    - 定义 GX_HAL_DMA_AHB、GX_HAL_DMA_AHB_INIT_CFG、GX_HAL_DMA_AHB_CONFIG
-- .c
-    - 实现了所有的功能函数，函数的参数都是 GX_HAL_DMA_AHB *dev, GX_HAL_DMA_AHB_INIT_CFG *cfg 形式
-    - 函数全都是传一个 dev + 参数
+## iodma
+- cmd
+- drv-sagitta
+- hal
+    - .h
+        - GX_HAL_IODMA
+            - 寄存器基地址
+            - 时钟源频率
+                - iodma
+                    - 下一次传输的时间配置，这里是来自时钟周期的一个节拍，后面可以做成自动的
+                - dmalite
+                    - 超时时间，应该不用放出去。内部处理一下就行了
+            - 固定模式下需要注册 callback、callback_param
+        - GX_HAL_IODMA_TX_CONFIG
+            - io_width  输出脚数
+            - mode 传输模式
+            - addr 要传输的 sram 地址
+            - len 总共要传输的长度
+    - .c
+        - GX_HAL_IODMA_TRANS
+            - mode  记录当前的传输模式
+                - 在 config 函数配置，中断服务函数里面会用
+            - total_len 固定模式下，需要在 irq 来配置的传输长度
+            - next_addr 固定模式下，记录下一次要传输的地址
+        - init
+            - 复位 iodma 寄存器
+                - EN = 0
+                - CTRL = 0
+                - IER = 0
+                - ISR = 0x1
+                    - 只有 done 中断可以 w1c
+                - TX_NUM = 0
+                - TX_DELAY = 0
+            - 复位 dmalite 寄存器
+                - EN = 0
+                - CTRL = 0
+                    - timeout 可以写1请0，但是不用清除
+                - IER = 0
+                - ISR = 0x3F
+                    - 清掉所有中断
+                - ADDRx = 0
+                - LENx = 0
+                - ADDR_LEN_USED_NUM = 0
+                - LIFT_TO_VALUE = 0
+        - config
+            - fix
+                - ！！！！ 判断错误的条件 ！！！！
+                    - 判断 trans.total_len 是否未传完 或者 trans.next_addr 还有值
+                        - 说明上一次传输还没传完，return -1
+                - 配置位宽和传输模式  CTRL
+                - 配置 iodma的传输长度   TX_NUM
+                - 配置传输完之后的延迟   TX_DELAY
+                    - ！！！ 这里是不是没意义？！！！
+                - 配置 dmalite 寄存器对   ADDRx  LENx
+                    - 最多只能配置 4*(64k-1) word，剩余的要在 irq 里面配
+                        - 还有剩余
+                            - trans.next_addr = curent_addr
+                                - 下一个要配置的地址
+                            - trans.total_len = remain_len
+                                - 剩余的总长度，都要在 irq 里面配完
+                - 配置 dmalite 使用的寄存器对数   USED
+                - 配置 dmalite 超时时间  TO_VALUE
+                    - ！！！ 这里是不是需要芯片给一个默认值或推荐值 ！！！
+                - 配置 dmalite 读模式   CTRL = 0
+                - 中断相关
+                    - iodma
+                        - ！！！ fifo full 中断开吗？！！！
+                            - 不用开，因为硬件自己清，不用管就是了
+                        - ！！！ fifo empty 中断开吗？ ！！！！
+                            - 不用开，因为硬件自己清，不用管就是了
+                        - tx_done 中断打开
+                    - dmalite
+                        - ahb resp  打开
+                        - timeout 打开
+                        - 4组的中断都打开
+            - continue
+                - ！！！！ 判断错误的条件 ！！！！
+                - 配置位宽和传输模式 CTRL
+                - ！！！ iodma 传输长度不用配 ！！！
+                - 配置传输完之后的延时 TX_DELAY
+                    - ！！！ 这里是不是 fix 模式配了没用？！！！
+                - 配置 dmalite 寄存器对
+                    - 最多只支持 4*(64k-1) word，剩余的 irq 里也不管。最大的长度就是这么多
+                - 配置 dmalite 使用的寄存器对数 USED
+                - 配置 dmalite 超时时间 TO_VALUE
+                - 配置 dmalite 读模式 CTRL = 0
+                - 中断相关
+                    - iodma
+                        - ！！！ 不用开，因为tx_done 只有在 fix 模式才会有 ！！！
+                    - dmalite
+                        - ahb resp 打开
+                        - timeout 打开
+                        - 4组的中断都打开
+        - start
+            - 配置状态为 BUSY
+            - 启动 dma lite
+            - 启动 iodma
+            - fix
+                - 需要等传输状态变为完成。否则如果用户没传完就又 start，就完了
+                    - 或者这里用回调来保证。
+                    - 用户必须等到回调了之后才能再去 start
+                - 传输完成之后需要关掉 dma lite 和 iodma 的使能
+                    - 或者这里就在中断里面，检测到完成了就关掉好了
+            - continue
+                - 不需要等传输状态
+                - 不能去关闭 dmalite 和 iodma
+        - irq
+            - 处理公共错误状态
+                - dmalite
+                    - ahb 错误
+                        - 错误，打印，关掉控制器
+                    - 超时
+                        - ！！！ 问下芯片怎么干 ！！！
+                - iodma
+                    - 没有公共错误状态
+            - fix
+                - dmalite 处理每个地址对传输完成的中断，循环配置地址对
+                    - 变量在哪里清？
+                - iodma done 中断，调用上层的回调
+                    - 清 tx done 中断
+                    - 关掉 dmalite
+                    - 关掉 iodma
+                    - 判断数据是不是都传输完了
+                        - 传输完成了
+                            - 将变量都清0
+                            - 调用用户注册的回调
+                        - 没传输完？
+                            - ！！！！ 那就是 bug ！！！
+            - continue
+                - ！！！！ 涉及到一个问题  ！！！！
+                    - continue 模式最大可配置的传输数据长度是多少？数据都是来自 dmalite 配置的，最大只能配置 4 组寄存器对？还是在中断里面处理来做到循环？
+                        - 最大只能配置4组寄存器对
+                - dmalite
+                    - 最大配置4组的话，不用管中断，来了就清，来了就清。或者干脆就别使能中断
+                - iodma
+                    - 没有可以处理的中断
