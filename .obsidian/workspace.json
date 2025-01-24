@@ -34,21 +34,61 @@
             }
           },
           {
-            "id": "19ec209694b88aa3",
+            "id": "e8d699a8b63b3c29",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Sagitta/IODMA/向芯片提问题.md",
+                "file": "01 项目/Chiptest/Sagitta/IODMA/Sagitta NRE FPGA IODMA 测试用例.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "向芯片提问题"
+              "title": "Sagitta NRE FPGA IODMA 测试用例"
             }
           },
           {
-            "id": "36140460758c0ccb",
+            "id": "baee047215567773",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Chiptest/Sagitta/IODMA/WS2811.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "WS2811"
+            }
+          },
+          {
+            "id": "bd69157c70c8202c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "04 其它/tmux.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "tmux"
+            }
+          },
+          {
+            "id": "faf0f36ce1300017",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "01 项目/Chiptest/Sagitta/IODMA/Drawing 2024-12-31 15.47.06.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Drawing 2024-12-31 15.47.06.excalidraw"
+            }
+          },
+          {
+            "id": "d1e29ec3ace5bd35",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -59,6 +99,20 @@
               },
               "icon": "lucide-file",
               "title": "Sagitta NRE FPGA IODMA 模块验证"
+            }
+          },
+          {
+            "id": "63a5ced00e9be48f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Chiptest/Sagitta/IODMA/向芯片提问题.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "向芯片提问题"
             }
           },
           {
@@ -93,6 +147,34 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "00 日记/2025/2025-1/2025-01-24-星期五.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-01-24-星期五"
+            }
+          },
+          {
+            "id": "affee1822b4e4813",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "06 资源/模板/GoXceed 支持 Nor Flash.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "GoXceed 支持 Nor Flash"
+            }
+          },
+          {
+            "id": "305a66be30f2e213",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "01 项目/Goxceed/Redmine/支持 Nor Flash GT25Q64A-S.md",
                 "mode": "source",
                 "source": false
@@ -102,7 +184,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -184,7 +266,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01 项目/Goxceed/Redmine/支持 Nor Flash GT25Q64A-S.md",
+                "file": "04 其它/tmux.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -194,7 +276,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "支持 Nor Flash GT25Q64A-S 的反向链接列表"
+              "title": "tmux 的反向链接列表"
             }
           },
           {
@@ -203,12 +285,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01 项目/Goxceed/Redmine/支持 Nor Flash GT25Q64A-S.md",
+                "file": "04 其它/tmux.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "支持 Nor Flash GT25Q64A-S 的出链列表"
+              "title": "tmux 的出链列表"
             }
           },
           {
@@ -230,10 +312,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01 项目/Goxceed/Redmine/支持 Nor Flash GT25Q64A-S.md"
+                "file": "04 其它/tmux.md"
               },
               "icon": "lucide-list",
-              "title": "支持 Nor Flash GT25Q64A-S 的大纲"
+              "title": "tmux 的大纲"
             }
           }
         ],
@@ -259,53 +341,54 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "07919ebeba8c7301",
+  "active": "bd69157c70c8202c",
   "lastOpenFiles": [
+    "04 其它/terminal.md",
+    "04 其它/tmux.md",
+    "01 项目/Chiptest/Sagitta/IODMA/WS2811.md",
+    "06 资源/image/Pasted image 20250124160242.png",
     "01 项目/Chiptest/Sagitta/IODMA/Sagitta NRE FPGA IODMA 模块验证.md",
-    "01 项目/Chiptest/Sagitta/IODMA/iodma_xmind.md",
+    "01 项目/Chiptest/Sagitta/IODMA/Drawing 2024-12-31 15.47.06.excalidraw.md",
+    "01 项目/Chiptest/Sagitta/IODMA/Sagitta NRE FPGA IODMA 测试用例.md",
+    "01 项目/Chiptest/Sagitta/IODMA/WS2811 编程.md~",
+    "06 资源/image/Pasted image 20250124142919.png",
+    "06 资源/image/Pasted image 20250124142907.png",
+    "06 资源/image/Pasted image 20250124142852.png",
+    "06 资源/image/Pasted Image 20250124134956_552.png",
+    "06 资源/image/Pasted Image 20250124134931_139.png",
+    "00 日记/2025/2025-1/2025-01-24-星期五.md",
+    "00 日记/2025/2025-1/2025-01-23-星期四.md",
+    "Home.md",
+    "00 日记/2025/2025-1/2025-01-22-星期三.md",
+    "04 其它/ubuntu_back_config/Shell 背景颜色配置.md",
+    "06 资源/image/Pasted image 20250122162036.png",
+    "欢迎.md",
     "01 项目/Chiptest/Sagitta/IODMA/向芯片提问题.md",
-    "06 资源/image/Pasted image 20250108112944.png",
+    "01 项目/Chiptest/Sagitta/IODMA/Sagitta NRE FPGA IODMA 测试用例.md~",
+    "00 日记/2025/2025-1/2025-01-21-星期二.md",
+    "00 日记/2025/2025-1/2025-01-18-星期六.md",
+    "06 资源/image/Pasted image 20250121152832.png",
+    "01 项目/Goxceed/Redmine/支持深圳芯存并行 Nand.md",
+    "01 项目/Chiptest/Sagitta/IODMA/iodma_xmind.md",
+    "04 其它/lazyvim/Lazyvim 常用功能按键映射.md",
+    "01 项目/Goxceed/Redmine/支持 Nor Flash GT25Q64A-S.md",
+    "06 资源/模板/GoXceed 支持 Nor Flash.md",
+    "06 资源/image/Pasted image 20250118160326.png",
+    "111.c~",
+    "111",
+    "111.c",
+    "06 资源/image/Pasted image 20250118141416.png",
     "01 项目/Goxceed/Redmine/Partitio_Raw_Write 接口返回出错.md",
     "01 项目/Goxceed/Common/aSan.md",
-    "Home.md",
-    "01 项目/Goxceed/Redmine/支持 Nor Flash GT25Q64A-S.md",
-    "04 其它/lazyvim/Lazyvim 常用功能按键映射.md",
-    "06 资源/image/Pasted image 20250116163847.png",
-    "06 资源/image/Pasted image 20250116162830.png",
-    "06 资源/模板/GoXceed 支持 Nor Flash.md",
     "00 日记/2025/2025-1/2025-01-16-星期四.md",
     "00 日记/2025/2025-1/2025-01-15-星期三.md",
-    "06 资源/image/Pasted image 20250116111715.png",
     "test",
     "test.c~",
     "test.c",
     "01 项目/Goxceed/Common/记录aSan工具使用方法.md~",
     "arm-linux/lib/ld-linux-armhf.so.3",
-    "arm-linux/lib/libc.so.6",
-    "arm-linux/lib/libgcc_s.so.1",
-    "arm-linux/lib/libdl.so.2",
-    "arm-linux/lib/librt.so.1",
-    "arm-linux/lib/libm.so.6",
     "00 日记/2025/2025-1/2025-01-14-星期二.md",
     "00 日记/2025/2025-1/2025-01-13-星期一.md",
-    "01 项目/Goxceed/Redmine/Python 自动生成 flash 支持列表.md",
-    "06 资源/image/Pasted image 20250113104645.png",
-    "01 项目/Robots/Common/Robots_Common_Note.md",
-    "00 日记/2025/2025-1/2025-01-10-星期五.md",
-    "00 日记/2025/2025-1/2025-01-11-星期六.md",
-    "06 资源/image/Pasted image 20250110144159.png",
-    "06 资源/image/Pasted image 20250110144039.png",
-    "06 资源/image/Pasted image 20250110102443.png",
-    "06 资源/image/Pasted image 20250110100934.png",
-    "00 日记/2025/2025-1/2025-01-09-星期四.md",
-    "00 日记/2025/2025-1/2025-01-08-星期三.md",
-    "01 项目/Chiptest/Virgo/Final/Virgo UART、I2C、Timer、RTC、WDT、GPIO外设交接.md",
-    "00 日记/2025/2025-1/2025-01-07-星期二.md",
-    "06 资源/image/Pasted image 20250108111551.png",
-    "欢迎.md",
-    "01 项目/Robots/Redmine/8302B 支持 GD25LQ64ESIG.md",
-    "01 项目/Chiptest/Sagitta/IODMA/register.md",
-    "01 项目/Chiptest/Virgo/Final/DW_UART.md",
     "未命名.canvas"
   ]
 }
