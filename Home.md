@@ -1,7 +1,22 @@
+---
+banner: "![[06 资源/file/wallhaven-l85vk2_1920x1080.png]]"
+banner_y: 0.51
+---
 
-今天是 **`=dateformat(date(today),"DD")`**，`=date(today).year` 年已经过去了 `=(date(today)-date(date(today).year + "-01-01")).days` 天.
+```dataviewjs
+let ftMd = dv.pages("").file.sort(t => t.cday)[0]
+let total = parseInt([new Date() - ftMd.ctime] / (60*60*24*1000))
+let totalDays = " 您已使用 *Obsidian* "+total+" 天，"
+let nofold = '!"misc/templates"'
+let allFile = dv.pages(nofold).file
+let totalMd = "共创建 "+
+	allFile.length+" 篇笔记"
+let totalTag = allFile.etags.distinct().length+" 个标签"
 
-
+dv.paragraph(
+	totalDays+totalMd+"、"+totalTag+""
+)
+```
 
 
 
@@ -14,9 +29,10 @@ sort file.ctime desc
 
 
 
-## Todo                                                                                                                          
+## Todo
 - [ ] Virgo 外设对接 
 - [ ] scpu flash 速度测试 case 不需要关心数据对错，所以直接测试整片 flash 即可，目前测试只测了 2 个 block，数据不准确 
+
 
 
 ## 进行中
@@ -53,3 +69,5 @@ from "00 日记"
 where dateformat(file.ctime,"MM-dd") = dateformat(date(today),"MM-dd") 
 limit 100
 ```
+
+[^1]: 

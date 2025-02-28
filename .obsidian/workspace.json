@@ -15,8 +15,8 @@
               "type": "markdown",
               "state": {
                 "file": "Home.md",
-                "mode": "source",
-                "source": false
+                "mode": "preview",
+                "source": true
               },
               "pinned": true,
               "icon": "lucide-file",
@@ -24,161 +24,7 @@
             }
           },
           {
-            "id": "d1006cb525aa86ee",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Goxceed/Redmine/历史分支支持 PY25Q128HA.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "历史分支支持 PY25Q128HA"
-            }
-          },
-          {
-            "id": "20fb8cd5bb0550f4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-2/2025-02-24-星期一.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-02-24-星期一"
-            }
-          },
-          {
-            "id": "60f21e28c40cb9cc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "06 资源/模板/Script/周小结_2025-02-24_至_2025-03-02.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "周小结_2025-02-24_至_2025-03-02"
-            }
-          },
-          {
-            "id": "2dcd898f4fcb2a08",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-2/2025-02-19-星期三.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-02-19-星期三"
-            }
-          },
-          {
-            "id": "55e711fe19e1e7f4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-2/2025-02-25-星期二.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-02-25-星期二"
-            }
-          },
-          {
-            "id": "3949a6295d17d010",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-2/2025-02-26-星期三.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-02-26-星期三"
-            }
-          },
-          {
-            "id": "ca7f2f64981fc258",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-2/2025-02-27-星期四.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-02-27-星期四"
-            }
-          },
-          {
-            "id": "c07ebbfd9cf87dbb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-2/2025-02-28-星期五.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-02-28-星期五"
-            }
-          },
-          {
-            "id": "4ab26da666d0a21e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-2/周小结.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "周小结"
-            }
-          },
-          {
-            "id": "e3bbfd77e5a5f346",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled.md",
-                "mode": "source",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "Untitled"
-            }
-          },
-          {
-            "id": "6b55107751ea5acc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "06 资源/模板/Script/weekly-summary.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "weekly-summary"
-            }
-          },
-          {
-            "id": "b3b7383cae28ed71",
+            "id": "f0982dcc9dbd5c2c",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -192,17 +38,45 @@
             }
           },
           {
-            "id": "63fdd0afb25816e2",
+            "id": "73f97abb6e6aa117",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
+                "file": "00 日记/2025/2025-2/2025-02-28-星期五.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Goxceed_Common_Note"
+              "title": "2025-02-28-星期五"
+            }
+          },
+          {
+            "id": "1cb58631e817a8ef",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 日记/2025/2025-2/2025-02-27-星期四.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-02-27-星期四"
+            }
+          },
+          {
+            "id": "d9255a52c28f76da",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 日记/2025/2025-2/2025-02-26-星期三.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-02-26-星期三"
             }
           },
           {
@@ -248,6 +122,42 @@
             }
           },
           {
+            "id": "eb362f91e3e044b9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 日记/2025/2025-2/2025-02-28-星期五.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-02-28-星期五"
+            }
+          },
+          {
+            "id": "d4d4b35cb4d4faef",
+            "type": "leaf",
+            "state": {
+              "type": "thino_view",
+              "state": {},
+              "icon": "Memos",
+              "title": "Thino"
+            }
+          },
+          {
+            "id": "3b678dce79849ffa",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.7"
+            }
+          },
+          {
             "id": "b52dadb290be3688",
             "type": "leaf",
             "state": {
@@ -274,9 +184,37 @@
               "icon": "lucide-file",
               "title": "IODMA 向芯片提问题"
             }
+          },
+          {
+            "id": "9f9d327ef4eecdd4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Home.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Home"
+            }
+          },
+          {
+            "id": "f0a172441b1b00aa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 日记/2025/2025-2/2025-02-28-星期五.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-02-28-星期五"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 14
       }
     ],
     "direction": "vertical"
@@ -308,7 +246,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "arm",
+                "query": "wallhaven",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -353,7 +291,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 480.5
+    "width": 391.5
   },
   "right": {
     "id": "329513b606a31f86",
@@ -417,13 +355,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "06 资源/模板/Script/周小结_2025-02-24_至_2025-03-02.md",
+                "file": "00 日记/2025/2025-2/2025-02-28-星期五.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "周小结_2025-02-24_至_2025-03-02 的大纲"
+              "title": "2025-02-28-星期五 的大纲"
             }
           }
         ],
@@ -447,41 +385,44 @@
       "obsidian-memos:Thino": false,
       "vscode-editor:新建代码文件": false,
       "copilot:Open Copilot Chat": false,
-      "obsidian-excalidraw-plugin:新建绘图文件": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "60f21e28c40cb9cc",
+  "active": "f0a172441b1b00aa",
   "lastOpenFiles": [
-    "06 资源/模板/Script/week.py~",
-    "00 日记/2025/2025-2/2025-02-24-星期一.md",
-    "00 日记/2025/2025-2/2025-02-25-星期二.md",
-    "00 日记/2025/2025-2/2025-02-26-星期三.md",
-    "00 日记/2025/2025-2/2025-02-27-星期四.md",
+    "Home.md",
+    "file.md",
+    "06 资源/file/wallhaven-l85vk2_1920x1080.png",
+    "06 资源/image/wallhaven-l85vk2_1920x1080 1.png",
+    "02 学习/linux-0.12/other/Draw_Note.md",
+    "01 项目/Chiptest/Virgo/axi-dma/AXI-DMA Linux 驱动.excalidraw.md",
+    "02 学习/arch/ARM/ARM.excalidraw.md",
+    "06 资源/模板/日记模板.md",
+    "06 资源/image/wallhaven-l85vk2_1920x1080.png",
     "00 日记/2025/2025-2/2025-02-28-星期五.md",
-    "00 日记/2025/2025-2/2025-02-19-星期三.md",
-    "06 资源/模板/Script/周小结_2025-02-24_至_2025-03-02.md",
-    "00 日记/2025/2025-2/2025-02-28.md",
+    "00 日记/2025/2025-2/2025-02-27-星期四.md",
+    "00 日记/2025/2025-2/2025-02-26-星期三.md",
     "06 资源/模板/Script/weekly-summary.md",
     "06 资源/模板/Script/week.py",
-    "Untitled 1.md",
+    "06 资源/模板/Script/周小结_2025-02-24_至_2025-03-02.md",
+    "00 日记/2025/2025-2/2025-02-24-星期一.md",
+    "欢迎.md",
+    "00 日记/2025/年度小结.md",
+    "00 日记/2025/2025-2/2025-02-25-星期二.md",
+    "01 项目/Chiptest/Sagitta/IODMA/IODMA 向芯片提问题.md",
     "Untitled.md",
-    "06 资源/模板/日记模板.md",
+    "01 项目/Goxceed/Redmine/历史分支支持 PY25Q128HA.md",
+    "00 日记/2025/2025-2/2025-02-19-星期三.md",
+    "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
+    "06 资源/模板/Script/week.py~",
+    "00 日记/2025/2025-2/2025-02-28.md",
+    "Untitled 1.md",
     "06 资源/模板/weekly-summary.js",
     "06 资源/模板/Script",
-    "00 日记/2025/2025-2/周小结.md",
     "06 资源/模板/weekly-summary.js.md",
-    "01 项目/Goxceed/Redmine/历史分支支持 PY25Q128HA.md",
-    "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
-    "01 项目/Chiptest/Sagitta/IODMA/IODMA 向芯片提问题.md",
-    "欢迎.md",
     "01 项目/Chiptest/Virgo/nre/Uboot 支持 SPI Nor Flash 驱动.md",
     "01 项目/Common/IP/iodma 测试代码.md",
-    "02 学习/arch/ARM/ARM体系结构与编程.md",
-    "01 项目/Goxceed/Common/aSan.md",
-    "typora/gx/Grus.md",
-    "02 学习/arch/ARM/GIC_V2.md",
-    "01 项目/Chiptest/Virgo/Final/Flash_SPI 模块 Final 验证.md",
     "07 临时/2-27/iodma/gx_ws2812.c~",
     "07 临时/2-27/iodma/gx_ws2812.c",
     "07 临时/2-27/iodma/main.c",
@@ -495,9 +436,6 @@
     "06 资源/image/Pasted image 20250225180548.png",
     "06 资源/image/Pasted image 20250225151938.png",
     "06 资源/image/Pasted image 20250225151845.png",
-    "06 资源/image/Pasted image 20250213110332.png",
-    "06 资源/image/Pasted image 20250213095155.png",
-    "06 资源/image/Pasted image 20250212110702.png",
     "未命名.canvas"
   ]
 }
