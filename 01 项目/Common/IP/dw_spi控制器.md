@@ -1914,6 +1914,8 @@ DWC_ssi 支持组合中断请求和单独中断请求，每种中断请求都可
 
 # 外部 DMA
 
+^4f33e0
+
 ## 选择 Receive Watermark Level
 
 - 如果 dma 的 burst_size 大于水线，当没有足够的数据填充到源时，可能会导致下溢，因此为了避免下溢，需要按照下面的公式配置水线和 burst_size
@@ -1928,6 +1930,33 @@ DWC_ssi 支持组合中断请求和单独中断请求，每种中断请求都可
 
 - 为了避免 TXFIFO 发生溢出的情况，一般来说水线配成 fifo 阈值的一半
 
+
+## Burst/Single
+
+- Burst：
+	- DW_ahb_dmac 用上升沿采样 `dma_tx_req/dma_rx_req` 信号来识别请求在哪个通道。接收来自 dw_ahb_dmac 的 `dma_tx_ack/dma_rx_ack` 信号用于表示 burst 传输完成。
+		- DW_ssi 一直选中 `dma_tx_req/dma_rx_req` 信号，直到收到 `dma_tx_ack/dma_rx_ack` 信号
+		- 当采样到 `dma_tx_ack/dma_rx_ack` 信号被选中后，如果 fifo 数量和水线相符会重新采样 `dma_tx_req/dma_rx_req` 信号
+	- burst 请求线 `dma_tx_req/dma_rx_req` 信号一旦选中则会保持选中，直到接收到正确的 `dma_tx_ack/dma_rx_ack` 信号。即使在 burst 传输期间相应的 fifo 降低至水线以下。
+	- 当接收到正确的 `dma_tx_ack/dma_rx_ack` 被选中后，`dma_tx_req/dma_tx_req` 将被取消选中。即使在 burst 传输期间相应的 fifo 超过水线。
+- Single：
+	- 当 tx fifo 中至少有一个空闲区域时，`dma_tx_single` 信号被置位，当 ` dma_tx_ack ` 信号有效时，` dma_tx_single ` 信号被清除。如果设置条件仍然成立，则当 ` dma_tx_ack ` 信号被置位时，` dma_tx_single ` 信号被重新置位
+	- 当 rx fifo 中至少有一个有效数据时，`dma_rx_single` 信号被置位，当 `dma_rx_ack` 信号有效时，该信号被清除。如果设置条件仍然成立，则当 `dma_rx_ack` 信号被置位时，`dma_rx_single` 信号被重新置位。
+	- 只有在 `dw_ahb_dmac` 种编程的块大小 `CTLx.BLOCK_TS` 不是 burst 长度 `CTLx.SRC_MSIZE、CTLx.DST_MSIZE` 的倍数的情况下，`dw_ahb_dmac` 才需要这些信号。这种情况下，DMA single 通知 `dw_ahb_dmac` 仍可以执行单个数据项传输，因此它可以访问 `tx/rx fifo` 中的所有数据项并完成 `dma block transfer`。否则，`dwc_ssi` 的 dma 单个输出不会被 `dw_ahb_dmac` 采样。
+
+
+![[Pasted image 20250210201040.png]]
+- Example1：全部用 burst 传输 (如图 `2-53`)
+	- `DMA.CTLx.SRC_MSIZE = SSI.DMARDLR + 1 = 4`
+	- `DMA.CTLx.BLOCK_TS = 12`
+	- 要传输的数据块大小为 12，当接收 FIFO 中有四个数据项时，`dma_rx_req` 信号被置位。在 `DWC_ssi` 串行传输期间，`dma_rx_req` 信号被置位三次，确保所有 12 个数据项都被 `dw_ahb_dmac` 读取。所有 dma 请求都读取一个数据项块，不需要 single 事务。此块传输由 3 个 burst 事务组成。
+
+
+![[Pasted image 20250210202925.png]]
+- Example2：Burst + Single (如图 `2-54 `)
+	- `DMA.CTLx.SRC_MSIZE = SSI.DMARDLR + 1 = 4`
+	- `DMA.CTLx.BLOCK_TS = 15`
+	- 前 12 个数据项使用 3 个 burst 传输，和 `Example1` 相同。但是，当最后三个数据帧进入 `rxfifo` 时，由于 FIFO 级别低于水线，因此不会激活 `dma_rx_req` 信号。`DW_ahb_dmac` 对 `dma_rx_single` 信号进行采样，并使用三个 single 传输完成 `DMA block transfer`。块传输由 `3*burst + 3*single` 组成。
 
 
 
@@ -1947,8 +1976,41 @@ DWC_ssi 支持组合中断请求和单独中断请求，每种中断请求都可
 
 
 
+# Bug:
+## Apus nre flash xip 在某些情况下访问出现卡死情况
+
+^1f043c
+
+### 问题现象
+- 初始化 xip
+- 做 flash 擦除操作
+- 关 spi 控制器使能
+- 开 spi 控制器使能
+- 访问 xip 卡死
+- 如果在开关使能中间增加部分寄存器写操作，访问 xip 正常了
+![[Pasted image 20250210093150.png]]
+
+### 问题原因 
+- spi 内部 fifo 的读写地址的更新分别属于不同的时钟域，写地址使用的时钟是 ssi_clk，读地址使用的时钟是 hclk，需要进行同步，也就需要一些延时。
+- 如果关掉 ssienr 会对内部 fifo 进行刷新，同时将读写地址置为 0。因此在关掉并打开 ssienr 中间需要设置延时才可以正常工作。
+- ssienr = 0 时，会更新内部 fifo 的读写地址，但是由于内部需要做通不处理，导致读写地址更新时间不同，需要等到同时更新完成，才可以再次配置 ssienr = 1，进而开始正常工作。
+- 从 ahb 总线写入到读写地址同步成功，需要 6 个 hclk 时钟周期：
+![[Pasted image 20250210093931.png]]
+- 因此在最新版的 spi 控制器使用时，需要修改某个寄存器，必须先关闭 spi enr 使能，再修改寄存器，然后再开 enr 使能；不能关闭 enr 之后立马打开 enr。
+
+- Apus fifo 同步时钟需要时间为：flash_spi 完成地址刷新需要 2 个 ssi_clk 和 3 个 hclk 时钟周期，ssi_clk 为 32MHz，hclk 和 cpu 同频为 96MHz，因此需要 10 个 cpu clk 周期。
+	- **spi fifo 用的时钟和 spi 控制器的时钟不是同一个时钟。**
+	- **在某些特定场景下，比如关了控制器，配一个值，立马打开控制器。此时 cpu 的频率很高，而 spi 的频率比较低，这个时候指令执行完了，但是 fifo 还没有同步，就会导致卡死的问题。**
+
+### 解决方法
+- 对于 gen spi、flash spi 都增加一个寄存器，用于描述 fifo 地址是否更新完成。
+	- 关闭控制器后，死等查询控制器地址更新完成
+- 对于没有寄存器的，在关闭控制器之后，等待一段时间再打开控制器 
 
 
+> [!note]
+>  - 问题原因主要是 spi fifo 和 spi 模块用的不是同一个时钟导致的，在关闭 spi 控制器之后会对内部 fifo 进行刷新，同时将读写地址置为 0，但是由于两者用的不是同一个时钟，需要等待这两个操作都完成了才能再次打开控制器。软件不知道什么时候同步完成，只能预估等待几个时钟周期。
+> - 如果 virgo 的时钟也是这样设计的话，要考虑下是否也存在同样的问题 
 
 
 

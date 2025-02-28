@@ -3,9 +3,13 @@
 ## Common
 
 ### 擦除 block 后可以不按顺序写入某个 page 吗？
+>  需求：ota 升级时想先升级 stage2，再升级 stage1，这样在升级的时候掉电了也可以起来；
+
 - 对于 `Nor Flash` 可以在擦除单个 block 后，先写这个 block 后面的 page，再写前面的 page
 - 对于 `Nand Flash` 也可以擦除单个 block 后，先写这个 block 后面的 page，再写前面的 page
-- **不能页内随机去操作**
+	- 对于并行 Nand Flash，**一个 block 内不支持随机页写, Block内的页需要按照顺序写，参考手册”8.13 Addressing for program operation“， gd9fx2gxf2a_v1.0_20190801.pdf**
+	- 对于串行 Nand Flash，暂时没有在手册上看到有描述这种特性的
+- **不能页内随机去操作**，意思是必须以 page 为单位
 - **单个 page只能写一次**
 	- 有些 nor flash 单个 page 内先写后面再写前面会出错 
 	- nand flash 必须按 page 操作，因为会算 ecc

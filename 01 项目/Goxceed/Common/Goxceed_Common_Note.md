@@ -159,6 +159,33 @@ https://git.nationalchip.com/redmine/issues/352665#note-3
 ```
 
 
+
+## GoXceed v1.9.6.4-lts 分支 gdbserver 连不上？
+- 手动打开 gdb 的引脚复用后可以了
+```diff
+--- a/board/gx3211/board-6622-dvbs2/board-init.c
++++ b/board/gx3211/board-6622-dvbs2/board-init.c
+@@ -92,11 +92,11 @@ struct mulpin_config_s mulpin_table[] = {
+         {88,        75,     107,    MP_INV_V,  1},           // NC          | SC2RST_PORT43
+         {90,        76,     108,    MP_INV_V,  1},           // NC          | SC2DATC8_PORT44
+         {92,        77,     109,    MP_INV_V,  1},           // NC          | SC2DATC7_PORT45
+-        {104,       0,      32,     MP_INV_V,  1},           // 29          | DBGTDI_PORT0
+-        {105,       1,      33,     MP_INV_V,  1},           // 30          | DBGTDO_PORT1
+-        {106,       2,      34,     MP_INV_V,  1},           // 31          | DBGTMS_PORT2
+-        {107,       3,      35,     MP_INV_V,  1},           // 32          | DBGTCK_PORT3
+-        {108,       4,      36,     MP_INV_V,  1},           // 33          | DBGTRST_PORT4
++        {104,       0,      32,     MP_INV_V,  0},           // 29          | DBGTDI_PORT0
++        {105,       1,      33,     MP_INV_V,  0},           // 30          | DBGTDO_PORT1
++        {106,       2,      34,     MP_INV_V,  0},           // 31          | DBGTMS_PORT2
++        {107,       3,      35,     MP_INV_V,  0},           // 32          | DBGTCK_PORT3
++        {108,       4,      36,     MP_INV_V,  0},           // 33          | DBGTRST_PORT4
+         {110,       128,    132,    MP_INV_V,  0},           // 34          | SPISCK_NFRDY0_NFRDY0_SPISCKDW
+         {111,       129,    133,    MP_INV_V,  0},           // 35          | SPIMOSI_NFOE_NFWE_SPIMOSIDW
+         {112,       130,    134,    MP_INV_V,  0},           // 36          | SPICSn_NFCLE_NFALE_SPICSnDW
+```
+
+
+
 ## Linux
 
 ### Linux 如何以 O0 方式编译某个 .c 文件

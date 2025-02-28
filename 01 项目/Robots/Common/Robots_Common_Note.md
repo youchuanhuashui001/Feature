@@ -128,3 +128,11 @@ stage1 cost : 17563
 ```
 
 
+
+
+# Sagitta
+
+## Cache
+- 只有 L1 Icache、Dcache
+- Flash XIP 会用到 L2 Icache，flash 读写擦不会过 L2 Icache
+- L2 Dcache 本来准备用于 Psram，后来 L2 Dcache 有问题，就去掉了，现在没有 L2 Dcache

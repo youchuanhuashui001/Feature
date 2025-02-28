@@ -20,7 +20,6 @@ sort file.ctime desc
 
 
 ## 进行中
-
 ```dataview
 list
 from #doing

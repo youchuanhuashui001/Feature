@@ -14,5 +14,9 @@
   "easy-typing-obsidian",
   "vscode-editor",
   "open-in-new-tab",
-  "obsidian-vimrc-support"
+  "obsidian-vimrc-support",
+  "copilot",
+  "obsidian-minimal-settings",
+  "obsidian-style-settings",
+  "templater-obsidian"
 ]

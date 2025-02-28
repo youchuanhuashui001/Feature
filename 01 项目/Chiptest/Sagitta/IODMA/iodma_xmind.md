@@ -47,13 +47,13 @@ mindmap-plugin: basic
                     - 超时时间，应该不用放出去。内部处理一下就行了
             - 固定模式下需要注册 callback、callback_param
         - GX_HAL_IODMA_TX_CONFIG
-            - io_width  输出脚数
+            - io_width  输出脚数
             - mode 传输模式
             - addr 要传输的 sram 地址
             - len 总共要传输的长度
     - .c
         - GX_HAL_IODMA_TRANS
-            - mode  记录当前的传输模式
+            - mode  记录当前的传输模式
                 - 在 config 函数配置，中断服务函数里面会用
             - total_len 固定模式下，需要在 irq 来配置的传输长度
             - next_addr 固定模式下，记录下一次要传输的地址
@@ -82,21 +82,21 @@ mindmap-plugin: basic
                 - ！！！！ 判断错误的条件 ！！！！
                     - 判断 trans.total_len 是否未传完 或者 trans.next_addr 还有值
                         - 说明上一次传输还没传完，return -1
-                - 配置位宽和传输模式  CTRL
-                - 配置 iodma的传输长度   TX_NUM
-                - 配置传输完之后的延迟   TX_DELAY
+                - 配置位宽和传输模式  CTRL
+                - 配置 iodma的传输长度   TX_NUM
+                - 配置传输完之后的延迟   TX_DELAY
                     - ！！！ 这里是不是没意义？！！！
-                - 配置 dmalite 寄存器对   ADDRx  LENx
+                - 配置 dmalite 寄存器对   ADDRx  LENx
                     - 最多只能配置 4*(64k-1) word，剩余的要在 irq 里面配
                         - 还有剩余
                             - trans.next_addr = curent_addr
                                 - 下一个要配置的地址
                             - trans.total_len = remain_len
                                 - 剩余的总长度，都要在 irq 里面配完
-                - 配置 dmalite 使用的寄存器对数   USED
-                - 配置 dmalite 超时时间  TO_VALUE
+                - 配置 dmalite 使用的寄存器对数   USED
+                - 配置 dmalite 超时时间  TO_VALUE
                     - ！！！ 这里是不是需要芯片给一个默认值或推荐值 ！！！
-                - 配置 dmalite 读模式   CTRL = 0
+                - 配置 dmalite 读模式   CTRL = 0
                 - 中断相关
                     - iodma
                         - ！！！ fifo full 中断开吗？！！！
@@ -105,7 +105,7 @@ mindmap-plugin: basic
                             - 不用开，因为硬件自己清，不用管就是了
                         - tx_done 中断打开
                     - dmalite
-                        - ahb resp  打开
+                        - ahb resp  打开
                         - timeout 打开
                         - 4组的中断都打开
             - continue
@@ -162,10 +162,12 @@ mindmap-plugin: basic
                         - 没传输完？
                             - ！！！！ 那就是 bug ！！！
             - continue
-                - ！！！！ 涉及到一个问题  ！！！！
+                - ！！！！ 涉及到一个问题  ！！！！
                     - continue 模式最大可配置的传输数据长度是多少？数据都是来自 dmalite 配置的，最大只能配置 4 组寄存器对？还是在中断里面处理来做到循环？
                         - 最大只能配置4组寄存器对
                 - dmalite
                     - 最大配置4组的话，不用管中断，来了就清，来了就清。或者干脆就别使能中断
                 - iodma
                     - 没有可以处理的中断
+
+## ws2811
