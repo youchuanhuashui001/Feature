@@ -503,6 +503,50 @@ hal -- ip 相关的
 
 # 测试用例
 
+## 引脚复用
+```diff
+diff --git a/board/nationalchip/sagitta_nre_fpga_1v/pinmux.c b/board/nationalchip/sagitta_nre_fpga_1v/pinmux.c
+index 9f7ab493..e573c89a 100644
+--- a/board/nationalchip/sagitta_nre_fpga_1v/pinmux.c
++++ b/board/nationalchip/sagitta_nre_fpga_1v/pinmux.c
+@@ -44,18 +44,18 @@ __attribute__((unused))
+ static const GX_PIN_CONFIG pin_table[] = {
+ //   id     func    | func 0      | func 1      | func 2           | func 3     | func 4 -6 | func 7      |
+     { 0,    0},     // idle       | vin         | pll_clk_out     | gpio[0]    | reserve   | idle         |
+-    { 1,    0},     // idle       | vip         | low_clk         | gpio[1]    | reserve   | idle         |
++    { 1,    47},     // idle       | vip         | low_clk         | gpio[1]    | reserve   | idle         |
+     { 2,    0},     // idle       | idle        | idle            | gpio[2]    | reserve   | idle         |
+-    { 3,    0},     // idle       | idle        | iodma[15]       | gpio[3]    | reserve   | idle         |
+-    { 4,    0},     // idle       | idle        | iodma[8]        | gpio[4]    | reserve   | idle         |
++    { 3,    48},     // idle       | idle        | iodma[15]       | gpio[3]    | reserve   | idle         |
++    { 4,    49},     // idle       | idle        | iodma[8]        | gpio[4]    | reserve   | idle         |
+     { 5,    2},     // idle       | test_io[0]  | uart0_rx        | gpio[5]    | reserve   | idle         |
+     { 6,    2},     // idle       | test_io[1]  | uart0_tx        | gpio[6]    | reserve   | idle         |
+-    { 7,    0},     // boot       | idle        | idle            | gpio[7]    | reserve   | idle         |
+-    { 8,    0},     // idle       | lpc/saradc0 | key_col[8]      | gpio[8]    | reserve   | idle         |
+-    { 9,    0},     // idle       | lpc/saradc1 | key_col[9]      | gpio[9]    | reserve   | idle         |
++    { 7,    50},     // boot       | idle        | idle            | gpio[7]    | reserve   | idle         |
++    { 8,    51},     // idle       | lpc/saradc0 | key_col[8]      | gpio[8]    | reserve   | idle         |
++    { 9,    52},     // idle       | lpc/saradc1 | key_col[9]      | gpio[9]    | reserve   | idle         |
+     { 10,   0},     // jtag_tms   | lpc/saradc2 | idle            | gpio[10]   | reserve   | idle         |
+     { 11,   0},     // jtag_tck   | lpc/saradc3 | idle            | gpio[11]   | reserve   | idle         |
+-    { 12,   0},     // idle       | lpc/saradc4 | key_col[10]     | gpio[12]   | reserve   | idle         |
++    { 12,   53},     // idle       | lpc/saradc4 | key_col[10]     | gpio[12]   | reserve   | idle         |
+     { 13,   0},     // idle       | lpc/saradc5 | key_col[11]     | gpio[13]   | reserve   | idle         |
+     { 14,   0},     // idle       | lpc/saradc6 | idle            | gpio[14]   | reserve   | idle         |
+     { 15,   0},     // idle       | lpc/saradc7 | rc_xo_mux_clk   | gpio[15]   | reserve   | idle         |
+@@ -68,7 +68,7 @@ static const GX_PIN_CONFIG pin_table[] = {
+     { 22,   0},     // idle       | idle        | idle            | gpio[22]   | reserve   | idle         |
+     { 23,   0},     // idle       | idle        | idle            | gpio[23]   | reserve   | idle         |
+     { 24,   0},     // pin_rst_b  | idle        | idle            | gpio[24]   | reserve   | idle         |
+-    { 25,   0},     // sys_i2c_scl| test_io[3]  | idle            | gpio[25]   | reserve   | idle         |
++    { 25,   46},     // sys_i2c_scl| test_io[3]  | idle            | gpio[25]   | reserve   | idle         |
+     { 26,   0},     // idle       | idle        | key_col[16]     | gpio[26]   | reserve   | idle         |
+     { 27,   0},     // idle       | idle        | key_col[17]     | gpio[27]   | reserve   | idle         |
+     { 28,   0},     // idle       | test_io[0]  | key_col[18]     | gpio[28]   | reserve   | idle         |
+```
+
+
 ## 功能测试范围
 
 ```
@@ -518,10 +562,24 @@ hal -- ip 相关的
 6. 边界测试                DMALITE 地址超过 16MB、地址非四字节对齐、
 
 
+
 ```
 
 
-
+# 测试结果：
+```
+|/4.输出位宽测试|2bit|ok|
+|4bit|ok|
+|8bit|ok|
+|16bit|ok|
+|/3. 固定模式测试|单组寄存器对|ok|
+|多组寄存器对|ok|
+|多组寄存器对循环|ok|
+|/2. 无尽模式测试|单组寄存器对|ok|
+|对组寄存器对|ok|
+|tx delay测试||ok|
+|中断测试||ok|
+```
 
 
 # 问题：
@@ -603,3 +661,8 @@ iodma8~15 的引脚，有些没拉到子板上
 - 用 2.03 的 bit 跑相同的程序没问题，先完整用 2.03 的  bit 测一把，看看结果，如果有问题就需要让芯片看看
 - 用 2.17 的 bit 测试发 0x300 个 word 数据，配了 3 组 dmalite 寄存器对，每组长度是 0x100，只有第一组有传输完成中断，看寄存器一直没有第二组传输完成的中断上来，看波形也是第一组发完了，第二组发了一部分
 - 同样的程序，用 2.03 的 bit 没问题
+- 3-6 号的 bit 可以了，还需要把时钟的最高 1bit 配置为 1
+
+
+
+

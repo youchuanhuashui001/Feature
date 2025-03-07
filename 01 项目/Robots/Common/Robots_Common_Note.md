@@ -6,9 +6,15 @@
 
 ## 各芯片 Flash 不同阶段工作频率
 
-| Chip     | ROM  | Stage1                  | Stage2 | 备注                                                                        |
-| -------- | ---- | ----------------------- | ------ | ------------------------------------------------------------------------- |
-| Leo_mini | 3Mhz | 50Mhz<br>(读 ID : 25MHz) | 50MHz  | Stage1、Stage2 同频，可以配置为 200MHz、150MHz、100MHz。<br>目前配置为 200MHz，4分频，相位范围：1~4 |
+### Leo_mini
+- ROM：3MHz
+- Stage1：50MHz (读 ID 的时候 25MHz)
+- Stage2：50MHz
+- 备注：
+	- Stage1、Stage2 同频，目前可配置为 200MHz、150MHz、100MHz。
+	- 目前配置为 200Mhz，4 分频，相位范围：1~4
+	- clk 在 stage1 配置，所以 stage1 读 flash 的时候就已经是高频
+
 
 
 
@@ -136,3 +142,16 @@ stage1 cost : 17563
 - 只有 L1 Icache、Dcache
 - Flash XIP 会用到 L2 Icache，flash 读写擦不会过 L2 Icache
 - L2 Dcache 本来准备用于 Psram，后来 L2 Dcache 有问题，就去掉了，现在没有 L2 Dcache
+
+
+
+
+
+
+
+
+
+
+# Apus Flash 跑极限频率 104MHz
+- 修改 `board/nationalchip/apus_nre_1v/clk.c` 后 `stage1` 的频率修改了吗？还是只修改了 `stage2` 的时钟频率？
+	- 没改，所以 stage1 原本用的是宏，现在都需要手动改成 1

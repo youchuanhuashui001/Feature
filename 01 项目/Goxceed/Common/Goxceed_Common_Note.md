@@ -20,6 +20,10 @@ https://git.nationalchip.com/redmine/issues/352665#note-3
 
 
 
+### A55 如何开启 GDBServer
+- `JLinkGDBServer -endian little -select USB -device Cortex-A55 -if JTAG -speed 10000`
+
+
 
 ## Gxloader
 
@@ -160,7 +164,7 @@ https://git.nationalchip.com/redmine/issues/352665#note-3
 
 
 
-## GoXceed v1.9.6.4-lts 分支 gdbserver 连不上？
+### GoXceed v1.9.6.4-lts 分支 gdbserver 连不上？
 - 手动打开 gdb 的引脚复用后可以了
 ```diff
 --- a/board/gx3211/board-6622-dvbs2/board-init.c
@@ -222,3 +226,24 @@ export PATH=${PATH}:/opt/gxtools/csky-linux-tools-i386-uclibc-20180905_cross_com
 ## eCos
 
 
+
+
+# 设备树
+
+### `#address-cells` 和 `#size-cells`
+- ​**作用**：定义父节点中子节点 `reg` 属性的地址和大小部分的单元格数量（每个单元格为 32 位）。
+- ​**使用场景**：通常出现在总线或父节点中，用于规范子节点的 `reg` 属性格式。
+- ​**示例**：
+```dts
+parent-node {
+    #address-cells = <1>;  // 地址部分占 1 个单元格（32 位）
+    #size-cells = <1>;     // 大小部分占 1 个单元格（32 位）
+    child-node {
+        reg = <0x1000 0x200>; // 地址=0x1000，大小=0x200
+    };
+};
+```
+- ​**常见值**：
+    - `#address-cells = <1>`：地址用 1 个 32 位数表示。
+    - `#size-cells = <0>`：无大小部分（如固定大小的寄存器）。
+    - `#address-cells = <2>`：地址用 2 个 32 位数（64 位地址）。

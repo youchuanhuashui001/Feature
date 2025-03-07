@@ -46,10 +46,16 @@
 `Ctrl o`
 
 
-# 高亮单词：
+## 高亮单词：
 -  `<Space> m`：高亮/取消高亮 
 - `<Space> m c`：取消所有高亮 
 
+
+
+## 使用 compiledb 生成 compile_commands. json
+```shell
+compiledb -n make -f /path/to/Makefile # 不编译，仅仅生成compile_commands.json compiledb make -f /path/to/Makefile #真的去编译
+```
 
 
 

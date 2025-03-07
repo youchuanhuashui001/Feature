@@ -1,6 +1,7 @@
 ---
 banner: "![[06 资源/file/wallhaven-l85vk2_1920x1080.png]]"
-banner_y: 0.51
+banner_y: 0.472
+banner_x:
 ---
 
 ```dataviewjs
@@ -32,6 +33,7 @@ sort file.ctime desc
 ## Todo
 - [ ] Virgo 外设对接 
 - [ ] scpu flash 速度测试 case 不需要关心数据对错，所以直接测试整片 flash 即可，目前测试只测了 2 个 block，数据不准确 
+- [ ] 了解 Uboot 的重定位，在调试 Virgo NRE 时遇到打断点打不上的情况，发现是
 
 
 
