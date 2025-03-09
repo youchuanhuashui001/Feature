@@ -22,11 +22,7 @@ dv.paragraph(
 
 
 ## 学习任务
-```dataview
-list
-from "03 备忘"
-sort file.ctime desc
-```
+- [[02 学习/schedule/学习计划|学习计划]]
 
 
 
