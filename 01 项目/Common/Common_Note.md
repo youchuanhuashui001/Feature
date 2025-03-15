@@ -655,3 +655,15 @@ UART 通信在配置时需要指定波特率，这决定了理论上的数据传
 
 - **波特 (baud):** 严格意义上来说，波特是指 **码元/秒 (symbols per second)**。
 - **bps (bits per second):** 比特每秒，指 **比特/秒 (bits per second)**。
+
+
+# Python
+
+## python  env
+要在 Python 中创建虚拟环境，可以使用内置的 venv 模块。虚拟环境是一个独立的 Python 环境，允许你为不同的项目安装特定版本的包，而不会干扰系统的全局 Python 安装。以下是创建和使用虚拟环境的完整步骤：
+进入到希望创建虚拟环境的目录：
+- 激活 env：
+	- `python3 -m venv myenv`
+	- `source myenv/bin/activate`
+- 退出 env：
+	- `deactivate`
