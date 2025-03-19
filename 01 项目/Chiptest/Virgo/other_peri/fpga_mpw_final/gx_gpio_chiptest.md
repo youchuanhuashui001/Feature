@@ -23,76 +23,112 @@
 	- 参数获取正确
 
 ### 2.3 输入模式
-- 测试命令：
-	- `struct gpio_entry_bootloader g_gpio_table` 中配置要使用的 gpio
-	- `gpio set_io [gpio] 0` 
 - 测试步骤：
-	- 配置 GPIO 为输入模式
-	- 验证配置是否生效
+	- `.config` 中打开 `ENABLE_GPIO = y`
+	- `bootmenu.c` 中打开 `CONFIG_GPIO_TEST`
+	- `board.c` 中 `struct gpio_entry_bootloader g_gpio_table` 配置要使用的 gpio
+	- `gpio set_io [gpio] 0` 
 - 预期结果：
 	- GPIO 成功配置为输入模式
+- 修改代码：
+```diff
+--- a/board/virgo/board-fpga/board-init.c
++++ b/board/virgo/board-fpga/board-init.c
+@@ -187,6 +187,8 @@ struct mulpin_config_s mulpin_table[] = {
+ };
+ 
+ struct gpio_entry_bootloader g_gpio_table[] = {
++       {0 ,  0, GX_GPIO_CONFIG_VALID, GX_GPIO_OUTPUT, GX_GPIO_HIGH},
++       {1 ,  1, GX_GPIO_CONFIG_VALID, GX_GPIO_OUTPUT, GX_GPIO_HIGH},
+ /*     {9 ,  1, GX_GPIO_CONFIG_VALID, GX_GPIO_OUTPUT, GX_GPIO_HIGH},
+        {10,  0, GX_GPIO_CONFIG_VALID, GX_GPIO_OUTPUT, GX_GPIO_HIGH},
+        {11,  3, GX_GPIO_CONFIG_VALID, GX_GPIO_OUTPUT, GX_GPIO_LOW },
+```
 
 ### 2.4 输出模式
-- 测试命令：
-	- `struct gpio_entry_bootloader g_gpio_table` 中配置要使用的 gpio
-	- `gpio set_io [gpio] 1` 
 - 测试步骤：
-	- 配置 GPIO 为输出模式
-	- 验证配置是否生效
+	- `.config` 中打开 `ENABLE_GPIO = y`
+	- `bootmenu.c` 中打开 `CONFIG_GPIO_TEST`
+	- `board.c` 中 `struct gpio_entry_bootloader g_gpio_table` 配置要使用的 gpio
+	- `gpio set_io [gpio] 1` 
 - 预期结果：
 	- GPIO 成功配置为输出模式
 
 ### 2.5 输出高电平
-- 测试命令：
-	- `struct gpio_entry_bootloader g_gpio_table` 中配置要使用的 gpio
+- 测试步骤：
+	- `.config` 中打开 `ENABLE_GPIO = y`
+	- `bootmenu.c` 中打开 `CONFIG_GPIO_TEST`
+	- `board.c` 中 `struct gpio_entry_bootloader g_gpio_table` 配置要使用的 gpio
 	- `gpio set_io [gpio] 1` 
 	- `gpio set_level [gpio] 1`
-- 测试步骤：
-	- 配置 GPIO 为输出模式
-	- 设置输出高电平
 	- 验证输出状态
 - 预期结果：
 	- GPIO 输出高电平
+- 注意：fmc 小板上的拨码开关要拨到 OUTPUT
 
 ### 2.6 输出低电平
-- 测试命令：
-	- `struct gpio_entry_bootloader g_gpio_table` 中配置要使用的 gpio
-	- `gpio set_io [gpio] 1` 
-	- `gpio set_level [gpio] 0`
 - 测试步骤：
-	- 配置 GPIO 为输出模式
-	- 设置输出低电平
+	- `.config` 中打开 `ENABLE_GPIO = y`
+	- `bootmenu.c` 中打开 `CONFIG_GPIO_TEST`
+	- `board.c` 中 `struct gpio_entry_bootloader g_gpio_table` 配置要使用的 gpio
+	- `gpio set_io [gpio] 1` 
+	- `gpio set_level [gpio] 0
 	- 验证输出状态
 - 预期结果：
 	- GPIO 输出低电平
+- 注意：fmc 小板上的拨码开关要拨到 OUTPUT
 
 ### 2.7 普通IO模式
-- 测试命令：
-	- `struct gpio_entry_bootloader g_gpio_table` 中配置要使用的 gpio
-	- `gpio set_io [gpio] 1` 
-	- `gpio set_level [gpio] 0`
 - 测试步骤：
-	- 配置 GPIO 为普通 IO 模式
-	- 验证配置是否生效
+	- `.config` 中打开 `ENABLE_GPIO = y`
+	- `bootmenu.c` 中打开 `CONFIG_GPIO_TEST`
+	- `board.c` 中 `struct gpio_entry_bootloader g_gpio_table` 配置要使用的 gpio
+	- `gpio set_io [gpio] 1` 
+	- `gpio set_level [gpio] 0
+	- 验证输出状态
 - 预期结果：
 	- GPIO 成功配置为普通 IO 模式
+- 注意：这里的普通 IO 模式指的是上面还有一个引脚复用模块，用于配置该 gpio 为 gpio 功能或其它功能
 
 ### 2.8 端口复用输出模式
-- 测试命令：
-	- `struct gpio_entry_bootloader g_gpio_table` 中配置要使用的 gpio
-	- 使用 timer 的 pwm 功能可以测到
 - 测试步骤：
-	- 配置 GPIO 为端口复用输出模式，FPGA 时只能将端口复用为 PWM 功能
-	- 验证配置是否生效
+	- `.config` 中打开 `ENABLE_GPIO = y`
+	- `bootmenu.c` 中打开 `CONFIG_GPIO_TEST`
+	- `board.c` 中 `struct gpio_entry_bootloader g_gpio_table` 配置要使用的 gpio
+	- `gpio set_io [gpio] 1` 
+	- `gpio set_level [gpio] 0
+	- 验证输出状态
+	- 使用 timer 的 pwm 功能可以测到
 - 预期结果：
 	- GPIO 成功配置为端口复用输出模式
+- 注意：配置 GPIO 为端口复用输出模式(AFIO)，FPGA 时只能将端口复用为 PWM 功能
 
 ### 2.9 时钟一直有效
 - 测试步骤：
 	- 配置 GPIO 时钟一直有效
-	- 验证配置是否生效
+	- 验证配置是否生效(gpio 能否正常操作)
 - 预期结果：
 	- GPIO 时钟一直有效
+- 代码修改：
+```diff
+--- a/drivers/gpio/gx_gpio.c
++++ b/drivers/gpio/gx_gpio.c
+@@ -51,10 +51,14 @@ int gx_gpio_setio(unsigned long gpio, unsigned long io)
+                tmp &= ~(1 << offs);
+        __raw_writel(tmp, reg_base + GPIO_EPDDR);
+ #elif defined(CONFIG_GPIO_GX_V2) || defined(CONFIG_GPIO_GX_V3)
+-       if (io)
++       if (io) {
++               __raw_writel(0x3, reg_base + GPIO_CTL);
+                __raw_writel(1 << offs, reg_base + GPIO_SET_OUT);
+-       else
++       }
++       else {
++               __raw_writel(0x1, reg_base + GPIO_CTL);
+                __raw_writel(1 << offs, reg_base + GPIO_SET_IN);
++       }
+ #endif
+```
 
 ### 2.10 自动开关时钟
 - 测试步骤：
@@ -123,8 +159,8 @@
 
 ### 2.13 使能中断
 - 测试命令：
-	- 配置 `.config` 使能 `CONFIG_ENABLE_IRQ`
-	- `struct gpio_entry_bootloader g_gpio_table` 中配置要使用的 gpio
+	- 配置 `.config` 使能 `ENABLE_GPIO = y；CONFIG_ENABLE_IRQ`
+	- `board.c` 中 `struct gpio_entry_bootloader g_gpio_table` 配置要使用的 gpio
 	- `gpio request_irq [port] [irq_mode]` 
 - 测试步骤：
 	- 配置 GPIO 使能中断
@@ -134,8 +170,8 @@
 
 ### 2.14 失能中断
 - 测试命令：
-	- 配置 `.config` 使能 `CONFIG_ENABLE_IRQ`
-	- `struct gpio_entry_bootloader g_gpio_table` 中配置要使用的 gpio
+	- 配置 `.config` 使能 `ENABLE_GPIO = y；CONFIG_ENABLE_IRQ`
+	- `board.c` 中 `struct gpio_entry_bootloader g_gpio_table` 配置要使用的 gpio
 	- `gpio disable_irq [port]` 
 - 测试步骤：
 	- 配置 GPIO 失能中断
@@ -187,7 +223,7 @@
 - 预期结果：
 	- 下降沿时正确触发中断
 
-### 2.19 使能降采样
+### 2.19 使能降采样 (之前没测过)
 - 测试步骤：
 	- 配置 GPIO 使能降采样
 	- 验证配置是否生效
@@ -195,7 +231,7 @@
 	- GPIO 降采样成功使能
 	- 配置为降采样后，IO 检测输入从 0 到 1 或者 从 1 到 0 有一定延迟
 
-### 2.20 失能降采样
+### 2.20 失能降采样 (之前没测过)
 - 测试步骤：
 	- 配置 GPIO 失能降采样
 	- 验证配置是否生效
@@ -220,9 +256,8 @@
 - 测试命令：
 	- 配置 `.config` 使能 `CONFIG_ENABLE_IRQ`
 	- `struct gpio_entry_bootloader g_gpio_table` 中配置要使用的 gpio
-	- `gpio getlevel [port]`
-- 测试步骤：
-	- 配置 GPIO 为输入模式
+	- `gpio get_level [port]`
+	- 拨码开关配置为输入模式
 	- 获取输入电平
 - 预期结果：
 	- 正确获取输入电平
@@ -271,8 +306,8 @@
 - [x] 2.16 低电平触发
 - [x] 2.17 上升沿触发
 - [x] 2.18 下降沿触发
-- [x] 2.19 使能降采样
-- [x] 2.20 失能降采样
+- [ ] 2.19 使能降采样
+- [ ] 2.20 失能降采样
 - [x] 2.21 时钟一直有效
 - [x] 2.22 自动开关时钟
 - [x] 2.23 输入电平获取

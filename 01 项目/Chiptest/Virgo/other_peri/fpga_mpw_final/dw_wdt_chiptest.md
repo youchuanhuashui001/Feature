@@ -1,16 +1,16 @@
 # DW WDT 芯片测试文档
 
 ## 1. 测试环境
-- FPGA 版本：`394932 peri_final3_gpio_FPGA_2024-12-03.tar`
+- FPGA 版本：`382541 9p_peri_newcode_FPGA_2024-09-03.tar`
 - VU9P
 
 ## 2. 测试用例
 
 ### 2.1 复位功能测试
-1. 测试命令：
-```c
-reboot
-```
+1. 测试步骤：
+	- `.config` 中打开配置 `CONFIG_WDT = y`
+	- `reboot`
+	- 观察系统是否重启
 2. 预期结果：
 	- FPGA 可以产生复位
 	- 系统可以正常重启
@@ -21,41 +21,85 @@ reboot
 
 ### 2.2 喂狗功能测试
 1. 测试步骤：
-	- 在 `bootmenu.c` 中添加喂狗代码
-	- 使能 WDT 中断
-	- 观察系统行为
+	- `.config` 中打开配置 `CONFIG_WDT = y;ENABLE_IRQ=y`
+	- `wdt ping <ms>`
+	- 观察系统打印
 2. 预期结果：
-	- 系统正常运行
-	- 不会触发复位
+	- 系统正常运行，打印 wdt callback
+	- gdb 打断程序不喂狗，系统复位
+3. 修改代码：
+```diff
+--- a/bootmenu.c
++++ b/bootmenu.c
+@@ -284,10 +284,33 @@ void command_wdtest(int argc, const char **argv)
+                gx_wdt_reset_soon(time);
+        }
+ }
++
++COMMAND(wdt,command_wdt, "<ping> <ms>");
++void command_wdt(int argc, const char **argv)
++{
++       extern int gx_wdt_timer(int32_t ms);
++       
++       if (argc != 3){
++               printf("wdt <ping> <ms>\n");
++               return;
++       }
++
++       if (strcmp(argv[1], "ping") == 0){
++               unsigned int time;
++               time = atoi(argv[2]);
++               gx_wdt_timer(time);
++       }
++}
+ #endif
+
+
+--- a/drivers/watchdog/dw_wdt.c
++++ b/drivers/watchdog/dw_wdt.c
+@@ -80,6 +80,7 @@ static enum interrupt_return wdt_interrupt_isr(uint32_t vector, void* pdata)
+ 
+ static int wtd_callback(GX_HAL_WDT *dev, void *pdata)
+ {
++       printf("wdt callback\n");
+     wdt_interrupt_isr(WDT_ISR_VEC, NULL);
+     return 0;
+ }
+
+```
+
+
 
 ### 2.3 中断使能测试
 1. 测试步骤：
-	- 配置 `CONFIG_ENABLE_IRQ`
-	- 使能 WDT 中断
+	- `.config` 中打开配置 `CONFIG_WDT = y;ENABLE_IRQ=y`
+	- `wdt ping <ms>`
+	- 观察系统打印
 2. 预期结果：
 	- 中断可以正常使能
 	- 可以正常触发中断
 
 ### 2.4 定时器值读取测试
 1. 测试步骤：
-	- 手动读取寄存器值
-	- 观察计数器变化
+	- `.config` 中打开配置 `CONFIG_WDT = y;ENABLE_IRQ=y`
+	- `wdt ping <ms>`
+	- 观察寄存器是否在递减 `x/x 0xfa450008`
 2. 预期结果：
-	- 寄存器值实时递增
-	- 喂狗后计数器清零
+	- 寄存器值实时递减
+	- 喂狗后计数器回绕到设定值开始递减
 3. 注意事项：
 	- 目前没有驱动代码
-	- 需要手动读取寄存器
+	- 需要手动读取寄存器，递减到 0 之后会根据所选的输出相应模式，将发生系统复位或中断
 
 
 
 
 ## 3. 测试结果
-- [ ] 复位功能测试
-- [ ] 喂狗功能测试
-- [ ] 中断使能测试
-- [ ] 定时器值读取测试
-- [ ] 定时精度测试
+- [x] 复位功能测试
+- [x] 喂狗功能测试
+- [x] 中断使能测试
+- [x] 定时器值读取测试
+
 
 
 

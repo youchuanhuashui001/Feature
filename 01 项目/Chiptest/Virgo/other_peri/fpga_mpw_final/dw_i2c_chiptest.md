@@ -6,67 +6,49 @@
 
 ## 2. 测试用例
 
-### 2.1 测试 master 高速模式 3.4MHz 读写
+### 2.1 测试 master 高速模式 3.4MHz 读写 (需要高速 i2c 设备)
 - 测试步骤：
-	- 配置 I2C 控制器为 master 模式
-	- 设置时钟频率为 3.4MHz
-	- 执行读写操作
+	- 打补丁：`https://git.nationalchip.com/gerrit/#/c/115970/5`
+	- `i2c_highspeed_test -y 1 1`
 	- 验证数据传输是否正确
 - 预期结果：
 	- I2C master 在 3.4MHz 频率下能正常读写数据
 
 ### 2.2 测试 DMA 传输功能
-- 测试命令：
-```shell
-i2c_async_test -y 1 1
-```
 - 测试步骤：
+	- 打开 `ENABLE_I2C = y；ENABLE_IRQ = y` 选项
 	- 打补丁 `https://git.nationalchip.com/gerrit/#/c/115970/5`
-	- 打开 `ENABLE_IRQ` 选项
-	- 验证 DMA 回调是否正常
+	- `i2c_async_test -y 1 1`
+	- 查看 DMA 回调是否正常
 - 预期结果：
 	- I2C 控制器能通过 DMA 正确传输数据
 
 ### 2.3 测试 RX_FULL 中断
-- 测试命令：
-```shell
-i2c_async_test -y 1 1
-```
 - 测试步骤：
-	- 打补丁
-	- 打开 `ENABLE_IRQ` 选项
+	- 打开 `ENABLE_I2C = y；ENABLE_IRQ = y` 选项
+	- 打补丁 `https://git.nationalchip.com/gerrit/#/c/115970/5`
 	- `dw_driver_i2c.c` 的开头加上 `#undef CONFIG_ENABLE_AXI_DMA`
-	- 配置 I2C 控制器使能 RX_FULL 中断
-	- 执行接收操作直到接收缓冲区满
+	- `i2c_async_test -y 1 1`
 	- 验证中断是否正确触发
-	- 看寄存器 `0xfc810034` 是否有对应中断
+	- b 到 `gx_hal_i2c_master_irq_handler`，看寄存器 `0xfc810034`  bit2 是否有对应中断
 - 预期结果：
-	- 接收缓冲区满时正确触发 RX_FULL 中断
+	- 接收缓冲区达到 rx fifo 阈值时正确触发 RX_FULL 中断
 
 ### 2.4 测试 TX_EMPTY 中断
-- 测试命令：
-```shell
-i2c_async_test -y 1 1
-```
 - 测试步骤：
-	- 打补丁
-	- 打开 `ENABLE_IRQ` 选项
+	- 打开 `ENABLE_I2C = y；ENABLE_IRQ = y` 选项
+	- 打补丁 `https://git.nationalchip.com/gerrit/#/c/115970/5`
 	- `dw_driver_i2c.c` 的开头加上 `#undef CONFIG_ENABLE_AXI_DMA`
-	- 配置 I2C 控制器使能 TX_EMPTY 中断
-	- 执行发送操作直到发送缓冲区空
+	- `i2c_async_test -y 1 1`
 	- 验证中断是否正确触发
-	- 看寄存器 `0xfc810034` 是否有对应中断
+	- b 到 `gx_hal_i2c_master_irq_handler`，看寄存器 `0xfc810034`  bit4 是否有对应中断
 - 预期结果：
 	- 发送缓冲区空时正确触发 TX_EMPTY 中断
 
 ### 2.5 测试 master 写
-- 测试命令：
-```shell
-i2cset -y 1 0x0c 0x0b 0x33
-```
 - 测试步骤：
-	- 配置 I2C 控制器为 master 模式
-	- 执行写操作
+	- 打开 `.config` 中的 `ENABLE_I2C = y`
+	- `i2cset -y 1 0x0c 0x0b 0x33`
 	- 验证数据是否正确写入
 - 预期结果：
 	- I2C master 能正确写入数据到 slave 设备
@@ -74,47 +56,50 @@ i2cset -y 1 0x0c 0x0b 0x33
 ![[Pasted image 20250318112032.png]]
 
 ### 2.6 测试 master 快速模式 400 KHz 读写
-- 测试命令：
-	- 需要手动添加测试代码到 `bootmenu. c`，`clk 400000` 配置为 400k
-```diff
-+       if (strcmp(argv[1], "clk") == 0) {
-+               unsigned int clk_fre;
-+               clk_fre = atoi(argv[2]);
-+               i2c_dev = gx_i2c_open(1);
-+               gx_i2c_clk_conf(i2c_dev, clk_fre);
-+       }
-```
 - 测试步骤：
-	- 配置 I2C 控制器为 master 模式
-	- 设置时钟频率为 400 KHz
-	- 执行读写操作
+	- 打开 `.config` 中的 `ENABLE_I2C = y`
+	- `i2cset clk 400000`，配置 clk 为 400k
+	- `i2cset -y 1 0x0c 0x0b 0x33`
+	- 逻辑分析仪量 `scl` 周期为 400k
 	- 验证数据传输是否正确
 - 预期结果：
 	- I2C master 在 400 KHz 频率下能正常读写数据
+- 修改代码：
+```diff
+--- a/bootmenu.c
++++ b/bootmenu.c
+
+@@ -2686,6 +2710,15 @@ void i2cset(int argc, const char **argv)
+        int data_len = 0;
+        int i = 0;
+        unsigned int reg_addr_width = 1;
++       
++       if (strcmp(argv[1], "clk") == 0){
++               unsigned int clk;
++               clk = atoi(argv[2]);
++               i2c_dev = gx_i2c_open(1);
++               gx_i2c_clk_conf(i2c_dev, clk);
++               gx_i2c_close(i2c_dev);
++               return;
++       }
+
+```
 
 ### 2.7 测试 master 标准模式 100 KHz 读写
-- 测试命令：
-```shell
-i2c_auto_test -y 1 1
-```
 - 测试步骤：
-	- 配置 grus：`i2c_slave 0 0x18`
-	- 配置 I2C 控制器为 master 模式
+	- 打开 `.config` 中的 `ENABLE_I2C = y`
+	- 配置 grus：`i2c_slave 0 0x18`；注释掉 `GX1133` 的测试代码
 	- 设置时钟频率为 100 KHz
+	- `i2c_auto_test -y 1 1`
 	- 执行读写操作
 	- 验证数据传输是否正确
 - 预期结果：
 	- I2C master 在 100 KHz 频率下能正常读写数据
 
 ### 2.8 测试 master 读
-- 测试命令：
-```shell
-# RDA5815M
-i2cget -y 1 0x0c 0x00 2
-```
 - 测试步骤：
-	- 配置 I2C 控制器为 master 模式
-	- 执行读操作
+	- 打开 `.config` 中的 `ENABLE_I2C = y`
+	- `i2cget -y 1 0x0c 0x00 2`  `# RDA5815M`
 	- 验证数据是否正确读取
 - 预期结果：
 	- I2C master 能正确从 slave 设备读取数据
@@ -122,53 +107,48 @@ i2cget -y 1 0x0c 0x00 2
 ![[Pasted image 20250318111928.png]]
 
 ### 2.9 测试时钟延展
-- 测试命令：
-```shell
-i2c_auto_test -y 1 1 
-```
 - 测试步骤：
-	- 配置 I2C 控制器启用时钟延展功能
-	- 执行数据传输操作
-	- 验证时钟延展是否正常工作
+	- 打开 `.config` 中的 `ENABLE_I2C = y`
+	- 配置 grus：`i2c_slave 0 0x18`；注释掉 `GX1133` 的测试代码
+	- 设置时钟频率为 100 KHz
+	- `i2c_auto_test -y 1 1`
+	- 验证数据传输是否正确
 	- grus 默认开了时钟延展，如果可以和 grus 正常通信，就 ok
 - 预期结果：
 	- I2C 时钟延展功能正常工作
 
 ### 2.10 测试配置 i2c 时序
 - 测试命令：
+	- 打开 `.config` 中的 `ENABLE_I2C = y`
+	- `i2cset clk 400000`，配置 clk 为 400k
 	- `clk 400000` 配置为 400k 时，高低电平都是 1.2us，`i2c-spec` 要求高电平只需要 `0.6us`，手动修改 `adap->dev->hight_time = 800`，逻辑分析仪量一下是 `0.8us` 左右即可
-- 测试步骤：
-	- 配置 I2C 控制器的时序参数
-	- 执行数据传输操作
 	- 验证时序配置是否生效
 - 预期结果：
 	- I2C 时序配置正确生效
 
 ### 2.11 测试 master 读写多个 slave
-- 测试命令：
-```shell
-i2c_auto_test -y 1 1
-```
 - 测试步骤：
-	- 需要先配置 grus，小板上没焊 GX1133，要注释掉
-	- 配置 I2C 控制器为 master 模式
-	- 依次对多个 slave 设备执行读写操作
-	- 验证对每个 slave 的数据传输是否正确
+	- 打开 `.config` 中的 `ENABLE_I2C = y`
+	- 配置 grus：`i2c_slave 0 0x18`；注释掉 `GX1133` 的测试代码
+	- 设置时钟频率为 100 KHz
+	- `i2c_auto_test -y 1 1`
+	- 执行读写操作
+	- 验证数据传输是否正确
 - 预期结果：
 	- I2C master 能正确读写多个 slave 设备
 
 ## 3. 测试结果
 - [ ] 2.1 测试 master 快速模式 3.4MHz 读写
-- [ ] 2.2 测试 DMA 传输功能
-- [ ] 2.3 测试 RX_FULL 中断
-- [ ] 2.4 测试 TX_EMPTY 中断
-- [ ] 2.5 测试 master 写
-- [ ] 2.6 测试 master 快速模式 400 KHz 读写
-- [ ] 2.7 测试 master 标准模式 100 KHz 读写
-- [ ] 2.8 测试 master 读
-- [ ] 2.9 测试时钟延展
-- [ ] 2.10 测试配置 i2c 时序
-- [ ] 2.11 测试 master 读写多个 slave
+- [x] 2.2 测试 DMA 传输功能
+- [x] 2.3 测试 RX_FULL 中断
+- [x] 2.4 测试 TX_EMPTY 中断
+- [x] 2.5 测试 master 写
+- [x] 2.6 测试 master 快速模式 400 KHz 读写
+- [x] 2.7 测试 master 标准模式 100 KHz 读写
+- [x] 2.8 测试 master 读
+- [x] 2.9 测试时钟延展
+- [x] 2.10 测试配置 i2c 时序
+- [x] 2.11 测试 master 读写多个 slave
 
 ## 4. 测试记录
 
