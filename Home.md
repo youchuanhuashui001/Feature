@@ -20,32 +20,26 @@ dv.paragraph(
 ```
 
 
+---
+
 
 ## 学习任务
 - [[02 学习/schedule/学习计划|学习计划]]
 
 
 
-## Todo
-- [ ] cursor
-	- [ ] [[02 学习/cursor/cursorrules/cursorrules|cursorrules]]
-	- [ ] [[agent]]
-- [ ] virgo
-	- [ ] 外设对接
-	- [ ] rom spinor 驱动优化，用双倍速。spinand 驱动整理
-	- [ ] flash spi 要加 ddr 模式
-- [ ] sagitta
-	- [ ] 给 dma 用的 buffer 需要 aligned cache_line，否则会出现 dma buffer 和其它数据共用同一个 cache line 的问题
-	- [ ] 做 dma 操作之前会先将 dma buffer clean & invalid 到内存，但是和它共用一条 cache line 的后面的代码会访问这个 cache line，导致把这里 dma buffer 又读到了 cache；等到 dma 操作完成后，cache line 的数据和内存的数据(dma 搬过去的数据)又不一样了；如果此时 invalid 就会丢失栈的其它部分，因为共用一条 cache line 的后面的代码会用这里来存东西，可能会被破坏，导致跑飞
+---
 
-
-
-## 进行中
+## 工作安排
 ```dataview
-list
-from #doing
-sort file.ctime desc
+TASK
+FROM "00 日记/2025/工作安排.md"
+WHERE !completed
 ```
+
+
+---
+
 
 
 # 最近编辑
@@ -56,6 +50,8 @@ sort file.mtime desc
 limit 5
 ```
 
+---
+
 # 最近创建
 ```dataview
 table WITHOUT ID file.link AS "标题",file.ctime as "时间"
@@ -65,6 +61,7 @@ limit 5
 ```
 
 
+---
 
 # 日记
 

@@ -1961,6 +1961,16 @@ DWC_ssi 支持组合中断请求和单独中断请求，每种中断请求都可
 
 
 
+# TX_AND_RX 传输模式
+designware spi ip 的 TX_AND_RX 模式，写数据的同时可以读数据。那么我有疑问：
+
+1. 如果要读一个字节数据，先写一个字节的 0xff，然后再读数据
+2. 如果要写一个字节数据，如果刚好的要写的数据就是 0xff 呢？这种情况会怎么处理？
+
+- 无论读或写操作，发出去的 0xff 都会发送给 slave，当 slave 接收到之后将 0xff 认为是什么，取决于 slave 如何处理
+
+- **不支持工作在 spi enhance 模式**
+
 
 
 
@@ -1969,6 +1979,11 @@ DWC_ssi 支持组合中断请求和单独中断请求，每种中断请求都可
 - 主要涉及到 `TX_FIFO_EMPTY、RX_FIFO_FULL` 两个中断
 	- 在发的时候，配置 `TX_FIFO_EMPTY` 的阈值为 `0`，表示 `TXFIFO` 没有数据，就直接往 `TXFIFO` 中写数据
 	- 在读的时候，配置 `RX_FIFO_FULL` 的阈值为 `min(rx->fifo_len, steps)`，如果要读的数据小于 `fifo_len` ，那么要读几个就配成几；如果要读的数据大于 `fifo_len`，那么就按 `fifo_len` 来触发中断 
+
+
+
+
+
 
 
 
