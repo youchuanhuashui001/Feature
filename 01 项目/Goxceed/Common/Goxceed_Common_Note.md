@@ -19,9 +19,12 @@
 https://git.nationalchip.com/redmine/issues/352665#note-3
 
 
+## VU440 使用方法
+- 有三个按键，最左边的按键是复位按键。最右边的 (靠近 fpga 风扇) 的按键不能按，按了之后串口就挂了
 
 ### A55 如何开启 GDBServer
 - `JLinkGDBServer -endian little -select USB -device Cortex-A55 -if JTAG -speed 10000`
+- 直接执行即可，因为 `JLinkGDBServer` 安装到了 `usr/bin` 目录下
 
 
 
@@ -187,6 +190,12 @@ https://git.nationalchip.com/redmine/issues/352665#note-3
          {111,       129,    133,    MP_INV_V,  0},           // 35          | SPIMOSI_NFOE_NFWE_SPIMOSIDW
          {112,       130,    134,    MP_INV_V,  0},           // 36          | SPICSn_NFCLE_NFALE_SPICSnDW
 ```
+
+
+## vega 修改 gpio 驱动能力
+https://git.nationalchip.com/redmine/issues/385267
+
+
 
 
 

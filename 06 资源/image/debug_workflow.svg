@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="700" height="350" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .stepbox {
+      fill: #e6f2ff;
+      stroke: #0066cc;
+      stroke-width: 2;
+      rx: 10;
+      ry: 10;
+    }
+    .steptitle {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .arrow {
+      stroke: #333;
+      stroke-width: 2;
+      fill: none;
+      marker-end: url(#arrowhead);
+    }
+    .code {
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .comment {
+      fill: #666;
+      font-style: italic;
+    }
+  </style>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+  
+  <text x="350" y="30" text-anchor="middle" class="title">
+    GDB调试工作流程
+  </text>
+  
+  <!-- 步骤1：连接到调试器 -->
+  <rect x="50" y="60" width="150" height="180" class="stepbox" />
+  <text x="125" y="85" text-anchor="middle" class="steptitle">步骤1</text>
+  <text x="125" y="110" text-anchor="middle">连接到调试器</text>
+  
+  <rect x="60" y="130" width="130" height="30" fill="#d1e7ff" rx="5" ry="5" />
+  <text x="125" y="150" text-anchor="middle" class="code">target remote</text>
+  <text x="125" y="170" text-anchor="middle" class="code">127.0.0.1:2331</text>
+  
+  <text x="125" y="200" text-anchor="middle" class="comment">建立与JTAG调试器</text>
+  <text x="125" y="220" text-anchor="middle" class="comment">的连接</text>
+  
+  <!-- 步骤2：配置内存和启动参数 -->
+  <rect x="275" y="60" width="150" height="180" class="stepbox" />
+  <text x="350" y="85" text-anchor="middle" class="steptitle">步骤2</text>
+  <text x="350" y="110" text-anchor="middle">配置内存和启动参数</text>
+  
+  <rect x="285" y="130" width="130" height="30" fill="#d1e7ff" rx="5" ry="5" />
+  <text x="350" y="150" text-anchor="middle" class="code">config3</text>
+  <text x="350" y="170" text-anchor="middle">或</text>
+  <text x="350" y="190" text-anchor="middle" class="code">config4</text>
+  
+  <text x="350" y="220" text-anchor="middle" class="comment">选择合适的配置</text>
+  
+  <!-- 步骤3：开始调试 -->
+  <rect x="500" y="60" width="150" height="180" class="stepbox" />
+  <text x="575" y="85" text-anchor="middle" class="steptitle">步骤3</text>
+  <text x="575" y="110" text-anchor="middle">开始调试</text>
+  
+  <rect x="510" y="130" width="130" height="30" fill="#d1e7ff" rx="5" ry="5" />
+  <text x="575" y="150" text-anchor="middle" class="code">load</text>
+  
+  <rect x="510" y="170" width="130" height="30" fill="#d1e7ff" rx="5" ry="5" />
+  <text x="575" y="190" text-anchor="middle" class="code">b bl2_main</text>
+  
+  <rect x="510" y="210" width="130" height="30" fill="#d1e7ff" rx="5" ry="5" />
+  <text x="575" y="230" text-anchor="middle" class="code">c</text>
+  
+  <!-- 连接箭头 -->
+  <line x1="200" y1="150" x2="275" y2="150" class="arrow" />
+  <line x1="425" y1="150" x2="500" y2="150" class="arrow" />
+  
+  <!-- 底部注释 -->
+  <text x="350" y="280" text-anchor="middle" class="comment">
+    注意：示例中的步骤3命令在.gdbinit中被注释掉了，需要手动执行
+  </text>
+  
+  <text x="350" y="310" text-anchor="middle" class="comment">
+    config3和config4区别：引导设备和闪存地址长度的不同配置
+  </text>
+</svg> 

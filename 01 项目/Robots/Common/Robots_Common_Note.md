@@ -143,7 +143,8 @@ stage1 cost : 17563
 - Flash XIP 会用到 L2 Icache，flash 读写擦不会过 L2 Icache
 - L2 Dcache 本来准备用于 Psram，后来 L2 Dcache 有问题，就去掉了，现在没有 L2 Dcache
 
-
+## IR
+- tx/rx 是独立的 buffer，深度均为：16，位宽均为：32
 
 
 
@@ -155,3 +156,18 @@ stage1 cost : 17563
 # Apus Flash 跑极限频率 104MHz
 - 修改 `board/nationalchip/apus_nre_1v/clk.c` 后 `stage1` 的频率修改了吗？还是只修改了 `stage2` 的时钟频率？
 	- 没改，所以 stage1 原本用的是宏，现在都需要手动改成 1
+
+
+
+# Flash 支持时需要用到的某些补丁：
+
+- Apus 测试 flash 跑极限频率代码修改
+	- https://git.nationalchip.com/gerrit/#/c/112577
+- Apus 测试 10ms 休眠唤醒
+	- `scpu` 中使用 ` apus_nre_xip_1v_deconfig ` 编译，打开 ` apus pmu test ` 测试选项
+	- `main.c` 中将 ` pmu_reboot_for_10ms_test ` 函数 `extern` 过来，并在 `app_start` 之前调用
+- leo_mini flash 跑 130Mhz，时钟代码修改
+	- https://git.nationalchip.com/gerrit/#/c/123165/
+- fornax 使用 psram spi 对接 flash 测试
+	- https://git.nationalchip.com/gerrit/#/c/124025/2
+

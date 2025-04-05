@@ -116,3 +116,35 @@ https://github.com/richards199999/Thinking-Claude/blob/main/model_instructions/v
 	4. 直接与 Cursor 交互时会使用默认规则，当与我们的要求不一致时，需要再次对话让 Cursor 重新输出，耗时长且容易出错。
 	5. 直接与 Cursor 交互难以精确控制其行为，无法完全满足特定需求。
 	6. 使用 CursorRules 只需简单配置和集成开源规则，就能快速定制 AI 行为，大幅提升开发效率。
+
+
+
+
+
+
+# CursorRules 整理到问题号上 
+Cursor 的 .cursorrules 功能为 AI 助手提供了一个定制化的 Prompt。用于预设提示词，规定 AI 在生成代码时需遵守的规则。
+## 1. 使用方法
+在项目的根目录放置 `.cursorrules` 文件，可以在这个文件里提供更多用于 Cursor 编辑器的上下文，比如我们可以：
+1. 指定项目的技术栈
+2. 设定开发规范
+3. 引导AI的问题解决思路
+4. 创建自定义指令
+
+这样的预设能显著提高 Curosr 生成代码的准确性和相关性，使其更好地符合项目需求。
+## 2. 开源规则
+https://cursor.directory/
+https://cursorlist.com/
+https://github.com/PatrickJS/awesome-cursorrules
+https://github.com/richards199999/Thinking-Claude/tree/main
+
+## 3. 自定义规则
+Cursor 官网专门提供了用于自定义提示词的网站，描述自己对于提示词的需求，由 AI 来生成提示词。
+- https://cursorrules.agnt.one/chat
+
+
+
+## 5. AI 识别原理图
+- 是否能检查到原理图及 pcb 错误
+
+- Redmine 创建任务记录

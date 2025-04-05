@@ -1833,6 +1833,12 @@ DWC_ssi 支持组合中断请求和单独中断请求，每种中断请求都可
 
 - 指令、地址与 bits_per_word 无关
 - 指令占用一个 location，地址可能占用多个 location，单个 location 必须单次写，不能将多个 location 组成一次写操作
+- WAIT_CYCLE：在发送完指令、地址之后等待 N 个 ssi_clk 周期，再去接收数据
+	- 在多线读 flash 的时候，需要 dummy
+	- 8bit 指令：0x3b、0x6b
+	- 24bit 地址：3 字节
+	- 32bit 地址：4 字节
+	- wait_cycle：8 相当于是 dummy 了
 
 
 

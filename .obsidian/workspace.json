@@ -24,7 +24,7 @@
             }
           },
           {
-            "id": "8145e8b7924db742",
+            "id": "297eb20d513ef49b",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -57,12 +57,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/rom flash 驱动优化.md",
+                "file": "01 项目/Chiptest/Virgo/nre/Uboot 支持 SPI Nor Flash 驱动.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "rom flash 驱动优化"
+              "title": "Uboot 支持 SPI Nor Flash 驱动"
             }
           },
           {
@@ -80,91 +80,91 @@
             }
           },
           {
-            "id": "aa2c30928053901c",
+            "id": "1c16a804b9a25e82",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/2025-3/2025-03-21-星期五.md",
+                "file": "01 项目/Chiptest/Sagitta/IODMA/WS2811.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-03-21-星期五"
+              "title": "WS2811"
             }
           },
           {
-            "id": "3b6aa9d6481c10b5",
+            "id": "f2bbfef0eaf38156",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/年度小结.md",
+                "file": "01 项目/Chiptest/Sagitta/ir/Sagitta NRE FPGA IR 模块验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "年度小结"
+              "title": "Sagitta NRE FPGA IR 模块验证"
             }
           },
           {
-            "id": "3ffe158f312b70e2",
+            "id": "723db0fa0feae11d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/2025-3/2025-03-17-星期一.md",
+                "file": "01 项目/Chiptest/Sagitta/IODMA/Sagitta NRE FPGA IODMA 模块验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-03-17-星期一"
+              "title": "Sagitta NRE FPGA IODMA 模块验证"
             }
           },
           {
-            "id": "acf50246a0b850b7",
+            "id": "e511e4cb7d4a5c80",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/2025-3/2025-03-18-星期二.md",
+                "file": "00 日记/2025/2025-3/2025-04-03-星期四.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-03-18-星期二"
+              "title": "2025-04-03-星期四"
             }
           },
           {
-            "id": "93f378ffdcbac5f8",
+            "id": "5aa5018cebc1a70e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/2025-3/2025-03-19-星期三.md",
+                "file": "00 日记/2025/2025-3/2025-04-05-星期六.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-03-19-星期三"
+              "title": "2025-04-05-星期六"
             }
           },
           {
-            "id": "c02b0535e447375d",
+            "id": "e470edf24d980a67",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/2025-3/2025-03-20-星期四.md",
+                "file": "01 项目/Chiptest/Sagitta/IODMA/iodma 补测.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-03-20-星期四"
+              "title": "iodma 补测"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 10
       }
     ],
     "direction": "vertical"
@@ -196,7 +196,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "agent",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -227,8 +227,7 @@
               "title": "Copilot"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -315,13 +314,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00 日记/2025/年度小结.md",
+                "file": "01 项目/Chiptest/Sagitta/IODMA/iodma 补测.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "年度小结 的大纲"
+              "title": "iodma 补测 的大纲"
             }
           }
         ]
@@ -341,61 +340,60 @@
       "i18n:I18N": false,
       "pkmer:Open Pkmer Market": false,
       "homepage:Open homepage": false,
-      "obsidian-memos:Thino": false,
       "vscode-editor:新建代码文件": false,
       "copilot:Open Copilot Chat": false,
       "templater-obsidian:Templater": false,
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "7e2ad763fc31303c",
+  "active": "e470edf24d980a67",
   "lastOpenFiles": [
-    "00 日记/2025/2025-3/2025-03-21-星期五.md",
-    "00 日记/2025/2025-3/2025-03-19-星期三.md",
-    "00 日记/2025/2025-3/2025-03-20-星期四.md",
-    "00 日记/2025/2025-3/2025-03-18-星期二.md",
-    "00 日记/2025/2025-3/2025-03-17-星期一.md",
-    "00 日记/2025/年度小结.md",
-    "01 项目/Robots/Redmine/fornax 验证 GT25Q16B 能否超频到 120MHz.md",
-    "Home.md",
-    "01 项目/Common/IP/dw_spi ip.md",
-    "01 项目/Chiptest/Virgo/Final/Virgo Nre 起 Linux 读错 flash id.md",
+    "01 项目/Chiptest/Sagitta/IODMA/WS2811.md",
+    "01 项目/Chiptest/Sagitta/IODMA/iodma 补测.md",
+    "00 日记/2025/2025-3/2025-04-05-星期六.md",
+    "00 日记/2025/2025-3/2025-04-03-星期四.md",
     "01 项目/Chiptest/Virgo/nre/rom flash 驱动优化.md",
+    "typora/note.md",
+    "06 资源/模板/Robots 支持 Nor Flash.md",
+    "01 项目/Common/IP/dw_spi ip.md",
+    "01 项目/Chiptest/Sagitta/IODMA/txdelay 配的很大之后电压往下掉.md",
+    "01 项目/Chiptest/Sagitta/IODMA/txdelay 配的很大之后电压往下掉 1.md",
+    "06 资源/image/17e1c53dccb4567ff30c03bf86c1f2c2.jpg",
+    "06 资源/image/8905802beedefecbae40570a0a4fe386.jpg",
+    "06 资源/image/ff5f2cc633a7849a0c5b043e971c138f.jpg",
+    "06 资源/image/5a934ae853dc8751e3f4884fb43d72f7.jpg",
+    "06 资源/image/36aa0f9079934b76b2c5efedf4dceb10.jpg",
+    "06 资源/image/740426926a050163030b19909d7d11ca.jpg",
+    "06 资源/image/aa809ea92b027e33db97c0fd05e5a80a.jpg",
+    "00 日记/2025/2025-3/2025-04-02-星期三.md",
+    "01 项目/Chiptest/Sagitta/IODMA/Sagitta NRE FPGA IODMA 模块验证.md",
+    "01 项目/Chiptest/Sagitta/ir/Sagitta NRE FPGA IR 模块验证.md",
+    "00 日记/2025/2025-3/2025-04-01-星期二.md",
+    "01 项目/Robots/Common/Robots_Common_Note.md",
+    "06 资源/image/微信图片_20250329141044.jpg",
+    "06 资源/image/微信图片_2025-03-29_135209_756.png",
+    "01 项目/Chiptest/Virgo/nre/Uboot 支持 SPI Nor Flash 驱动.md",
+    "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
+    "04 其它/xmind/driver/gx_ai_ir/scpu_ir.xmind",
+    "04 其它/xmind/driver/gx_ai_ir",
+    "00 日记/2025/2025-3/2025-03-31-星期一.md",
+    "00 日记/2025/2025-3/2025-03-28-星期五.md",
+    "06 资源/image/Pasted image 20250331111212.png",
+    "00 日记/2025/年度小结.md",
+    "sagitta ir 模块交接.md",
+    "01 项目/Common/IP/ai_ir ip.md",
     "00 日记/2025/工作安排.md",
-    "01 项目/Chiptest/Virgo/Virgo 启动出现 Receive FIFO Overflow.md",
+    "01 项目/Chiptest/Virgo/Final/Virgo Nre 起 Linux 读错 flash id.md",
+    "Home.md",
+    "01 项目/Common/IP/gx_ir ip.md",
+    "01 项目/Chiptest/Sagitta/ir",
+    "07 临时/3-27/gx_spinand.c",
+    "07 临时/3-27/BC4_ViUjWk",
+    "07 临时/3-27/BC4_ih1knj",
+    "07 临时/3-27/gx_spinand.c~",
+    "07 临时/3-27",
+    "02 学习/cursor/硬件",
     "04 其它/xmind/driver/stage1_flash/Stage1_flash.xmind",
-    "04 其它/xmind/driver/stage1_flash",
-    "01 项目/Chiptest/Virgo/nre/flash spi 新增 ddr 模式.md",
-    "01 项目/Chiptest/Virgo/other_peri/fpga_mpw_final/dw_i2c_chiptest.md",
-    "01 项目/Chiptest/Virgo/other_peri/fpga_mpw_final/dw_rtc_chiptest.md",
-    "01 项目/Chiptest/Virgo/other_peri/fpga_mpw_final/dw_uart_chiptest.md",
-    "01 项目/Chiptest/Virgo/other_peri/fpga_mpw_final/dw_wdt_chiptest.md",
-    "01 项目/Chiptest/Virgo/other_peri/fpga_mpw_final/gx_gpio_chiptest.md",
-    "04 其它/xmind/driver/virgo_nre_rom/rom_flash.xmind",
-    "04 其它/xmind/driver/virgo_nre_rom",
-    "02 学习/cursor/录屏方法/录屏方法.md",
-    "06 资源/image/Pasted image 20250319163230.png",
-    "02 学习/cursor/录屏方法",
-    "06 资源/image/Pasted image 20250319141059.png",
-    "00 日记/2025/2025-2/2025-03-19-星期三.md",
-    "01 项目/Chiptest/Virgo/other_peri/fpga_mpw_final/gx_timer_chiptest.md",
-    "06 资源/image/Pasted image 20250318170857.png",
-    "06 资源/image/Pasted image 20250318170845.png",
-    "06 资源/image/Pasted image 20250318170813.png",
-    "06 资源/image/Pasted image 20250318170744.png",
-    "07 临时/3-18/virgo_peri/rtc.h",
-    "07 临时/3-18/virgo_peri/serial_test.py",
-    "07 临时/3-18/virgo_peri/serial_send.py",
-    "07 临时/3-18/virgo_peri/dw_rtc.c",
-    "07 临时/3-18/virgo_peri/bootmenu.c",
-    "06 资源/image/Pasted image 20250318112032.png",
-    "06 资源/image/Pasted image 20250318111928.png",
-    "06 资源/image/Pasted image 20250318102437.png",
-    "01 项目/Common/IP/dw_i2c ip.md",
-    "01 项目/Common/IP/i2c-spec.md",
-    "02 学习/cursor/agent/agent.md",
-    "06 资源/image/Pasted image 20250317201935.png",
-    "02 学习/cursor/cursorrules/cursorrules.md",
     "未命名.canvas"
   ]
 }
