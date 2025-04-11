@@ -171,3 +171,8 @@ stage1 cost : 17563
 - fornax 使用 psram spi 对接 flash 测试
 	- https://git.nationalchip.com/gerrit/#/c/124025/2
 
+
+
+# K7 FPGA 对应 FMC 子板原理图
+- 老的子板： http://yun.nationalchip.com/v/list/ent/1483267603295113268
+- 新的子板： https://git.nationalchip.com/redmine/issues/399831
