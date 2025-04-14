@@ -23,16 +23,31 @@
 >  - 需要用 `394932 peri_final3_gpio_FPGA_2024-12-03.tar`
 
 
-### 2.2 偶校验测试 (没测过)
+### 2.2 偶校验测试
 1. 测试步骤：
 	- 配置串口为偶校验
 	- 配置 minicom 为奇校验
+	- gdb 将代码加载后停住，在 minicom 中敲入按键
+	- 查看寄存器 `LSR[2]  0x14` 是否触发对应错误中断
 	- 通过串口发送数据
 2. 预期结果：
 	- 触发校验错误中断
-3. 当前问题：
-	- 没有驱动和测试代码
-	- 需要补充测试代码
+- 代码修改：
+```diff
+diff --git a/drivers/serial/dw_uart.c b/drivers/serial/dw_uart.c
+index a0def6139..ca74b3616 100644
+--- a/drivers/serial/dw_uart.c
++++ b/drivers/serial/dw_uart.c
+@@ -191,7 +191,8 @@ static void uart_init_port(int baudrate, int port)
+        __raw_writel(0x3, (dw_uartbase + DSW_MCR));
+ 
+        DW_WAIT_IDLE(dw_uartbase, DSW_USR, _usr, DSW_USR_BUSY);
+-       __raw_writel(0x03, (dw_uartbase + DSW_LCR));
++//     __raw_writel(0x03, (dw_uartbase + DSW_LCR));
++       __raw_writel(0x03 | (1<<3) | (1<<4), (dw_uartbase + DSW_LCR));
+        __raw_writel(0x01, (dw_uartbase + DSW_FCR));
+```
+
 
 ### 2.3 发送中断测试
 1. 测试步骤：
@@ -46,14 +61,74 @@
 	- 系统卡死
 	- 触发 tx empty 中断（中断寄存器：`0xfc880000+0x8 0xfc880008: 0x000000c2`）
 
-### 2.4 发送硬件 FIFO 大小测试 (没测过)
+### 2.4 发送硬件 FIFO 大小测试
 1. 测试命令：
 	```bash
 	uarttest 1 tx_fifo_size
 	```
 2. 当前问题：
 	- 代码会一直卡在等 tx fifo empty 状态
+		- 按照下面的修改来解决
 	- 代码被注释
+		- 打开就好
+- 代码修改：
+```diff
+--- a/bootmenu.c
++++ b/bootmenu.c
+
+-//#define CONFIG_UART_TEST
++#define CONFIG_UART_TEST
+        } else if (0 == strcmp("tx_fifo_size", cmd)) {
+-#if 0
++#if 1
+                int fifo_size = 0;
+                volatile int j = 1;
+                printf("Start testing tx_fifo_size\n");
+                uart_halt_tx(port, 1);
++               extern volatile unsigned int tx_fifo_test;
++               tx_fifo_test = 1;
+                while (1) {
+                        uart_putc('t', port);
+                        if (uart_get_tx_fifo_size(port) > fifo_size)
+@@ -2969,8 +2971,9 @@ void uarttest(int argc, const char **argv)
+                        else
+                                break;
+                }
++               tx_fifo_test = 0;
+                uart_halt_tx(port, 0);
+-               printf("tx_fifo_size : %d\n", fifo_size);
++               printf("\n\ntx_fifo_size : %d\n", fifo_size);
+ #endif
+ 
+diff --git a/drivers/serial/dw_uart.c b/drivers/serial/dw_uart.c
+index a0def6139..95ff92425 100644
+--- a/drivers/serial/dw_uart.c
++++ b/drivers/serial/dw_uart.c
+@@ -296,6 +296,8 @@ int uart_flush_in(int port)
+ }
+ #endif
+
++volatile unsigned int tx_fifo_test = 0;
++
+ static inline void uart_raw_putc(int ch, int port)
+ {
+        unsigned int  state;
+@@ -305,10 +307,11 @@ static inline void uart_raw_putc(int ch, int port)
+        p_uart_dev = get_uart_dev(port);
+        dw_uartbase = p_uart_dev->reg_base;
+
+-       do {
+-               state = __raw_readl(dw_uartbase + DSW_LSR);
+-       } while ( !(state & (1 << DSW_LSR_TEMT)) );
+-
++       if (!tx_fifo_test) {
++               do {
++                       state = __raw_readl(dw_uartbase + DSW_LSR);
++               } while ( !(state & (1 << DSW_LSR_TEMT)) );
++       }
+        __raw_writel((unsigned int)ch, (dw_uartbase + DSW_THR));
+ }
+```
 
 ### 2.5 多种波特率测试
 1. 测试步骤：
@@ -69,14 +144,27 @@
 	- 需要用 `382541 9p_peri_newcode_FPGA_2024-09-03.tar`
 	- minicom 打开时需要指定波特率
 
-### 2.6 奇校验测试 (没测过)
+### 2.6 奇校验测试
 1. 测试步骤：
 	- 配置串口为奇校验
 	- 配置 minicom 为偶校验
-	- 通过串口发送数据
-2. 当前问题：
-	- 没有驱动和测试代码
-	- 配置后没有出现对应的中断 `LSR[2] 0x14`
+	- gdb 加载代码，然后 gdb 停住，在 minicom 中按下按键
+	- 查看 `LSR[2]  0x14` 寄存器是否触发错误中断状态
+- 代码修改：
+```diff
+diff --git a/drivers/serial/dw_uart.c b/drivers/serial/dw_uart.c
+index a0def6139..ae4ba27ee 100644
+--- a/drivers/serial/dw_uart.c
++++ b/drivers/serial/dw_uart.c
+@@ -191,7 +191,8 @@ static void uart_init_port(int baudrate, int port)
+        __raw_writel(0x3, (dw_uartbase + DSW_MCR));
+ 
+        DW_WAIT_IDLE(dw_uartbase, DSW_USR, _usr, DSW_USR_BUSY);
+-       __raw_writel(0x03, (dw_uartbase + DSW_LCR));
++       __raw_writel(0x03 | (1<<3), (dw_uartbase + DSW_LCR));
+        __raw_writel(0x01, (dw_uartbase + DSW_FCR));
+```
+
 
 ### 2.7 小数波特率测试
 1. 测试步骤：
@@ -122,14 +210,12 @@
 	- 不能打开中断，因为中断会一直从 fifo 取数据
 	- 手动读 `x/x 0xfc880000`，读一次少一个
 
-### 2.10 接收硬件 FIFO 溢出检测测试 (没测过)
+### 2.10 接收硬件 FIFO 溢出检测测试
 1. 测试步骤：
-	- 填满接收 FIFO
-	- 继续输入数据
-2. 当前问题：
-	- 无法触发溢出中断
-	- `LSR[1]` 位始终为 0
-	- FIFO 中有 128 个数据，但未触发溢出
+	- gdb 加载程序后跑起来，然后停住
+	- 在 minicom 中一直输入数据，填满 uart rx fifo 直至溢出
+	- 查看寄存器 `LSR.OE bit1 0x14` 是否为 1
+
 
 ### 2.11 硬件流控 CTS 测试
 - 测试步骤：
@@ -317,3 +403,7 @@ if __name__ == "__main__":
     # 调用函数开始发送
     send_byte(args.port, args.baud, args.value, args.interval)
 ```
+
+### 不能使用 `rx_fifo_size` 来测试 rx fifo 溢出
+- 因为 `rx_fifo_size` 会一直调用 `printf`，`printf` 中会一直去读 `lsr` 寄存器
+- 由于 `lsr` 寄存器是读清 0 的，所以当触发了中断之后立马就被清楚了，没有机会通过 gdb 去读到对应的中断状态
