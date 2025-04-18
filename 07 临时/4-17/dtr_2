@@ -1,0 +1,37 @@
+set  *((volatile unsigned int *) 0xf8400008) = 0
+set  *((volatile unsigned int *) 0xf840002c) = 0
+set  *((volatile unsigned int *) 0xf84000f4) = 0
+set  *((volatile unsigned int *) 0xf8400018) = 0
+set  *((volatile unsigned int *) 0xf840001c) = 0
+set  *((volatile unsigned int *) 0xfa490080) = 0x0f
+set  *((volatile unsigned int *) 0xfa490080) = 0xf & ~(1 << 0)
+set  *((volatile unsigned int *) 0xf8400008) = 0
+
+set  *((volatile unsigned int *) 0xf84000f0) = 0x01
+
+set  *((volatile unsigned int *) 0xf8400014) = 0x40
+set  *((volatile unsigned int *) 0xf8400004) = 0x00
+set  *((volatile unsigned int *) 0xf840004c) = 0x00
+set  *((volatile unsigned int *) 0xf8400008) = 0x00
+
+set  *((volatile unsigned int *) 0xf8400010) = 0x01
+set  *((volatile unsigned int *) 0xf840004c) = 0x00
+
+set  *((volatile unsigned int *) 0xf84000f4) = (0 << 30) | (0x2 << 8) | (0x8 << 2) | 0x1
+set  *((volatile unsigned int *) 0xf84000f4) |= (1 << 16)
+
+set  *((volatile unsigned int *) 0xf84000f8) = 1
+
+
+set  *((volatile unsigned int *) 0xf8400000) = (0x1 << 31) | (0x2 << 22) | (0x1 << 10) | ((0x20 - 1) << 0)
+
+
+set  *((volatile unsigned int *) 0xf8400018) = (0x2 << 16)
+set  *((volatile unsigned int *) 0xf8400004) = 0x0
+
+
+set  *((volatile unsigned int *) 0xf8400008) = 0x01
+
+
+set  *((volatile unsigned int *) 0xf8400060) = 0xed
+set  *((volatile unsigned int *) 0xf8400060) = 0x345678

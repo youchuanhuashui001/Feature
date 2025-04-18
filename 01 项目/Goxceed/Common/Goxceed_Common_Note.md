@@ -256,3 +256,16 @@ parent-node {
     - `#address-cells = <1>`：地址用 1 个 32 位数表示。
     - `#size-cells = <0>`：无大小部分（如固定大小的寄存器）。
     - `#address-cells = <2>`：地址用 2 个 32 位数（64 位地址）。
+
+
+
+# 调试
+
+## canopus-spinand-gdb-linux
+`CANOPUS-6631SH1D SPINAND` 板级使用 gdb 加载 linux 调试流程：
+- 烧录一个可以正常启动的整 bin
+- gxloader：
+	- `./build canopus 6631SH1D debug` 编译后生成的 bin 文件烧录到 flash
+```diff
+
+```

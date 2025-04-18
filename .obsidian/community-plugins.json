@@ -3,7 +3,6 @@
   "calendar",
   "dataview",
   "i18n",
-  "pkmer",
   "homepage",
   "obsidian-activity-history",
   "calendar-beta",
@@ -18,5 +17,6 @@
   "obsidian-minimal-settings",
   "obsidian-style-settings",
   "templater-obsidian",
-  "obsidian-banners"
+  "obsidian-banners",
+  "obsidian-custom-file-extensions-plugin"
 ]
