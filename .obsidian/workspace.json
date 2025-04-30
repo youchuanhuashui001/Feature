@@ -24,77 +24,21 @@
             }
           },
           {
-            "id": "76d756b144939884",
+            "id": "d84290fa7f8a06f7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Goxceed/Common/Build.md",
+                "file": "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Build"
+              "title": "Goxceed_Common_Note"
             }
           },
           {
-            "id": "bb4b61f8b62600d5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Common/IP/dw_uart ip.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "dw_uart ip"
-            }
-          },
-          {
-            "id": "cc4394fe09f87ef2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Goxceed/Redmine/spinand stage1 往 0 地址读写数据(更正：修改编译报错).md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "spinand stage1 往 0 地址读写数据(更正：修改编译报错)"
-            }
-          },
-          {
-            "id": "ea27349bcd1e3ed9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_uart_chiptest.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "dw_uart_chiptest"
-            }
-          },
-          {
-            "id": "9962aef1f1a34d7b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-4/2025-04-18-星期五.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-04-18-星期五"
-            }
-          },
-          {
-            "id": "3012293be3c65cb6",
+            "id": "106f3862db206dcf",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -108,35 +52,49 @@
             }
           },
           {
-            "id": "9c7cf8bbfadabff5",
+            "id": "5f0138f289c50b3c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Common/IP/flash_spi 寄存器级测试代码.md",
+                "file": "01 项目/Common/IP/dw_spi ip.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "flash_spi 寄存器级测试代码"
+              "title": "dw_spi ip"
             }
           },
           {
-            "id": "c3bfb5ed938ef4e9",
+            "id": "a19ba1142c992e00",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "06 资源/模板/周小结生成提示词.md",
+                "file": "01 项目/Common/IP/dw_uart ip.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "周小结生成提示词"
+              "title": "dw_uart ip"
+            }
+          },
+          {
+            "id": "6453845443825650",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 日记/2025/2025-4/2025-04-30-星期三.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-04-30-星期三"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -168,7 +126,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "volatile *",
+                "query": "a55",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -286,13 +244,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo NRE Flash_SPI 模块验证.md",
+                "file": "00 日记/2025/2025-4/2025-04-30-星期三.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Virgo NRE Flash_SPI 模块验证 的大纲"
+              "title": "2025-04-30-星期三 的大纲"
             }
           }
         ]
@@ -317,54 +275,54 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "3012293be3c65cb6",
+  "active": "6453845443825650",
   "lastOpenFiles": [
-    "01 项目/Common/IP/flash_spi 寄存器级测试代码.md",
     "01 项目/Chiptest/Virgo/nre/beta/Virgo NRE Flash_SPI 模块验证.md",
+    "00 日记/2025/2025-4/2025-04-29-星期二.md",
+    "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
+    "00 日记/2025/2025-4/2025-04-28-星期一.md",
+    "00 日记/2025/2025-4/2025-04-30-星期三.md",
+    "01 项目/Common/IP/dw_uart ip.md",
+    "01 项目/Common/IP/dw_spi ip.md",
+    "06 资源/image/Pasted image 20250429164819.png",
+    "01 项目/Chiptest/Virgo/nre/beta/rom flash 驱动优化.md",
+    "06 资源/image/Pasted image 20250428105352.png",
+    "06 资源/image/Pasted image 20250428104312.png",
     "Home.md",
+    "00 日记/2025/2025-4/2025-04-27-星期日.md",
+    "06 资源/image/c88bce4eb52107b60582917bbf54328f.jpg",
+    "01 项目/Chiptest/Sagitta/final/Sagitta Final IODMA 模块测试.md",
+    "06 资源/模板/日记模板.md",
+    "01 项目/Chiptest/Virgo/mpw/axi-dma/AXI-DMA Linux 驱动.md",
+    "04 其它/cursor/cursor 增强配置.md",
+    "00 日记/2025/2025-4/2025-04-16-星期三.md",
+    "00 日记/2025/2025-4/2025-04-15-星期二.md",
+    "00 日记/2025/2025-4/2025-04-11-星期五.md",
+    "00 日记/2025/2025-4/2025-04-25-星期五.md",
+    "06 资源/image/Pasted image 20250425164611.png",
+    "06 资源/image/Pasted image 20250425164608.png",
+    "06 资源/image/Pasted image 20250425163126.png",
+    "06 资源/image/Pasted image 20250425162521.png",
+    "06 资源/image/Pasted image 20250425162503.png",
+    "06 资源/image/Pasted image 20250425162232.png",
+    "00 日记/2025/2025-4/2025-04-24-星期四.md",
+    "00 日记/2025/2025-4/2025-04-23-星期三.md",
+    "00 日记/2025/2025-4/2025-04-22-星期二.md",
+    "00 日记/2025/2025-4/2025-04-21-星期一.md",
     "06 资源/模板/周小结生成提示词.md",
-    "00 日记/2025/周小结.md",
-    "00 日记/2025/2025-4/2025-04-18-星期五.md",
-    "06 资源/image/Pasted image 20250418140617.png",
-    "06 资源/image/Pasted image 20250418140614.png",
-    "06 资源/image/Pasted image 20250418140612.png",
-    "01 项目/Common/IP/gpio ip.md",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_uart_chiptest.md",
-    "00 日记/2025/2025-4/2025-04-17-星期四.md",
-    "06 资源/image/Pasted image 20250417202113.png",
-    "06 资源/image/Pasted image 20250417201802.png",
-    "06 资源/image/Pasted image 20250417201759.png",
-    "06 资源/image/Pasted image 20250417201514.png",
-    "06 资源/image/Pasted image 20250417172105.png",
-    "06 资源/image/Pasted image 20250417163631.png",
+    "01 项目/Chiptest/Sagitta/IODMA/iodma 补测.md",
+    "01 项目/Chiptest/Sagitta/IODMA/Sagitta NRE FPGA IODMA 模块验证.md",
+    "00 日记/2025/工作安排.md",
+    "01 项目/Chiptest/Sagitta/final",
     "07 临时/4-17/dtr~",
     "07 临时/4-17/dtr_2",
-    "06 资源/image/Pasted image 20250417161309.png",
     "07 临时/4-17/dtr_1",
     "07 临时/4-17/dtr",
     "07 临时/4-17",
-    "typora/note.md",
-    "01 项目/Chiptest/Lepus/Lepus.md",
-    "01 项目/Common/IP/iodma 寄存器级测试代码.md",
-    "01 项目/Chiptest/Sagitta/IODMA/iodma 补测.md",
-    "01 项目/Common/IP/gx_ir ip.md",
-    "typora/gx/Grus.md",
-    "01 项目/Chiptest/Virgo/mpw/Final/Flash_SPI 模块 Final 验证.md",
-    "01 项目/Chiptest/Aquila/test.md",
-    "01 项目/Common/IP/dw_spi ip.md",
-    "01 项目/Chiptest/Virgo/mpw/axi-dma/AXI-DMA Linux 驱动.md",
-    "typora/gx/apus.md",
-    "00 日记/2025/2025-3/2025-03-31-星期一.md",
-    "00 日记/2025/2025-4/2025-04-16-星期三.md",
     "02 学习/linux/Linux_UART_SubSystem.md~",
-    "02 学习/linux/Linux_UART_SubSystem.md",
     "02 学习/linux/4913",
-    "01 项目/Goxceed/Redmine/如何将某个文件放到文件系统中打开.md",
-    "00 日记/2025/2025-4/2025-04-15-星期二.md",
-    "01 项目/Goxceed/Common/Build.md",
     "02 学习/driver/uart",
     "02 学习/driver",
-    "01 项目/Chiptest/Virgo/nre/beta",
     "未命名.canvas"
   ]
 }

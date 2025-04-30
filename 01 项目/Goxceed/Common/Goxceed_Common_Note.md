@@ -192,9 +192,12 @@ https://git.nationalchip.com/redmine/issues/352665#note-3
 ```
 
 
-## vega 修改 gpio 驱动能力
+### vega 修改 gpio 驱动能力
 https://git.nationalchip.com/redmine/issues/385267
 
+
+### Gxloader 中 arm v8 架构中的 flush cache 接口包括 Clean && Invalid
+- `include/cpu_func.h：flush_dcache_all`：包括 clean && invalid
 
 
 

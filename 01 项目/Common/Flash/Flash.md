@@ -101,6 +101,10 @@ CMD -> ADDR -> DUMMY -> DATA
 2. 用 64KB 擦除的指令 (0xD8) 擦除整片 flash，发现第一个 block 中非保护的区域依然有数据，未被擦掉；
 3. 用 4KB 擦除的指令 (0x20) 不会有上面的问题
 
+Flash 厂商答复：
+block erase 擦除的地址范围包含写保护的地址就不会执行了
+![[Pasted image 20250421134828.png]]
+
 
 
 
