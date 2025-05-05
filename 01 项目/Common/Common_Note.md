@@ -264,6 +264,37 @@ https://www.mouser.com/datasheet/2/737/UM08001_JLink_(1)-1228640. pdf? srsltid=A
 
 
 
+### GDB 如何单步汇编执行，并且显示反汇编代码
+#### x 用法：
+- `x/nfu addr`
+	- `x` 命令检查内存
+	- `n` 表示重复计数
+	- `f` 表示显示格式：x 十六进制，i 机器指令
+	- `u` 表示单位大小：b 字节，h 半字，w 字，g 巨字 (8 Byte)
+![[Pasted image 20250505151147.png]]
+
+
+#### display 用法：
+- `display expr`：添加表达式添加到要显示的表达式列表，每次程序停止时显示。
+- `display/fmt expr`：fmt 表示每次以执行格式显示。
+	- x：以十六进制显示
+	- d：以 10 进制显示
+	- u：以小数的形式显示，就像它是无符号的一样
+	- o：以 8 进制显示
+	- t：以 2 禁止显示
+	- a：打印为地址，既可以是 16 进制的绝对地址也可以是最接近的前面符号的偏移量
+	- c：以字符形式打印
+	- f：以浮点数打印
+	- s：以字符串打印
+	- z：与 x 一样，但前面的 0 会补齐
+- `disaplay/fmt addr`：以某格式显示地址处的数据
+![[Pasted image 20250505151446.png]]
+
+- `undisplay dums`：取消显示
+- `delete display dnums`：删除显示
+
+
+
 ## objdump
 
 
