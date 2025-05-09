@@ -108,6 +108,12 @@ block erase 擦除的地址范围包含写保护的地址就不会执行了
 
 
 
+### 开 XIP 时想要动态调频 SPI，有何注意事项
+- XIP 是硬件操作，不清楚何时访问，这个要注意
+- 调频涉及到 Sample_delay 的同步修改，在配置 Sample_delay 时需要先关控制器，配值，再开控制器
+
+
+
 ## SPINand Flash
 
 

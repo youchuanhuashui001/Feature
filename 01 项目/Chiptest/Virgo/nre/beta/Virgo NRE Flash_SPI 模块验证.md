@@ -195,9 +195,20 @@ addr = 0x12 << 24 | 0x34 << 16 | 0x56 << 8 | 0x0
 - gxmisc 有两个补丁：支持 dtr 模式和支持 64 位编译器，需要两个都打上
 
 
-### 问题 5：dtr 模式只有一个相位
+### 【已解决】问题 5：dtr 模式只有一个相位
 dtr 模式下，若 flash 工作频率很低，则采样的右边在 0，左边到了负值，所以一直只有一个相位；若 flash 工作频率变高，则采样的右边有值，左边也有值，所以有多个相位。
 - 实际测试：48MHz 模块频率时相位有：0、1
+
+
+### 【已解决】问题 6：换成 spinand ，读不到 flash id
+- gxmisc 没有打补丁：支持 dtr 模式
+	- 打了之后，cs 依然不拉低
+- 由于 `spi_nand_init` 中的宏应该是 `CONFIG_ARCH_ARM64_VIRGO2`，实际写成了 `CONFIG_ARCH_ARM_VIRGO2`，修改正确后可以读到 id。
+
+
+### 【已解决】问题 7：spinand 开启 dma 时，用 boot 工具烧录不成功
+- 由于开了 dma 之后，刷 cache 的时间很久，但 boot 工具有超时机制，因此烧录失败
+- 用 gdb 加载是可以的
 
 
 
@@ -295,8 +306,95 @@ flash_spi 48MHz 之后，4分频有相位0、1可用
 
 性能测试：双线、四线、八线、双线 dtr、四线 dtr
 
+模块频率 48MHz，4分频(12MHz)
+
+八线：开 dma
+boot> flash speedtest
+erase flash size 16MiB
+read 16MiB elapse 2003ms, 8179 KB/S
+
+四线 dtr：开 dma
+boot> flash speedtest
+protect len: 0x0
+erase flash size 16MiB
+read 16MiB elapse 2002ms, 8183 KB/S
+
+四线：开 dma
+boot> flash speedtest
+protect len: 0x0
+erase flash size 16MiB
+read 16MiB elapse 3400ms, 4818 KB/S
+
+双线 dtr：开 dma
+boot> flash speedtest
+protect len: 0x0
+erase flash size 16MiB
+read 16MiB elapse 3401ms, 4817 KB/S
 
 
+双线：开 dma
+boot> flash speedtest
+protect len: 0x0
+erase flash size 16MiB
+read 16MiB elapse 6197ms, 2643 KB/S
+
+
+模块频率 48MHz，2分频(24MHz)
+八线：开 dma
+boot> flash speedtest
+erase flash size 16MiB
+read 16MiB elapse 1304ms, 12564 KB/S
+
+
+四线：开 dma
+boot> flash speedtest
+protect len: 0x0
+erase flash size 16MiB
+read 16MiB elapse 2003ms, 8179 KB/S
+
+
+四线：不开 dma
+boot> flash speedtest
+protect len: 0x0
+erase flash size 16MiB
+read 16MiB elapse 18322ms, 894 KB/S
+
+
+双线：开 dma
+boot> flash speedtest
+protect len: 0x0
+erase flash size 16MiB
+read 16MiB elapse 3401ms, 4817 KB/S
+
+双线：不开 dma
+boot> flash speedtest
+protect len: 0x0
+erase flash size 16MiB
+read 16MiB elapse 18324ms, 894 KB/S
+
+
+------
+spinand
+
+48MHz(4分频，12MHz)
+
+双线：不开 dma
+
+
+双线：开 dma
+boot> flash speedtest
+erase flash size 8MiB
+read 8MiB elapse 23938ms, 342 KB/S
+
+四线：不开 dma
+boot> flash speedtest
+erase flash size 8MiB
+read 8MiB elapse 10884ms, 752 KB/S
+
+四线：开 dma
+boot> flash speedtest
+erase flash size 8MiB
+read 8MiB elapse 22545ms, 363 KB/S
 
 
 |测试项 |测试结果|
@@ -352,3 +450,92 @@ flash_spi 48MHz 之后，4分频有相位0、1可用
 | Quad 模式读写擦速度  |      |
 | Octal 模式读写擦速度 |      |
 | 兼容性测试         |      |
+
+
+
+# 修改
+## gxmisc 编译选项. S、. C 分开
+- .S 使用 mcpu 指定
+- .c 使用 march 指定，搞清楚各种编译选项，以及是否对现有的编译选项有影响
+
+### 参考链接：
+https://gcc.gnu.org/onlinedocs/gcc/AArch64-Options.html
+
+### 编译选项：
+```makefile
+-Wpointer-arith -Wundef -Wall -Wstrict-prototypes -pipe -fno-builtin -fstrict-volatile-bitfields -mlittle-endian
+```
+- -Wpointer-arith:
+	- 警告任何依赖于函数类型或 `void` 的“大小”的操作。GNU C 将这些类型的大小指定为 1，以便于使用 `void *` 指针和指针进行计算。函数。在 C++ 中，当算术运算涉及 `NULL` 。此警告也由 -Wpedantic 启用。
+	- 当对 `void *` 指针或函数指针进行算术运算时，如果 GCC 扩展被使用，此选项会发出警告。这些操作在 ISO C 标准中是不允许的。
+- -Wundef
+	- 如果在 `#if` 指令中计算未定义的标识符，则发出警告。此​​类标识符将被替换为零。
+- -Wall
+	- 启用所有关于某些用户认为有问题的构造的警告。
+- -Wstrict-prototypes 
+	- 如果声明或定义函数时未指定参数类型，则发出警告。（如果旧式函数定义前面有指定参数类型的声明，则允许使用旧式函数定义，而不会发出警告。）
+- -pipe
+	- 使用管道而不是临时文件在编译的各个阶段之间进行通信。在某些汇编器无法从管道读取数据的系统上，这种方法会失败；但 GNU 汇编器却没有遇到任何问题。
+- -fno-builtin
+	- 无法识别不以 built-in 开头的内置函数 __builtin__  作为前缀。
+- -fstrict-volatile-bitfields
+	- 如果访问易失性位字段（或其他结构体字段，尽管编译器通常也支持这些类型），需要使用与字段类型宽度相同的单次访问，​​并尽可能进行自然对齐，则应使用此选项。例如，具有内存映射外设寄存器的目标系统可能要求所有此类访问的宽度均为 16 位；使用此标志，您可以将所有外设位字段声明为 `unsigned short` （假设这些目标系统上的 short 为 16 位），以强制 GCC 使用 16 位访问， 而不是更高效的 32 位访问。
+- -mlittle-endian
+	- 为以小端模式运行的处理器生成代码。这是所有标准配置的默认设置。
+
+
+---
+
+```makefile
+MY_CFLAGS += -Wno-format-security -ffreestanding -fshort-wchar -fno-strict-aliasing
+MY_CFLAGS += -march=armv8-a
+MY_CFLAGS += -std=gnu99
+MY_CFLAGS += -mstrict-align
+```
+- -Wno-format-security
+	- 如果指定了 -Wformat ，还会对可能存在安全问题的格式化函数的使用发出警告。目前，这会对 `printf` 和 `scanf` 函数的调用发出警告，其中格式字符串不是字符串文字，并且没有格式参数，例如 `printf (foo);` 。如果格式字符串来自不受信任的输入并且包含“ %n ”，则可能存在安全漏洞。
+	- 此选项用于禁止上面的警告
+- -ffreestanding
+	- 断言编译目标为独立环境。这意味着 -fno-builtin 。独立环境是指标准库可能不存在，程序启动也不一定在 `main` 中。最明显的例子是操作系统内核。这相当于 -fno-hosted 。
+- -fshort-wchar
+	- 将 wchar_t 的底层类型覆盖为 short unsigned int，而不是目标的默认类型。此选项对于构建在 WINE 下运行的程序很有用。
+- -fno-strict-aliasing
+	- 允许编译器采用适用于所编译语言的最严格的别名规则。对于 C（和 C++），这将根据表达式的类型激活优化。具体来说，除非类型几乎相同，否则一种类型的对象被假定永远不会与另一种类型的对象位于同一地址。例如， `unsigned int` 可以为 `int` 指定别名，但不能为 `void*` 或 `double` 。字符类型可以是任何其他类型的别名。
+
+---
+
+- -std=gnu99
+    - 对于带有 GNU 扩展的 C99
+- -mstrict-align
+	- 允许生成可能未按照架构规范中描述的自然对象边界对齐的内存访问
+
+- -mcpu=name
+	- 指定目标处理器的名称，可选地添加一个或多个功能修饰符作为后缀。
+	- 目前使用 cpu 是 cotrex-a55
+- -march=name
+	- 指定目标 ARM 架构的名称
+
+
+
+
+## gxmisc 只需要增加 DDR 特性，flash 支持 DDR 特性，能够和 DUAL、QUAD 交叉
+- gxmisc 中对于 flash 的特性增加了一个 DTR，可以和 DUAL、QUAD 一起匹配
+
+
+## gxloader 中对于 message 的处理需要支持单线写、多线写、ddr 多线写
+- gxmisc 中处理 ddr 模式时分成 3 个 message，第一个 message 使用单线将指令发掉，第二个 message 使用多线 ddr 将地址、模式、dummy 发掉，第三个 message 使用多线 ddr 模式读数据
+
+- 四线 dtr 模式，可以读到数据，但是读的数据看起来有点问题，不太正确
+	- 因为逻辑分析仪的线导致的干扰
+
+dual_dtr_addr 改成 7
+
+## 测试
+- [x] 双线 dtr
+- [x] 四线 dtr
+- [x] 双线 dma dtr
+- [x] 四线 dma dtr
+- [x] 双线
+- [x] 四线
+- [x] 双线 dma
+- [x] 四线 dma
