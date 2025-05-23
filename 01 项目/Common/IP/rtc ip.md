@@ -267,3 +267,11 @@
 - `rtc read`：`gx_rtc_get_tick(&time)`
 - `rtc set_alarm`：`gx_rtc_set_alarm_time_s(&time)`
 
+
+
+
+# Q&&A
+
+## Q1：对于预分频开启与关闭对于计数的影响
+- 假设预分频开启，驱动中将预分频的值配置为 32768，则 rtc 内部以 32k 的频率计数 32768 次，`RTC_CCVR` 寄存器增加 1 次，由于 32k 频率下一个周期时间为 31.25us，计数 32768 次则刚好达到 1s
+- 如果预分频值配置为 n，则 rtc 内部以 32k 的频率计数 n 次，`RTC_CCVR` 寄存器增加 1 次

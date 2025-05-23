@@ -24,105 +24,161 @@
             }
           },
           {
-            "id": "d84290fa7f8a06f7",
+            "id": "861c080bc34d9be9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_wdt_chiptest.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Goxceed_Common_Note"
+              "title": "dw_wdt_chiptest"
             }
           },
           {
-            "id": "106f3862db206dcf",
+            "id": "d1c5d06a1507a9e1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo NRE Flash_SPI 模块验证.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_i2c_chiptest.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Virgo NRE Flash_SPI 模块验证"
+              "title": "dw_i2c_chiptest"
             }
           },
           {
-            "id": "51522bcf604d8898",
+            "id": "a1abe034db10605f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Common/GEN_SPI/Gen_SPI.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_rtc_chiptest.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Gen_SPI"
+              "title": "dw_rtc_chiptest"
             }
           },
           {
-            "id": "a893a2acbd0a8111",
+            "id": "9abdd95ddaefef64",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE IRR 模块验证.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/gx_timer_chiptest.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Virgo_NRE IRR 模块验证"
+              "title": "gx_timer_chiptest"
             }
           },
           {
-            "id": "75fd5a2ed11a031f",
+            "id": "6793b8bb297e3dd8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_uart_chiptest.md",
+                "file": "00 日记/2025/2025-5/2025-05-21-星期三.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "dw_uart_chiptest"
+              "title": "2025-05-21-星期三"
             }
           },
           {
-            "id": "c595b5080baefe32",
+            "id": "627495e24420d567",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE GEN_SPI 模块验证.md",
+                "file": "01 项目/Goxceed/Redmine/新增SPI_NAND.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Virgo_NRE GEN_SPI 模块验证"
+              "title": "新增SPI_NAND"
             }
           },
           {
-            "id": "6bb24c5230c2ad11",
+            "id": "44ffd6abfde84bdb",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Common/IP/dw_spi ip.md",
+                "file": "01 项目/Chiptest/Sagitta/final/Sagitta Final IR 模块测试.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "dw_spi ip"
+              "title": "Sagitta Final IR 模块测试"
+            }
+          },
+          {
+            "id": "64923128e1d576e0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Chiptest/Sagitta/ir/Sagitta NRE FPGA IR 模块验证.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Sagitta NRE FPGA IR 模块验证"
+            }
+          },
+          {
+            "id": "0422dd5800338e4a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02 学习/knowledge_base/i2c/linux driver.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "linux driver"
+            }
+          },
+          {
+            "id": "94122607b5a3988f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02 学习/knowledge_base/i2c/dw_i2c ip.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "dw_i2c ip"
+            }
+          },
+          {
+            "id": "210a6ed4cc8bc158",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 日记/2025/2025-5/2025-05-23-星期五.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-05-23-星期五"
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 11
       }
     ],
     "direction": "vertical"
@@ -154,7 +210,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "dw_spi",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -272,13 +328,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01 项目/Common/IP/dw_spi ip.md",
+                "file": "00 日记/2025/2025-5/2025-05-23-星期五.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "dw_spi ip 的大纲"
+              "title": "2025-05-23-星期五 的大纲"
             }
           }
         ]
@@ -303,54 +359,54 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "6bb24c5230c2ad11",
+  "active": "210a6ed4cc8bc158",
   "lastOpenFiles": [
-    "06 资源/image/Pasted image 20250509172932.png",
-    "06 资源/image/Pasted image 20250509172905.png",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE GEN_SPI 模块验证.md",
-    "01 项目/Common/IP/dw_spi ip.md",
-    "06 资源/image/Pasted image 20250509172651.png",
-    "01 项目/Common/Flash/Flash.md",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_uart_chiptest.md",
-    "01 项目/Common/IP/gen_spi.md",
-    "01 项目/Common/IP/flash_spi 寄存器级测试代码.md",
-    "07 临时/5-9/gen_spi_to_axi_dma_notwork/gen_spi_dma.c",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo NRE Flash_SPI 模块验证.md",
-    "07 临时/5-9/gen_spi_to_axi_dma_notwork/spi_dma.c",
-    "07 临时/5-9/gen_spi_to_axi_dma_notwork",
-    "07 临时/5-9",
-    "00 日记/2025/2025-5/2025-05-09-星期五.md",
-    "00 日记/2025/2025-5/2025-05-06-星期二.md",
-    "00 日记/2025/周小结.md",
-    "00 日记/2025/2025-5/2025-05-07-星期三.md",
-    "00 日记/2025/2025-5/2025-05-08-星期四.md",
-    "00 日记/2025/2025-5",
-    "00 日记/2025/2025-4/未命名",
-    "01 项目/Chiptest/Virgo/mpw/Final/AXI-DMA 模块 Final 验证.md",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE IRR 模块验证.md",
-    "06 资源/image/Pasted image 20250509110109.png",
-    "06 资源/image/Pasted image 20250509105543.png",
-    "01 项目/Common/GEN_SPI/Gen_SPI.md",
+    "00 日记/2025/周小结AI提示词.md",
+    "02 学习/knowledge_base/i2c/linux driver.md",
+    "06 资源/image/Pasted image 20250523163544.png",
+    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_rtc_chiptest.md",
+    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE RTC 模块验证.md",
+    "02 学习/knowledge_base/i2c/dw_i2c ip.md",
+    "02 学习/knowledge_base/i2c/Interaction_History.md",
+    "02 学习/knowledge_base/i2c/interface.md",
+    "01 项目/Common/IP/dw_i2c ip.md",
+    "00 日记/2025/2025-5/2025-05-23-星期五.md",
+    "02 学习/knowledge_base/i2c",
+    "02 学习/knowledge_base",
+    "02 学习/cursor/知识库/i2c",
+    "02 学习/cursor/知识库",
     "Home.md",
-    "01 项目/Chiptest/Virgo/mpw/Final/Gen_SPI 模块 Final 验证.md",
-    "01 项目/Common/GEN_SPI",
+    "00 日记/2025/2025-5/2025-05-21-星期三.md",
+    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_wdt_chiptest.md",
     "00 日记/2025/工作安排.md",
-    "01 项目/Common/IP/dw_uart ip.md",
-    "00 日记/2025/2025-4/2025-04-30-星期三.md",
-    "00 日记/2025/2025-4/2025-04-29-星期二.md",
-    "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
-    "00 日记/2025/2025-4/2025-04-28-星期一.md",
-    "06 资源/image/Pasted image 20250429164819.png",
-    "01 项目/Chiptest/Virgo/nre/beta/rom flash 驱动优化.md",
-    "06 资源/image/Pasted image 20250428105352.png",
-    "06 资源/image/Pasted image 20250428104312.png",
-    "00 日记/2025/2025-4/2025-04-27-星期日.md",
-    "06 资源/image/c88bce4eb52107b60582917bbf54328f.jpg",
-    "06 资源/image/Pasted image 20250425164611.png",
-    "06 资源/image/Pasted image 20250425164608.png",
-    "01 项目/Chiptest/Sagitta/final",
-    "07 临时/4-17/dtr~",
-    "07 临时/4-17/dtr_2",
+    "01 项目/Goxceed/Redmine/新增SPI_NAND.md",
+    "01 项目/Robots/Redmine/sagitta 支持 GT25Q20D、GT25Q40D、P25Q21U、P25Q40SU、P25Q40TU.md",
+    "01 项目/Goxceed/Redmine/v3.2.1 版本 GxFlash_xxx_API 支持 SPI Nand.md",
+    "typora/Note_study.md",
+    "00 日记/2025/2025-5/2025-05-22-星期四.md",
+    "01 项目/Chiptest/Sagitta/ir/Sagitta NRE FPGA IR 模块验证.md",
+    "07 临时/5-22/canopus-6631SH1D-spinand.boot",
+    "01 项目/Chiptest/Sagitta/final/Sagitta Final IR 模块测试.md",
+    "00 日记/2025/2025-5/2025-05-20-星期二.md",
+    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/gx_timer_chiptest.md",
+    "01 项目/Goxceed/Redmine/v1.9.6.4-lts 分支支持 fm25q128ai3、fm25q64ai3、fm25q32bi3.md",
+    "01 项目/Goxceed/Common/Build.md",
+    "00 日记/2025/2025-5/2025-05-19-星期一.md",
+    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_i2c_chiptest.md",
+    "111~",
+    "111",
+    "4913",
+    "05 生活/生态鱼缸.md~",
+    "06 资源/image/Pasted image 20250515160001.png",
+    "06 资源/image/Pasted image 20250514172449.png",
+    "06 资源/image/Pasted image 20250514172441.png",
+    "06 资源/image/Pasted image 20250514165017.png",
+    "06 资源/image/Pasted image 20250514164706.png",
+    "06 资源/image/Pasted image 20250514160503.png",
+    "06 资源/image/Pasted image 20250514160356.png",
+    "06 资源/image/Pasted image 20250514160204.png",
+    "06 资源/image/Pasted image 20250512180811.png",
+    "07 临时/5-9/gen_spi_to_axi_dma_notwork/gen_spi_dma.c",
     "未命名.canvas"
   ]
 }

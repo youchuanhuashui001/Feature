@@ -1810,3 +1810,14 @@ set $pc=0x00008000
 
 ## eCos:
   - 与 linux 相同的测试方法，只是编译更改成 ecos 即可
+
+
+
+
+
+# v1.9.6-4-lts 分支编译 Linux-2.6.27.55
+编译方法：
+- 修改 .zshrc 切换成编译 linux-2. x 版本的工具链，并重起一个 shell 窗口
+- `make ARCH=csky CROSS_COMPILE=csky-linux- gx3211-debug_defconfig`
+- `make ARCH=csky CROSS_COMPILE=csky-linux- -j$(nproc)`
+

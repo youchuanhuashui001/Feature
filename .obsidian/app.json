@@ -4,7 +4,7 @@
   "showUnsupportedFiles": true,
   "attachmentFolderPath": "06 资源/image",
   "showLineNumber": false,
-  "readableLineLength": true,
+  "readableLineLength": false,
   "pdfExportSettings": {
     "includeName": true,
     "pageSize": "Letter",

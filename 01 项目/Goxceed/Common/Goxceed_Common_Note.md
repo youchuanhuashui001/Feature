@@ -20,7 +20,9 @@ https://git.nationalchip.com/redmine/issues/352665#note-3
 
 
 ## VU440 使用方法
+- 替换 `USRDATA` 分区内的 `Fpga1.bin`
 - 有三个按键，最左边的按键是复位按键。最右边的 (靠近 fpga 风扇) 的按键不能按，按了之后串口就挂了
+
 
 ### A55 如何开启 GDBServer
 - `JLinkGDBServer -endian little -select USB -device Cortex-A55 -if JTAG -speed 10000`
@@ -214,6 +216,10 @@ https://git.nationalchip.com/redmine/issues/385267
 
 
 ### Linux2.6.27.55 编译失败
+
+参考 https://git.nationalchip.com/redmine/issues/398032 进行编译。
+- 拷贝 config 作为 .config，然后执行编译命令即可
+
 - 需要使用老的那套编译工具链，在编译 `linux4.9` 或其它版本时用的是一套新的编译工具链
 - 修改完 `zshrc` 之后看一下 `gcc` 的版本就可以确认是哪套工具链 
 ```bash
@@ -230,7 +236,22 @@ export PATH=${PATH}:/opt/gxtools/csky-linux-tools-i386-uclibc-20180905_cross_com
 
 ```
 
-
+- 编译 video 失败，则注释掉相关的编译，再接着编译
+```diff
+diff --git a/drivers/media/video/Makefile b/drivers/media/video/Makefile
+index 6a2e163e..a75e7171 100644
+--- a/drivers/media/video/Makefile
++++ b/drivers/media/video/Makefile
+@@ -106,7 +106,7 @@ obj-$(CONFIG_VIDEO_CAFE_CCIC) += cafe_ccic.o
+ obj-$(CONFIG_VIDEO_OV7670)     += ov7670.o
+ 
+ obj-$(CONFIG_VIDEO_TCM825X) += tcm825x.o
+-obj-$(CONFIG_NATIONALCHIP_DECODER_CORE) += nationalchip/
++#obj-$(CONFIG_NATIONALCHIP_DECODER_CORE) += nationalchip/
+ 
+ obj-$(CONFIG_USB_DABUSB)        += dabusb.o
+ obj-$(CONFIG_USB_OV511)         += ov511.o
+```
 
 
 
