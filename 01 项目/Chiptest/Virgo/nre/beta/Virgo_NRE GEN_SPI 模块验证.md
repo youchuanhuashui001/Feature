@@ -203,3 +203,68 @@ genspi 对接 axi-dma 水线相关配置：
 		- 假设传输 4 个字节，则会有 1 次 burst
 - tx
 
+
+
+## 问题 5：【已解决】NRE 使用 SPI0 时代码修改
+```diff
+diff --git a/drivers/spi/dw_spi/gx_dw_spi.c b/drivers/spi/dw_spi/gx_dw_spi.c
+index 776e9d88..21dace9e 100644
+--- a/drivers/spi/dw_spi/gx_dw_spi.c
++++ b/drivers/spi/dw_spi/gx_dw_spi.c
+@@ -10,7 +10,7 @@
+ #include <gx_hal_spi_ctrl.h>
+ #include "interrupt.h"
+ #if defined(CONFIG_ENABLE_AXI_DMA)
+-#include <driver/gx_dma_axi.h>
++#include "axi_dma.h"
+ #endif
+ 
+ #define CONFIG_SPI_SLAVE_NUM_MAX    3
+@@ -23,7 +23,7 @@
+ #define DW_SPI_DMA_SYNC_MODE         1
+ #define DW_SPI_DMA_ASYNC_MODE        2
+ 
+-#define DW_SPI_TRANSFER_MODE DW_SPI_DMA_NOTUSE_MODE
++#define DW_SPI_TRANSFER_MODE DW_SPI_DMA_SYNC_MODE
+ 
+ #define DW_SPI_TRANSFER_MAX_SIZE 0x10000
+ 
+@@ -90,7 +90,7 @@ static int dw_spi_dma_tx_sync(struct gx_hal_dw_spi *hal_dws, int channel,
+ 	dma_config.dst_hs_select     = DWAXIDMAC_HS_SEL_HW;
+ 	dma_config.dst_master_select = AXI_MASTER_2;
+ 	dma_config.dst_msize         = DWAXIDMAC_BURST_TRANS_LEN_8;
+-	dma_config.dst_per           = DMA_HS_PER_SPI2_DMA_TX;
++	dma_config.dst_per           = DMA_HS_PER_SPI1_DMA_TX;
+ 
+ 	dcache_flush();
+ 	dw_dma_channel_config(channel, &dma_config);
+@@ -148,7 +148,7 @@ static int dw_spi_dma_rx_sync(struct gx_hal_dw_spi *hal_dws, int channel,
+ 	dma_config.src_hs_select     = DWAXIDMAC_HS_SEL_HW;
+ 	dma_config.src_master_select = AXI_MASTER_2;
+ 	dma_config.src_msize         = DWAXIDMAC_BURST_TRANS_LEN_4;
+-	dma_config.src_per           = DMA_HS_PER_SPI2_DMA_RX;
++	dma_config.src_per           = DMA_HS_PER_SPI1_DMA_RX;
+ 
+ 	dma_config.dst_addr_update   = DWAXIDMAC_CH_CTL_L_INC;
+ 	dma_config.dst_hs_select     = DWAXIDMAC_HS_SEL_HW;
+@@ -243,7 +243,7 @@ static int dw_spi_setup(struct spi_device *spi)
+ 	config.freq_src      = CONFIG_GEN_SPI1_CLK_SRC;
+ 	config.max_speed_hz  = spi->max_speed_hz;
+ 	config.is_master     = 1;
+-	config.sample_delay  = 0;
++	config.sample_delay  = 1;
+ 	config.clk_mode      = GX_HAL_SPI_CLK_MODE0;
+ 	config.cs_init_func = gx_hal_spi_ctrl_cs_init;
+ 	config.cs_ctrl_func = gx_hal_spi_ctrl_cs_control;
+@@ -1056,8 +1056,8 @@ void dw_spi_probe(void)
+ 	dw_spi_master_set_dws(master, &dws_spi_data);
+ 
+ 	dws = dw_spi_master_get_dws(master);
+-	dws->base_regs = REG_BASE_GEN_SPI1;
+-	dws->cs_reg = REG_BASE_GEN_SPI1_CS;
++	dws->base_regs = REG_BASE_GEN_SPI0;
++	dws->cs_reg = REG_BASE_GEN_SPI0_CS;
+ 	dws->master = master;
+ 
+ 	master->bus_num    = CONFIG_GENERAL_SPI_BUS_SN;
+```

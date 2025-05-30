@@ -24,49 +24,21 @@
             }
           },
           {
-            "id": "861c080bc34d9be9",
+            "id": "72f1607b0b4cf28d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_wdt_chiptest.md",
+                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE TIMER 模块验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "dw_wdt_chiptest"
+              "title": "Virgo_NRE TIMER 模块验证"
             }
           },
           {
-            "id": "d1c5d06a1507a9e1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_i2c_chiptest.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "dw_i2c_chiptest"
-            }
-          },
-          {
-            "id": "a1abe034db10605f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_rtc_chiptest.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "dw_rtc_chiptest"
-            }
-          },
-          {
-            "id": "9abdd95ddaefef64",
+            "id": "dbee199f4041a8aa",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -80,105 +52,49 @@
             }
           },
           {
-            "id": "6793b8bb297e3dd8",
+            "id": "37730ec73b2fca26",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/2025-5/2025-05-21-星期三.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/timer fpga 验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-05-21-星期三"
+              "title": "timer fpga 验证"
             }
           },
           {
-            "id": "627495e24420d567",
+            "id": "e37a5f01bbf6427f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Goxceed/Redmine/新增SPI_NAND.md",
+                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE I2C 模块验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "新增SPI_NAND"
+              "title": "Virgo_NRE I2C 模块验证"
             }
           },
           {
-            "id": "44ffd6abfde84bdb",
+            "id": "62a3f3dda2bfdc59",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Sagitta/final/Sagitta Final IR 模块测试.md",
+                "file": "00 日记/2025/2025-5/2025-05-30-星期五.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Sagitta Final IR 模块测试"
-            }
-          },
-          {
-            "id": "64923128e1d576e0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Chiptest/Sagitta/ir/Sagitta NRE FPGA IR 模块验证.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Sagitta NRE FPGA IR 模块验证"
-            }
-          },
-          {
-            "id": "0422dd5800338e4a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02 学习/knowledge_base/i2c/linux driver.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "linux driver"
-            }
-          },
-          {
-            "id": "94122607b5a3988f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02 学习/knowledge_base/i2c/dw_i2c ip.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "dw_i2c ip"
-            }
-          },
-          {
-            "id": "210a6ed4cc8bc158",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-5/2025-05-23-星期五.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-05-23-星期五"
+              "title": "2025-05-30-星期五"
             }
           }
         ],
-        "currentTab": 11
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -210,7 +126,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "flash 支持列表",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -328,13 +244,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00 日记/2025/2025-5/2025-05-23-星期五.md",
+                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE TIMER 模块验证.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "2025-05-23-星期五 的大纲"
+              "title": "Virgo_NRE TIMER 模块验证 的大纲"
             }
           }
         ]
@@ -359,54 +275,54 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "210a6ed4cc8bc158",
+  "active": "72f1607b0b4cf28d",
   "lastOpenFiles": [
+    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE I2C 模块验证.md",
+    "00 日记/2025/2025-5/2025-05-30-星期五.md",
+    "00 日记/2025/2025-5/2025-05-29-星期四.md",
+    "00 日记/2025/2025-5/2025-05-28-星期三.md",
+    "00 日记/2025/2025-5/2025-05-27-星期二.md",
+    "00 日记/2025/2025-5/2025-05-26-星期一.md",
     "00 日记/2025/周小结AI提示词.md",
-    "02 学习/knowledge_base/i2c/linux driver.md",
-    "06 资源/image/Pasted image 20250523163544.png",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_rtc_chiptest.md",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE RTC 模块验证.md",
-    "02 学习/knowledge_base/i2c/dw_i2c ip.md",
-    "02 学习/knowledge_base/i2c/Interaction_History.md",
-    "02 学习/knowledge_base/i2c/interface.md",
+    "00 日记/2025/2025-6/2025-05-30-星期五.md",
+    "00 日记/2025/2025-6",
+    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE TIMER 模块验证.md",
+    "Home.md",
+    "00 日记/2025/工作安排.md",
+    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/gx_timer_chiptest.md",
+    "01 项目/Chiptest/Virgo/mpw/other_peri/timer fpga 验证.md",
     "01 项目/Common/IP/dw_i2c ip.md",
-    "00 日记/2025/2025-5/2025-05-23-星期五.md",
+    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_i2c_chiptest.md",
+    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE UART 模块验证.md",
+    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE RTC 模块验证.md",
+    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE WDT 模块验证.md",
+    "01 项目/Chiptest/Virgo/nre/beta/Virgo NRE AXI-DMA 模块验证.md",
+    "01 项目/Goxceed/Redmine/支持列表/Nor Flash 支持列表优化.md",
+    "01 项目/Goxceed/Redmine/支持列表/发布版本 V3.10.0 Flash 支持列表.md",
+    "01 项目/Goxceed/Redmine/支持列表/Python 自动生成 flash 支持列表.md",
+    "01 项目/Goxceed/Redmine/Gxloader 完善 flash 测试程序.md",
+    "01 项目/Goxceed/Redmine/支持列表",
+    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_uart_chiptest.md",
+    "01 项目/Chiptest/Virgo/mpw/other_peri/dw_uart fpga 验证.md",
+    "06 资源/image/Pasted image 20250528134531.png",
+    "06 资源/image/Pasted image 20250528134521.png",
+    "06 资源/image/Pasted image 20250528134511.png",
+    "06 资源/image/Pasted image 20250528134458.png",
+    "06 资源/image/Pasted image 20250528134445.png",
+    "06 资源/image/Pasted image 20250528134425.png",
+    "06 资源/image/Pasted image 20250528134409.png",
+    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE GEN_SPI 模块验证.md",
+    "06 资源/image/485c1f1b36e78f038fb0e713785f9065.jpg",
+    "06 资源/image/Pasted image 20250523163544.png",
     "02 学习/knowledge_base/i2c",
     "02 学习/knowledge_base",
     "02 学习/cursor/知识库/i2c",
     "02 学习/cursor/知识库",
-    "Home.md",
-    "00 日记/2025/2025-5/2025-05-21-星期三.md",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_wdt_chiptest.md",
-    "00 日记/2025/工作安排.md",
-    "01 项目/Goxceed/Redmine/新增SPI_NAND.md",
-    "01 项目/Robots/Redmine/sagitta 支持 GT25Q20D、GT25Q40D、P25Q21U、P25Q40SU、P25Q40TU.md",
-    "01 项目/Goxceed/Redmine/v3.2.1 版本 GxFlash_xxx_API 支持 SPI Nand.md",
-    "typora/Note_study.md",
-    "00 日记/2025/2025-5/2025-05-22-星期四.md",
-    "01 项目/Chiptest/Sagitta/ir/Sagitta NRE FPGA IR 模块验证.md",
     "07 临时/5-22/canopus-6631SH1D-spinand.boot",
-    "01 项目/Chiptest/Sagitta/final/Sagitta Final IR 模块测试.md",
-    "00 日记/2025/2025-5/2025-05-20-星期二.md",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/gx_timer_chiptest.md",
-    "01 项目/Goxceed/Redmine/v1.9.6.4-lts 分支支持 fm25q128ai3、fm25q64ai3、fm25q32bi3.md",
-    "01 项目/Goxceed/Common/Build.md",
-    "00 日记/2025/2025-5/2025-05-19-星期一.md",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_i2c_chiptest.md",
     "111~",
     "111",
     "4913",
-    "05 生活/生态鱼缸.md~",
     "06 资源/image/Pasted image 20250515160001.png",
-    "06 资源/image/Pasted image 20250514172449.png",
-    "06 资源/image/Pasted image 20250514172441.png",
-    "06 资源/image/Pasted image 20250514165017.png",
-    "06 资源/image/Pasted image 20250514164706.png",
-    "06 资源/image/Pasted image 20250514160503.png",
-    "06 资源/image/Pasted image 20250514160356.png",
-    "06 资源/image/Pasted image 20250514160204.png",
-    "06 资源/image/Pasted image 20250512180811.png",
-    "07 临时/5-9/gen_spi_to_axi_dma_notwork/gen_spi_dma.c",
     "未命名.canvas"
   ]
 }

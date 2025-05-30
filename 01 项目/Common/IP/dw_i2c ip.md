@@ -1343,6 +1343,10 @@ Below is a complete and organized list of all registers for the DesignWare DW_ap
 
 
 # Q&&A
-
-
+## I2C 作为 Master Receiver 时，当接收完最后一个字节数据后，会发送 NACK 给 Slave，则 Slave 停止传输。
+- I2C 怎么知道应该发 ACK 还是 NACK？
+	- 驱动会往 CMD_DATA 寄存器写，来开始传输，那是不是这里就有一个时间？多久之后没有继续往 CMD_DATA 里面写，就会发 NACK？
+	- 这样如果在多线程的环境下，数据没处理完，这个线程就一直不被调度，不就有问题？
+- 感觉应该是根据 stop 信号来的，因为每次传输都会发一个 Read，最后一次传输的时候会发一个 STOP，这样控制器知道了要停止传输，就会在发完数据之后，发 STOP 之前，发出一个 NACK
+- 实际测试，读 3 个字节，在倒数第 2 个字节的时候，本来只发一个 Read，修改成 Read | Stop，逻辑分析仪抓到倒数第二个字节的时候  Master 主动发了一个 NACK 出去，并且发了一个 STOP。
 
