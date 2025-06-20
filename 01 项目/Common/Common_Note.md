@@ -380,6 +380,85 @@ case /proc/sys/kernel/printk
 
 
 
+## Linux 如何编译进内核、编译成模块等等
+
+内核 Makefile 有五个部分：
+- Makefile                                   the Top Makefile
+- .config                                      the kernel configuration file.
+- arch/$(SRCARCH)/Makefile    the arch Makefile.
+- scripts/Makefile.*                    common rules etc. for all kbuild Makefiles.
+- kbuild Makefiles                      exist in every subdirectory
+
+顶层 Makefile 读取 .config 文件，并负责构建 vmlinux 和 modules。它通过递归地深入内核源代码树的子目录来构建这两个目标。
+每个子目录都有一个 kbuild Makefile，用于执行从上层传递下来的命令。kbuild Makefile 使用 .config 中的信息来构建各种文件列表。
+scripts/Makefile.* 包含基于 kbuild Makfile 构建内核所使用的所有定义/规则等。
+
+
+### 编译成内置/模块
+kbuild makefile 通过使用 obj-y 表示将文件编译到内核，使用 obj-m 表示将文件编译成模块。
+对于常用的做法是：
+`obj-$(CONFIG_FOO) += foo.o`
+$(CONFIG_FOO) 的值为 y 表示内置，m 表示模块。如果既不是 y 也不是 m，则该文件不会被编译或链接。
+
+### 内置对象目标 obj-y
+kbuild Makefile 在 $(obj-y) 列表中指定 vmlinux 的目标文件。
+Kbuild 编译所有$(obj-y) 文件，然后调用 $(AR) rcSTP 将这些文件合并为一个内置的 .a 文件。这是一个没有符号表的精简存档，稍后通过 scripts/link-vmlinux. sh 将其链接到 vmlinux 中。
+
+### 可加载模块目标 obj-m
+$(obj-m) 指定构建为可加载内核模块的目标文件。
+一个模块可以由一个或多个源文件构建。如果只有一个源文件，kbuild makefile 只需将该文件添加到 $(obj-m) 即可。
+```
+#drivers/isdn/i4l/Makefile
+obj-$(CONFIG_ISDN_PPP_BSDCOMP) += isdn_bsdcomp.o
+```
+如果内核模块是由多个源文件构建的，则您可以指定要与上述相同的方式构建模块；但是 kbuild 需要直到您要从哪些目标文件构建模块，因此必须设置 $(<module_name> -y) 变量。
+```
+#drivers/isdn/i4l/Makefile
+obj-$(CONFIG_ISDN_I4L) += isdn.o
+isdn-y := isdn_net_lib.o isdn_v110.o isdn_common.o
+```
+因此模块名称是 isdn. o。kbuild 将编译 $(isdn-y) 中列出的对象，然后运行 $(LD) -r 在这些文件列表上生成 isdn. o
+
+对于 -y 选项，则后面的目标文件仅是前面对象 .o 的一部分。
+```
+#fs/ext2/Makefile
+obj-$(CONFIG_EXT2_FS) += ext2.o
+ext2-y := balloc.o dir.o file.o ialloc.o inode.o ioctl.o \
+  namei.o super.o symlink.o
+ext2-$(CONFIG_EXT2_FS_XATTR) += xattr.o xattr_user.o \
+  xattr_trusted.o
+```
+如果 $(CONFIG_EXT2_FS) 的计算结果为 y，则后面的这些 .o 是 ext2. o 的一部分。kbuild 会根据配置，构建一个 ext2. o，然后将其连接到 build-in. a 中。
+
+
+### 库文件目标 lib-y
+```
+#arch/x86/lib/Makefile
+lib-y := delay.o
+```
+这将基于 delay. o 创建一个库 lib. a。
+
+
+### 构建外部模块
+kbuild 是 Linux 内核使用的构建系统。模块必须使用 kbuild 才能与构建基础架构的变更保持兼容，并向编译器获取正确的标志。内核提供了在内核树内和内核树外构建模块的功能。
+
+要构建外部模块，必须拥有一个预编译的内核，其中包含构建过程中用到的配置和头文件。此外，内核不许在启用模块的情况下构建。
+
+构建外部模块的命令是：
+```
+$ make -C <path_to_kernel_dir> M=$PWD
+```
+kbuild 系统直到正在构建一个外部模块，因为 `M=<dir>` 命令中给出的选项。
+- -C $KDIR
+	- 包含用于构建外部模块的内核和相关构建工件的目录。make 在执行时实际上会改变到指定的目录，并在完成后改回。
+- M=$PWD
+	- 通知 kbuild 正在构建一个外部模块。M 的值是外部模块所在目录的绝对路径。
+- MO=$BUILD_DIR
+	- 为外部模块指定单独的输出目录。
+
+
+
+
 # Cache
 
 ## 刷 Cache 地址应该传虚拟地址，DMA 操作应该用物理地址
@@ -696,3 +775,48 @@ UART 通信在配置时需要指定波特率，这决定了理论上的数据传
 	- `source myenv/bin/activate`
 - 退出 env：
 	- `deactivate`
+
+
+# 驱动能力、灌电流
+- 驱动能力指的是芯片 io 能够对负载提供的最大电流能力
+- **驱动能力**：指芯片输出引脚驱动相连的负载正常工作的能力，通常用其能提供或吸收的最大电流来衡量。驱动能力越强，能带动的负载就越多或对电流要求越高的负载。
+- **拉电流 (Source Current)**：指电流从芯片的输出引脚**流出**，为外部负载提供能量。这就像一个“源头”在往外供水。
+- **灌电流 (Sink Current)**：指电流从外部**流入**芯片的输出引脚，并被芯片的内部电路吸收（灌入）到地。这就像一个“排水口”在接收外部来的水。
+
+## 详细解释与区别
+
+为了更好地理解这几个概念，我们可以通过一个常见的例子——用单片机的I/O口点亮一个LED灯——来说明。
+
+### **拉电流 (Source Current)**
+
+当I/O口作为输出，并设置为高电平（例如 5V）时，它就像一个正电压源。如果我们将LED的正极连接到I/O口，负极通过一个限流电阻接地，那么电流就会从I/O口流出，经过LED和电阻，最终流向地（GND）。
+
+- **电流方向**：芯片I/O口 rightarrow 外部负载 (LED) rightarrow 地
+- **工作模式**：此时，I/O口处于“拉电流”或“源输出”模式（Sourcing）。它输出电流来点亮LED。
+- **能力限制**：数据手册中会标明“最大拉电流”（Maximum Source Current）。如果负载需要的电流超过这个值，I/O口的输出电压会被拉低，可能导致LED亮度不足或后级电路无法正常工作，甚至烧毁芯片。
+
+
+
+### **灌电流 (Sink Current)**
+
+另一种接法是将LED的负极连接到I/O口，正极通过限流电阻接到电源（VCC，例如 5V）。要点亮LED，我们需要将I/O口设置为低电平（例如 0V 或 GND）。此时，电流会从电源VCC流出，经过电阻和LED，最终流入I/O口，并通过芯片内部的电路流向地。
+
+- **电流方向**：外部电源 (VCC) rightarrow 外部负载 (LED) rightarrow 芯片I/O口
+- **工作模式**：此时，I/O口处于“灌电流”模式（Sinking）。它像一个“地”一样，负责吸收来自外部的电流。
+- **能力限制**：数据手册中会标明“最大灌电流”（Maximum Sink Current）。如果流入的电流过大，会超过芯片的承受能力，导致I/O口电压被抬高（不再是标准的低电平），同样可能损坏芯片。
+
+
+---
+
+### 为什么要区分拉电流和灌电流？
+
+在数字集成电路（如TTL和CMOS逻辑门、单片机）的设计中，其内部输出级的结构决定了其拉电流和灌电流的能力并不总是相等的。
+
+- **对于很多逻辑芯片（尤其是早期的TTL电路），其灌电流能力远大于拉电流能力**。这意味着，在灌电流模式下，它们可以吸收比拉电流模式下大得多的电流。因此，在需要较大驱动电流的场合，优先选择灌电流的接法会更可靠。
+- **CMOS电路**的拉/灌电流能力相对来说比较对称，但通常灌电流能力仍然会略强一些。
+- 在查阅芯片的数据手册（Datasheet）时，必须同时关注这两个参数，并根据外部负载的需求和电路设计的逻辑来选择合适的连接方式。
+
+
+# 开漏输出和推挽输出
+- **推挽输出 (Push-Pull)**：**既能强力拉高，也能强力拉低**。它内部由两个开关（晶体管）组成，一个负责“推”——输出高电平，另一个负责“挽”——输出低电平。绝大多数通用I/O口（如单片机的GPIO）默认都是这种模式。
+- **开漏输出 (Open-Drain)**：**只能强力拉低，无法主动输出高电平**。它内部只有一个负责“拉低”的开关。要输出高电平，必须借助外部的上拉电阻。

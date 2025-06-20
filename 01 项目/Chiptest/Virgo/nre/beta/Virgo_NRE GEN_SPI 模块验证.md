@@ -68,21 +68,75 @@ boot> spim_test read 2 1 8 0
 ```
 
 ## 测试用例
+
+- master
+	- 非 dma 单双四线
+		- a55 ok
+	- 同步 dma 单双四线
+		- a55 ok
+	- 异步 dma 单双四线
+		- a55 不可测
+- slave
+	- 非 dma 单双四线
+		- a55 ok
+	- 同步 dma 单双四线
+		- a55 ok
+
+
 ### 标准模式读写
 - [x] 非 DMA 模式
 - [ ] 同步 DMA 模式
 - [ ] 异步 DMA 模式
-```
 
-```
 
 ### Dual 模式读写
 
+
+
 ### Quad 模式读写
+
+
 
 ### 片选 CS
 
+
 ### 中断
+- `.config` 中打开 `ENABLE_GEN_SPI_TEST=y、ENABLE_IRQ=y`
+- `gx_hal_spi.c` 中不要从 fifo 取数据，执行测试命令：`spim_test read 100`， 能够触发 rx fifo overflow 中断
+```diff
+diff --git a/drivers/spi/gen_spi/gx_hal_spi.c b/drivers/spi/gen_spi/gx_hal_spi.c
+index 2c399a030..afa4f0416 100644
+--- a/drivers/spi/gen_spi/gx_hal_spi.c
++++ b/drivers/spi/gen_spi/gx_hal_spi.c
+@@ -367,11 +367,11 @@ static int gx_hal_spi_poll_recv_msg(struct gx_hal_dw_spi *dws, struct gx_hal_spi
+                while(!(gx_hal_dw_readl(dws, GX_HAL_SPI_SR) & GX_HAL_SR_RF_NOT_EMPT));
+ 
+                if (dws->n_bytes == 1) {
+-                       ((uint8_t*)transfer->rx_buf)[i] = gx_hal_dw_readl(dws, GX_HAL_SPI_RXDR);
++                       //((uint8_t*)transfer->rx_buf)[i] = gx_hal_dw_readl(dws, GX_HAL_SPI_RXDR);
+                } else if (dws->n_bytes == 2) {
+-                       ((uint16_t*)transfer->rx_buf)[i] = gx_hal_dw_readl(dws, GX_HAL_SPI_RXDR);
++                       //((uint16_t*)transfer->rx_buf)[i] = gx_hal_dw_readl(dws, GX_HAL_SPI_RXDR);
+                } else if (dws->n_bytes == 4) {
+-                       ((uint32_t*)transfer->rx_buf)[i] = gx_hal_dw_readl(dws, GX_HAL_SPI_RXDR);
++                       //((uint32_t*)transfer->rx_buf)[i] = gx_hal_dw_readl(dws, GX_HAL_SPI_RXDR);
+                }
+        }
+
+
+--- a/drivers/spi/gen_spi/gx_dw_spi.c
++++ b/drivers/spi/gen_spi/gx_dw_spi.c
+@@ -1040,6 +1040,7 @@ static enum interrupt_return dw_spi_irq_handler(uint32_t interrupt, void *pdata)
+ {
+        struct spi_data *dws = pdata;
+        struct gx_hal_spi_tran trans = {0};
++       printf("irq status:0x%x.\n", *(volatile unsigned int *)0xfc000030);
+ #ifdef CONFIG_ENABLE_SPI_INT
+        struct spi_transfer *transfer = NULL;
+
+
+```
+
 
 ### DMA
 
@@ -268,3 +322,7 @@ index 776e9d88..21dace9e 100644
  
  	master->bus_num    = CONFIG_GENERAL_SPI_BUS_SN;
 ```
+
+### 【已解决】问题 6：Virgo 做 Slave 时，对接 Apus 作为 Master，QUAD 模式数据比较不通过
+- 单独测试 quad 可以
+- 重新测试 ok，应该是拨码开关没有拨正确

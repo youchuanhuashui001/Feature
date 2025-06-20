@@ -344,7 +344,7 @@ auto_test 时已测到，测试通过
 
 ## 7. 问题与缺陷记录
 
-### 问题 1：对接 I2C 设备小板经常写入出错
+### 【已解决】问题 1：对接 I2C 设备小板经常写入出错
 ```
 [2025-05-14 13:49:27] Error during I2C_RDWR ioctl with error code: -11
 [2025-05-14 13:49:27] write i2c chip_addr 0x0c reg 0x0b failed
@@ -377,8 +377,57 @@ auto_test 时已测到，测试通过
 			- 返回 -22，错误的 msg data
 
 
-### 问题 2：缺少 FAST PLUS 模式 1MHz 频率读写测试
+### 【已解决】问题 2：缺少 FAST PLUS 模式 1MHz 频率读写测试
+- 使用 `scpu hal` 那套驱动来读写，对接 eeprom m24c32 正常
+```diff
+--- a/bootmenu.c
++++ b/bootmenu.c
+@@ -2974,7 +2974,9 @@ void i2c_auto_test(int argc, const char **argv)
+        }
+ 
+        bus_id = atoi(argv[2]);
+-       i2c_dev = gx_i2c_open(bus_id);
++       gx_i2c_set_speed(bus_id, 1000);
++
++       i2c_dev = gx_i2c_open1(bus_id);
 
+                /* EEPROM M24C32 */
+                printf("start test EEPROM M24C32\n");
+                chip_addr = 0x50;
+                reg_addr_width = 2;
+-               if (gx_i2c_set(i2c_dev, bus_id, chip_addr << 1, reg_addr_width, 1, 0) != 0) {
+-                       printf("set i2c %d failed\n", bus_id);
+-                       goto i2c_auto_test_exit;
+-               }
++//             if (gx_i2c_set(i2c_dev, bus_id, chip_addr << 1, reg_addr_width, 1, 0) != 0) {
++//                     printf("set i2c %d failed\n", bus_id);
++//                     goto i2c_auto_test_exit;
++//             }
+                reg_addr = 0x00;
+                tx_data[0] = 0x33;
+-               data_len = 1;
+-               if (gx_i2c_tx(i2c_dev, reg_addr, tx_data, data_len) != data_len) {
++               tx_data[1] = 0x44;
++               tx_data[2] = 0x55;
++               data_len = 3;
++               if (gx_i2c_tx1(bus_id, chip_addr, reg_addr, reg_addr_width, &tx_data[0], data_len)) {
+                        printf("write i2c chip_addr 0x%02x reg 0x%02x failed\n", chip_addr, reg_addr);
+                        goto i2c_auto_test_exit;
+                }
+                mdelay(10);
+-               if (gx_i2c_rx(i2c_dev, reg_addr, rx_data, data_len) != data_len) {
++               if (gx_i2c_rx1(bus_id, chip_addr, reg_addr, reg_addr_width, &rx_data[0], data_len)) {
+                        printf("read i2c chip_addr 0x%02x reg 0x%02x failed\n", chip_addr, reg_addr);
+                        goto i2c_auto_test_exit;
+                }
+@@ -3150,7 +3154,7 @@ void i2c_auto_test(int argc, const char **argv)
+        printf("finish i2c test\n");
+ 
+ i2c_auto_test_exit:
+-       gx_i2c_close(i2c_dev);
++       gx_i2c_close1(i2c_dev);
+        return ;
+```
 
 
 

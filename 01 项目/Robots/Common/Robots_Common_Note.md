@@ -176,3 +176,13 @@ stage1 cost : 17563
 # K7 FPGA 对应 FMC 子板原理图
 - 老的子板： http://yun.nationalchip.com/v/list/ent/1483267603295113268
 - 新的子板： https://git.nationalchip.com/redmine/issues/399831
+
+
+# Fornax BBT 子板调试
+- 环境搭建： https://git.nationalchip.com/redmine/issues/397618
+- 包含 3 款芯片，Apus、Fornax、Leo_mini
+	- Fornax：待测芯片
+	- Leo_mini：用于启动 Fornax，Fornax 的程序是放在 Leo_mini 中的，当 Leo_mini 启动的时候会把 Fornax 的程序发到 Fornax 的内存，然后跑起来
+	- Apus：用于与 Fornax 交互，Fornax 跑什么测试程序是由 Apus 决定的；Apus 与 Fornax 的串口是通的
+- 可以直接把 Fornax 连接 Leo_mini 的串口跳帽拔掉，插到外接的串口上，这样直接连上 Fornax 的串口和 Jtag，就可以跑 SCPU 的代码
+

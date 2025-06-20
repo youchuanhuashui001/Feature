@@ -259,6 +259,17 @@ index 6a2e163e..a75e7171 100644
 ## eCos
 
 
+## 如何从 bsp. cpp 到 ecos 中的 flash_init
+- bsp. cpp 使用 MOD_SPINORFLASH、MOD_FLASHIO 来初始化 flash
+- 这些 MOD 实际来自 gxapi 中的宏定义，这些宏定义定义成为 cyg_对应的 flash 初始化类，在类的构造函数中会执行 spi、flash 的初始化
+```c
+#define CLASS_SPINORFLASH(chip)  cyg_spinor_flash_init_class_##chip  spinorflash0  CYGBLD_ATTRIB_INIT_PRI( 60900 );
+#define CLASS_SPINANDFLASH(chip) cyg_spinand_flash_init_class_##chip spinandflash0 CYGBLD_ATTRIB_INIT_PRI( 60910 );
+#define MOD_SPINORFLASH(chip)  CLASS_SPINORFLASH(chip)
+#define MOD_SPINANDFLASH(chip) CLASS_SPINANDFLASH(chip)
+```
+
+
 
 
 # 设备树

@@ -13,7 +13,7 @@
   set *(int*)0xa0e000F4 = 0x0         // SPI_CTRLR0
   set *(int*)0xa0e00008 = 0x1         // SSIENR
   set *(int*)0xa0e00010 = 0x1         // SER
-  set *(int*)0xa0e00080 = 0x9F        // DR
+  set *(int*)0xa0e00060 = 0x9F        // DR
   ```
 
 - 内部 DMA 发送数据

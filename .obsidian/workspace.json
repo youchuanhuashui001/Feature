@@ -24,77 +24,119 @@
             }
           },
           {
-            "id": "72f1607b0b4cf28d",
+            "id": "8b390d482552d4cd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE TIMER 模块验证.md",
+                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE A55 调试环境.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Virgo_NRE TIMER 模块验证"
+              "title": "Virgo_NRE A55 调试环境"
             }
           },
           {
-            "id": "dbee199f4041a8aa",
+            "id": "c17133a573ded7bc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/gx_timer_chiptest.md",
+                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE 驱动移植到 Linux4.19.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "gx_timer_chiptest"
+              "title": "Virgo_NRE 驱动移植到 Linux4.19"
             }
           },
           {
-            "id": "37730ec73b2fca26",
+            "id": "9af4f60833766ea9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/other_peri/timer fpga 验证.md",
+                "file": "01 项目/Chiptest/Virgo/nre/beta/Uboot 支持 SPI Nor Flash 驱动.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "timer fpga 验证"
+              "title": "Uboot 支持 SPI Nor Flash 驱动"
             }
           },
           {
-            "id": "e37a5f01bbf6427f",
+            "id": "08a80c2a0bc38f3b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE I2C 模块验证.md",
+                "file": "01 项目/Chiptest/Virgo/nre/beta/Uboot 对接 gxmisc.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Virgo_NRE I2C 模块验证"
+              "title": "Uboot 对接 gxmisc"
             }
           },
           {
-            "id": "62a3f3dda2bfdc59",
+            "id": "8ac8e39e0dc2a3a8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/2025-5/2025-05-30-星期五.md",
+                "file": "01 项目/Robots/Redmine/Leo_mini 支持 X25Q128ES、YXW25Q64E.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-05-30-星期五"
+              "title": "Leo_mini 支持 X25Q128ES、YXW25Q64E"
+            }
+          },
+          {
+            "id": "1ddcd3f267c4fe1e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02 学习/Linux_Driver_Learning/Linux 驱动学习主页.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Linux 驱动学习主页"
+            }
+          },
+          {
+            "id": "de3da158bdd74aae",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Goxceed_Common_Note"
+            }
+          },
+          {
+            "id": "4cd03ac1f6c98301",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 日记/2025/2025-6/2025-06-20-星期五.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-06-20-星期五"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -126,7 +168,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "flash 支持列表",
+                "query": "MOD_",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -170,7 +212,7 @@
       {
         "id": "0ed646c319fb51cd",
         "type": "tabs",
-        "dimension": 31.57407407407408,
+        "dimension": 24.166666666666668,
         "children": [
           {
             "id": "2b8bf9e8dc642e68",
@@ -236,7 +278,7 @@
       {
         "id": "7baf7bde227a91ce",
         "type": "tabs",
-        "dimension": 68.42592592592592,
+        "dimension": 75.83333333333333,
         "children": [
           {
             "id": "3bfecc5090389071",
@@ -244,13 +286,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE TIMER 模块验证.md",
+                "file": "00 日记/2025/2025-6/2025-06-20-星期五.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Virgo_NRE TIMER 模块验证 的大纲"
+              "title": "2025-06-20-星期五 的大纲"
             }
           }
         ]
@@ -275,54 +317,53 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "72f1607b0b4cf28d",
+  "active": "4cd03ac1f6c98301",
   "lastOpenFiles": [
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE I2C 模块验证.md",
-    "00 日记/2025/2025-5/2025-05-30-星期五.md",
-    "00 日记/2025/2025-5/2025-05-29-星期四.md",
-    "00 日记/2025/2025-5/2025-05-28-星期三.md",
-    "00 日记/2025/2025-5/2025-05-27-星期二.md",
-    "00 日记/2025/2025-5/2025-05-26-星期一.md",
-    "00 日记/2025/周小结AI提示词.md",
-    "00 日记/2025/2025-6/2025-05-30-星期五.md",
-    "00 日记/2025/2025-6",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE TIMER 模块验证.md",
+    "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma/Linux_axidma_driver.md~",
+    "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma/Linux_axidma_driver.md",
+    "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma/4913",
+    "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
+    "02 学习/Linux_Driver_Learning/02_驱动分析/uart/Linux_uart_driver.md",
+    "00 日记/2025/2025-6/2025-06-20-星期五.md",
+    "01 项目/Robots/Redmine/Leo_mini 支持 X25Q128ES、YXW25Q64E.md",
+    "00 日记/2025/2025-6/2025-06-19-星期四.md",
+    "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma",
+    "02 学习/Linux_Driver_Learning/Linux 驱动学习主页.md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Spinlock(自旋锁).md",
+    "02 学习/Linux_Driver_Learning/02_驱动实践/uart/Linux_uart_driver.md~",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Spinlock(自旋锁).md~",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Mutex(互斥锁).md",
+    "02 学习/Linux_Driver_Learning/02_驱动分析/watchdog/Linux_watchdog_driver.md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Tasklet(任务队列).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Wait_Queue(等待队列).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Completion(完成量).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Timer(内核定时器).md",
+    "02 学习/Linux_Driver_Learning/02_驱动分析/irr/Linux_irr_driver.md",
+    "06 资源/模板/Linux_xxx_driver.md",
+    "02 学习/Linux_Driver_Learning/02_驱动分析/i2c/Linux_i2c_driver.md",
+    "02 学习/Linux_Driver_Learning/02_驱动实践/i2c/I2C_Driver.md",
+    "02 学习/Linux_Driver_Learning/02_驱动分析/i2c/dw_i2c_ip.md",
+    "02 学习/Linux_Driver_Learning/02_驱动实践/irr/IRR_Driver.md",
     "Home.md",
-    "00 日记/2025/工作安排.md",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/gx_timer_chiptest.md",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/timer fpga 验证.md",
-    "01 项目/Common/IP/dw_i2c ip.md",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_i2c_chiptest.md",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE UART 模块验证.md",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE RTC 模块验证.md",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE WDT 模块验证.md",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo NRE AXI-DMA 模块验证.md",
-    "01 项目/Goxceed/Redmine/支持列表/Nor Flash 支持列表优化.md",
-    "01 项目/Goxceed/Redmine/支持列表/发布版本 V3.10.0 Flash 支持列表.md",
-    "01 项目/Goxceed/Redmine/支持列表/Python 自动生成 flash 支持列表.md",
-    "01 项目/Goxceed/Redmine/Gxloader 完善 flash 测试程序.md",
-    "01 项目/Goxceed/Redmine/支持列表",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/dw_uart_chiptest.md",
-    "01 项目/Chiptest/Virgo/mpw/other_peri/dw_uart fpga 验证.md",
-    "06 资源/image/Pasted image 20250528134531.png",
-    "06 资源/image/Pasted image 20250528134521.png",
-    "06 资源/image/Pasted image 20250528134511.png",
-    "06 资源/image/Pasted image 20250528134458.png",
-    "06 资源/image/Pasted image 20250528134445.png",
-    "06 资源/image/Pasted image 20250528134425.png",
-    "06 资源/image/Pasted image 20250528134409.png",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE GEN_SPI 模块验证.md",
-    "06 资源/image/485c1f1b36e78f038fb0e713785f9065.jpg",
-    "06 资源/image/Pasted image 20250523163544.png",
-    "02 学习/knowledge_base/i2c",
-    "02 学习/knowledge_base",
-    "02 学习/cursor/知识库/i2c",
-    "02 学习/cursor/知识库",
-    "07 临时/5-22/canopus-6631SH1D-spinand.boot",
-    "111~",
-    "111",
-    "4913",
-    "06 资源/image/Pasted image 20250515160001.png",
+    "02 学习/Linux_Driver_Learning/02_驱动实践/watchdog/Watchdog_Driver.md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/MTD_子系统.md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/Input_子系统.md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/DMAEngine_子系统.md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/设备模型",
+    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/字符设备驱动",
+    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/块设备驱动",
+    "02 学习/Linux_Driver_Learning/01_内核基础/子系统",
+    "02 学习/Linux_Driver_Learning/01_内核基础/数据结构",
+    "06 资源/image/Pasted image 20250618204054.png",
+    "06 资源/image/Pasted image 20250618204046.png",
+    "06 资源/image/Pasted image 20250618203941.png",
+    "06 资源/image/Pasted image 20250618203920.png",
+    "06 资源/image/Pasted image 20250618203824.png",
+    "06 资源/image/Pasted image 20250618143058.png",
+    "06 资源/image/0990186cd2c28b4f8d7873dd3234aa2a.jpg",
+    "06 资源/image/21c69096fe4eb46c624b84f90f8da05e.jpg",
+    "06 资源/image/ced9f35b8ea5b1cd8394214e6dedd8ce.jpg",
+    "06 资源/image/91a0272161a18ee44d540c8eb44bdd6e.jpg",
     "未命名.canvas"
   ]
 }

@@ -88,11 +88,20 @@ JLinkGDBServer -endian little -select USB -device Cortex-A55 -if JTAG -speed 100
 # FPGA 网络有问题需要配置：
 mw 0xF0A06088 0x10000
 
+# 切换至 100M Phy
+mw 0xfa4900cc 0x4
+
 # U-boot 设定环境变量，并从 tftp 服务器获取 uImage
 setenv tftpserver 192.168.108.149 && dhcp 0x12200000 ${tftpserver}:uImage
 
 # U-boot 设定环境变量，并启动 Linux
 setenv fdt_addr 0x8000000 && setenv kernel_addr_r 0x12200000 && setenv ramdisk_addr_r 0x15000000 && setenv bootargs console=ttyS0,115200 earlycon=uart8250,mmio32,0xFC880000 root=/dev/nfs rw nfsroot=192.168.108.149:/opt/nfs/virgo_nre/,v3 ip=192.168.108.198:::255.255.255.0 && bootm ${kernel_addr_r} - ${fdt_addr}
+
+
+
+# U-boot 设定环境变量，并启动 Linux
+setenv fdt_addr 0x8000000 && setenv kernel_addr_r 0x12200000 && setenv ramdisk_addr_r 0x15000000 && setenv bootargs console=ttyS0,115200 earlycon=uart8250,mmio32,0xFC880000 root=/dev/nfs rw nfsroot=192.168.108.149:/opt/nfs/virgo_nre/,v3 ip=192.168.108.198:::255.255.255.0  mtdparts=m25p80:128k@0m(BOOT),64k@128k(TABLE),2880k@192k(KERNEL),1792k@3m(ROOTFS),2368k@4864k(USER),960k@7232k(DATA) mtdparts_end
+ && bootm ${kernel_addr_r} - ${fdt_addr}
 ```
 
 
