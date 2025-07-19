@@ -8,5 +8,6 @@
       "shouldHideLabel": false,
       "containsMarkdown": false
     }
-  ]
+  ],
+  "show-checkboxes": true
 }

@@ -9,14 +9,14 @@
   "cm-editor-syntax-highlight-obsidian",
   "editing-toolbar",
   "obsidian-markmind",
-  "easy-typing-obsidian",
   "vscode-editor",
   "open-in-new-tab",
   "obsidian-vimrc-support",
   "copilot",
-  "obsidian-minimal-settings",
   "obsidian-style-settings",
   "templater-obsidian",
   "obsidian-banners",
-  "obsidian-custom-file-extensions-plugin"
+  "obsidian-custom-file-extensions-plugin",
+  "Enhanced-editing",
+  "obsidian-kanban"
 ]

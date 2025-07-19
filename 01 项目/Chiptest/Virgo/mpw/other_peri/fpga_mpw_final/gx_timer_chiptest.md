@@ -314,3 +314,19 @@ index 9a70216b..9b527354 100644
 > - 引脚复用功能：最上一层通过引脚复用可以把某个引脚复用为 gpio、spi、i2c、uart 等功能  
 > - 将某个引脚复用为 gpio 后，又可以通过该 gpio 的复用功能来复用成 pwm 的输出引脚或 PMU 域的 gpio
 
+
+
+
+## 3. 如何编译测试代码？
+- 测试代码路径
+    - gxtest: stb/chiptest/cases/TIME_V100/
+- 编译方法：
+	- 到 `gxtest/stb/chiptest/` 目录下
+    - 编译./build config -m TIME_V100 
+    - ./build arm nos virgo fpga dvbs bin debug
+    - 依赖 gxloader 的 nos lib，需要先编译 gxloader
+- 编译后生成的整 bin 在 `/home/tanxzh/goxceed/develop2/gxtest/stb/chiptest/output/image`
+- 也可以直接 gdb 加载 `chiptest` 目录下的 `out.elf`
+
+- minicom 不显示汉字：
+	- `minicom -R utf8`

@@ -24,119 +24,132 @@
             }
           },
           {
-            "id": "8b390d482552d4cd",
+            "id": "51ef32cefabe468d",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "工作安排.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    true,
+                    false,
+                    true,
+                    true,
+                    true
+                  ]
+                }
+              },
+              "pinned": true,
+              "icon": "lucide-trello",
+              "title": "工作安排"
+            }
+          },
+          {
+            "id": "1084dc8b11db1b2f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE A55 调试环境.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Virgo_NRE A55 调试环境"
+              "title": "Linux dvfs(dynamic voltage frequency scaling)"
             }
           },
           {
-            "id": "c17133a573ded7bc",
+            "id": "63a5c0359580f4df",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW 芯片测试进度.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Virgo_MPW 芯片测试进度"
+            }
+          },
+          {
+            "id": "f36346f0827f594b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE 驱动移植到 Linux4.19.md",
+                "file": "01 项目/Common/Common_Note.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Virgo_NRE 驱动移植到 Linux4.19"
+              "title": "Common_Note"
             }
           },
           {
-            "id": "9af4f60833766ea9",
+            "id": "4555ba2511db6ea7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Uboot 支持 SPI Nor Flash 驱动.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW GPIO 模块验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Uboot 支持 SPI Nor Flash 驱动"
+              "title": "Virgo_MPW GPIO 模块验证"
             }
           },
           {
-            "id": "08a80c2a0bc38f3b",
+            "id": "8794ea9dc71ce2d7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/nre/beta/Uboot 对接 gxmisc.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW Flash_SPI 模块验证.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Uboot 对接 gxmisc"
+              "title": "Virgo_MPW Flash_SPI 模块验证"
             }
           },
           {
-            "id": "8ac8e39e0dc2a3a8",
+            "id": "dbdab690080c74c0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Robots/Redmine/Leo_mini 支持 X25Q128ES、YXW25Q64E.md",
+                "file": "00 日记/2025/2025-7/2025-07-18-星期五.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Leo_mini 支持 X25Q128ES、YXW25Q64E"
+              "title": "2025-07-18-星期五"
             }
           },
           {
-            "id": "1ddcd3f267c4fe1e",
+            "id": "e1894d8ed9ba41b4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02 学习/Linux_Driver_Learning/Linux 驱动学习主页.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Linux 驱动学习主页"
-            }
-          },
-          {
-            "id": "de3da158bdd74aae",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
+                "file": "00 日记/2025/2025-7/2025-07-19-星期六.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Goxceed_Common_Note"
-            }
-          },
-          {
-            "id": "4cd03ac1f6c98301",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-6/2025-06-20-星期五.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-06-20-星期五"
+              "title": "2025-07-19-星期六"
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -168,7 +181,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "MOD_",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -212,7 +225,7 @@
       {
         "id": "0ed646c319fb51cd",
         "type": "tabs",
-        "dimension": 24.166666666666668,
+        "dimension": 23.637650389242744,
         "children": [
           {
             "id": "2b8bf9e8dc642e68",
@@ -220,7 +233,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "04 其它/tmux.md",
+                "file": "工作安排.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -230,7 +243,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "tmux 的反向链接列表"
+              "title": "工作安排 的反向链接列表"
             }
           },
           {
@@ -239,12 +252,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "04 其它/tmux.md",
+                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE A55 调试环境.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "tmux 的出链列表"
+              "title": "Virgo_NRE A55 调试环境 的出链列表"
             }
           },
           {
@@ -278,7 +291,7 @@
       {
         "id": "7baf7bde227a91ce",
         "type": "tabs",
-        "dimension": 75.83333333333333,
+        "dimension": 76.36234961075725,
         "children": [
           {
             "id": "3bfecc5090389071",
@@ -286,13 +299,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "00 日记/2025/2025-6/2025-06-20-星期五.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "2025-06-20-星期五 的大纲"
+              "title": "Linux dvfs(dynamic voltage frequency scaling) 的大纲"
             }
           }
         ]
@@ -314,56 +327,58 @@
       "vscode-editor:新建代码文件": false,
       "copilot:Open Copilot Chat": false,
       "templater-obsidian:Templater": false,
+      "obsidian-kanban:创建新看板": false,
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "4cd03ac1f6c98301",
+  "active": "1084dc8b11db1b2f",
   "lastOpenFiles": [
+    "07 临时/07_19/rk-gpio.c",
+    "07 临时/07_19/rk9.dtsi",
+    "07 临时/07_19",
+    "00 日记/2025/2025-7/2025-07-19-星期六.md",
+    "00 日记/2025/2025-7/2025-07-18-星期五.md",
+    "01 项目/Chiptest/Virgo/nre/设备树支持 SPINor、SPINand.md",
+    "工作安排.md",
+    "01 项目/Chiptest/Virgo/mpw/Virgo 启动出现 Receive FIFO Overflow.md",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW Flash_SPI 模块验证.md",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/低功耗测试.md",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW 芯片测试进度.md",
+    "00 日记/2025/2025-7/2025-07-17-星期四.md",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md",
+    "06 资源/image/Pasted image 20250717105828.png",
+    "00 日记/2025/2025-7/2025-07-16-星期三.md",
+    "00 日记/2025/2025-7/2025-07-15-星期二.md",
+    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE A55 调试环境.md",
+    "00 日记/2025/2025-7/2025-07-14-星期一.md",
+    "06 资源/image/Pasted image 20250715165835.png",
+    "06 资源/image/Pasted image 20250714151800.png",
+    "06 资源/image/Pasted image 20250714151753.png",
+    "06 资源/image/Pasted image 20250714150922.png",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW Time 模块验证.md",
+    "00 日记/2025/2025-7/2025-07-10-星期四.md",
+    "Home.md",
+    "00 日记/2025/2025-6/2025-06-30-星期一.md",
+    "00 日记/2025/2025-7/2025-07-05-星期六.md",
+    "00 日记/2025/2025-7/2025-07-07-星期一.md",
+    "00 日记/2025/2025-7/2025-07-08-星期二.md",
+    "00 日记/2025/2025-7/2025-07-09-星期三.md",
+    "01 项目/Goxceed/Redmine/如何将某个文件放到文件系统中打开.md",
+    "01 项目/Common/Common_Note.md",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW GPIO 模块验证.md",
+    "06 资源/image/Pasted image 20250707201811.png",
+    "06 资源/image/d4efbac5e3315d9ca0d9f1b7b5571330.jpg",
+    "06 资源/image/5aab6453f90ffaed301e76a451cd40f0.jpg",
+    "06 资源/image/Pasted image 20250702142746.png",
+    "06 资源/image/Pasted image 20250701140328.png",
+    "00 日记/2025/2025-7",
+    "Excalidraw",
     "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma/Linux_axidma_driver.md~",
-    "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma/Linux_axidma_driver.md",
     "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma/4913",
-    "01 项目/Goxceed/Common/Goxceed_Common_Note.md",
-    "02 学习/Linux_Driver_Learning/02_驱动分析/uart/Linux_uart_driver.md",
-    "00 日记/2025/2025-6/2025-06-20-星期五.md",
-    "01 项目/Robots/Redmine/Leo_mini 支持 X25Q128ES、YXW25Q64E.md",
-    "00 日记/2025/2025-6/2025-06-19-星期四.md",
     "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma",
-    "02 学习/Linux_Driver_Learning/Linux 驱动学习主页.md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Spinlock(自旋锁).md",
     "02 学习/Linux_Driver_Learning/02_驱动实践/uart/Linux_uart_driver.md~",
     "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Spinlock(自旋锁).md~",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Mutex(互斥锁).md",
-    "02 学习/Linux_Driver_Learning/02_驱动分析/watchdog/Linux_watchdog_driver.md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Tasklet(任务队列).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Wait_Queue(等待队列).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Completion(完成量).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Timer(内核定时器).md",
-    "02 学习/Linux_Driver_Learning/02_驱动分析/irr/Linux_irr_driver.md",
-    "06 资源/模板/Linux_xxx_driver.md",
-    "02 学习/Linux_Driver_Learning/02_驱动分析/i2c/Linux_i2c_driver.md",
-    "02 学习/Linux_Driver_Learning/02_驱动实践/i2c/I2C_Driver.md",
-    "02 学习/Linux_Driver_Learning/02_驱动分析/i2c/dw_i2c_ip.md",
-    "02 学习/Linux_Driver_Learning/02_驱动实践/irr/IRR_Driver.md",
-    "Home.md",
-    "02 学习/Linux_Driver_Learning/02_驱动实践/watchdog/Watchdog_Driver.md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/MTD_子系统.md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/Input_子系统.md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/DMAEngine_子系统.md",
     "02 学习/Linux_Driver_Learning/01_内核基础/设备模型",
-    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/字符设备驱动",
-    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/块设备驱动",
-    "02 学习/Linux_Driver_Learning/01_内核基础/子系统",
-    "02 学习/Linux_Driver_Learning/01_内核基础/数据结构",
-    "06 资源/image/Pasted image 20250618204054.png",
-    "06 资源/image/Pasted image 20250618204046.png",
-    "06 资源/image/Pasted image 20250618203941.png",
-    "06 资源/image/Pasted image 20250618203920.png",
-    "06 资源/image/Pasted image 20250618203824.png",
-    "06 资源/image/Pasted image 20250618143058.png",
-    "06 资源/image/0990186cd2c28b4f8d7873dd3234aa2a.jpg",
-    "06 资源/image/21c69096fe4eb46c624b84f90f8da05e.jpg",
-    "06 资源/image/ced9f35b8ea5b1cd8394214e6dedd8ce.jpg",
-    "06 资源/image/91a0272161a18ee44d540c8eb44bdd6e.jpg",
     "未命名.canvas"
   ]
 }

@@ -24,6 +24,63 @@ setenv fdt_addr 0x8000000 && setenv kernel_addr_r 0x12200000 && setenv ramdisk_a
  && bootm ${kernel_addr_r} - ${fdt_addr}
  
  
+ 
+ 
+ setenv fdt_addr 0x8000000 && setenv kernel_addr_r 0x12200000 && setenv ramdisk_addr_r 0x15000000 && 
+ 
+ 
+ setenv bootargs console=ttyS0,115200 earlycon=uart8250,mmio32,0xFC880000 root=/dev/nfs rw nfsroot=192.168.108.149:/opt/nfs/virgo_nre/,v3 ip=192.168.108.198:::255.255.255.0  mtdparts=m25p80:128k@4m(BOOT),64k@4224k(TABLE),3904k@4288k(MTD_TEST) mtdparts_end
+ && bootm ${kernel_addr_r} - ${fdt_addr}
+ 
+ 
+ 
+ 
+# Virgo_MPW uboot linux4.19
+setenv tftpserver 192.168.108.149
+
+
+setenv bootargs 'console=ttyS0,115200 earlycon=uart8250,mmio32,0xFC880000 videomem=240m@0x61000000 vdpmem=16m@0x60000000 cma=1024M root=/dev/ram'
+
+setenv bootargs 'console=ttyS0,115200 earlycon=uart8250,mmio32,0xFC880000 videomem=240m@0x61000000 vdpmem=16m@0x60000000 cma=1024M root=/dev/ram mtdparts=m25p80:1m@16m(MTD1),15m@17m(MTD2) mtdparts_end'
+
+setenv bootcmd "dhcp ${kernel_addr_r} ${tftpserver}:mpw/Image.lzma && tftp ${ramdisk_addr_r} ${tftpserver}:mpw/rootfs.cpio.uboot && booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr}" 
+
+
+./boot4 -b virgo-3502-D4-sflash-1500000.boot -c serialdown 0x0 ../../goxceed/platform/gxloader/output/loader-sflash.bin -d /dev/ttyUSB0
+
+./boot4 -b virgo-3502-D4-sflash-1500000.boot -c serialdown 0x40000 ../../gxbin/bin/virgo/mpw_bl31.bin -d /dev/ttyUSB0 -t nns
+
+./boot4 -b virgo-3502-D4-sflash-1500000.boot -c serialdown 0x60000 ../../gxbin/bin/virgo/mpw_bl32.bin -d /dev/ttyUSB0 -t nns
+
+./boot4 -b virgo-3502-D4-sflash-1500000.boot -c serialdown 0x1f0000 virgo.dtb -d /dev/ttyUSB0 -t nns
+
+./boot4 -b virgo-3502-D4-sflash-1500000.boot -c serialdown 0x200000 ../../u-boot/u-boot.bin -d /dev/ttyUSB0 -t nns
+
+./boot4 -b virgo-3502-D4-sflash-1500000.boot -c serialdown 0x1000000 my_Image.lzma -d /dev/ttyUSB0 -t nns
+
+./boot4 -b virgo-3502-D4-sflash-1500000.boot -c serialdown 0x1a00000 my_rootfs.cpio.gz -d /dev/ttyUSB0 -t nns
+Image.lzma 放到 flash 的 16M 地址，读到 0x02280000;
+
+sf probe
+sf read 2280000 1000000 9bf8cc
+sf read 5000000 1a00000 3C7758
+booti ${kernel_addr_r} ${ramdisk_addr_r}:0x3c7758 ${fdt_addr}
+
+
+需要把原来的 rootfs 制作成 cpio，然后压缩
+压缩完之后，读到内存，读到内存，启动的时候需要 指定 ramdisl_addr_r:size
+                                            0x             0x
+rootfs.cpio.uboot 放到 flash 的 xxx 地址，读到 0x05000000;
+
+env save
+
+# DDR4
+setenv bootargs 'mtdparts=m25p80:1m@16m(MTD1),15m@17m(MTD2) mtdparts_end'
+
+
+mount -t nfs -o nolock 192.168.108.149:/opt/nfs /tmp
+
+ 
 ```
 
 # 编译 uImage
@@ -139,3 +196,56 @@ $(KERNEL_UIMAGE): u-boot linux | $(BINARIES_PATH)
         *   `$(KERNEL_UIMAGE)`：指定输出文件，即 `$(ROOT)/out/bin/uImage`。
 
 最终，`$(ROOT)/out/bin/` 目录下会生成一个名为 `uImage` 的文件，这就是 `make uImage` 命令的最终产物。这个文件可以直接由 U-Boot 加载和启动。
+
+
+
+
+# 制作 rootfs.cpio.gz 
+### 制作 CPIO 归档
+
+`rootfs` 目录已经准备好了。使用 `cpio` 命令将其打包。
+
+1. 进入 `rootfs` 目录。
+    
+2. 执行打包命令。
+    
+
+Bash
+
+```
+cd rootfs
+find . | cpio -o -H newc > ../rootfs.cpio
+cd ..
+```
+
+**命令解析**：
+
+- `find .`：找到当前目录下的所有文件和目录，并将其列表通过管道 `|` 传递给 `cpio`。
+    
+- `cpio -o`：表示创建归档（输出模式）。
+    
+- `-H newc`：使用 "newc" 格式。这是一种可移植的、被广泛支持的格式，也是内核 `initramfs` 所期望的格式。
+    
+- `> ../rootfs.cpio`：将输出的归档内容重定向到上级目录的 `rootfs.cpio` 文件中。
+    
+
+### 压缩 CPIO 归档
+
+为了减小文件大小，加快传输和加载速度，通常会对 CPIO 归档进行压缩。`gzip` 是最常用的工具。
+
+Bash
+
+```
+gzip -9 rootfs.cpio
+```
+
+这会生成一个名为 `rootfs.cpio.gz` 的文件。
+
+
+### uboot 加载 cpio.gz
+```
+sf probe
+sf read 2280000 1000000 9c135b
+sf read 5000000 1a00000 2c71c6
+booti ${kernel_addr_r} ${ramdisk_addr_r}:0x2c71c6 ${fdt_addr}
+```

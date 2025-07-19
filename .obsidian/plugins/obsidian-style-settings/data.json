@@ -1,3 +1,18 @@
 {
-  "minimal-style@@tx1@@light": "#4D98ECFA"
+  "minimal-style@@tx1@@light": "#4D98ECFA",
+  "blue-topaz-theme@@list-style-change-options": "list-bracket-left",
+  "blue-topaz-theme@@blockquote-style-change-options": "blockquote-style-border-left",
+  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-default",
+  "blue-topaz-theme@@background-settings-workplace-background-image": false,
+  "blue-topaz-theme@@style-options-for-kanban-plugin-static": "style-options-for-kanban-plugin-static-little-color",
+  "blue-topaz-theme@@style-options-for-kanban-plugin-dynamic": "style-options-for-kanban-plugin-dynamic-default",
+  "blue-topaz-theme@@bt-status-on": false,
+  "blue-topaz-theme@@retain-header-color": false,
+  "blue-topaz-theme@@clutter-free-headings": false,
+  "blue-topaz-theme@@funny-header-anim": false,
+  "blue-topaz-theme@@remove-heading-indicator": false,
+  "blue-topaz-theme@@left-ribbon-style": "default-left-ribbon-style",
+  "blue-topaz-theme@@scrollbar-style-option": "default-scrollbar",
+  "blue-topaz-theme@@tab-title-bar-position": false,
+  "blue-topaz-theme@@view-button-front": false
 }

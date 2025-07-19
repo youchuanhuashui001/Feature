@@ -34,7 +34,7 @@
 
 
 
-# Flash_SPI 模块
+# 【已完成】Flash_SPI 模块
 - SPI 驱动：
 	- 目前包括 dw_spi_v2. c，dw_spi. c，gx_spi. c，三套驱动，canopus、vega、virgo 用的都是 dw_spi_v2. c
 - flash 驱动：
@@ -94,10 +94,13 @@
 - spinor:
 	- gxmisc 编译 `./build arm64 linux` 生成 `libarm64.fw`
 	- configs
-		- CONFIG_MTD=y
-		- CONFIG_MTD_M25P80=y
-		- CONFIG_MTD_SPI_NOR=y
-		- CONFIG_MTD_CMDLINE_PART=y
+		```
+		CONFIG_MTD=y
+		CONFIG_MTD_CMDLINE_PARTS=y
+		CONFIG_MTD_M25P80=y
+		CONFIG_MTD_SPI_NOR=y
+		# CONFIG_MTD_SPI_NOR_USE_4K_SECTORS is not set
+		```
 	- dts：不需要
 	- Makefile
 		- 依赖 CONFIG_MTD_M25P80，在编译 m25p80 时，依赖 gxspinor. o
@@ -220,7 +223,7 @@ Core:  25 devices, 14 uclasses, devicetree: board
 Loading Environment from SPIFlash... SF: Detected XM25QH128B with page size 256 Bytes, erase size 64 KiB, total 16 MiB
 ```
 
-
+- 已完成 https://git.nationalchip.com/gerrit/#/c/126533/
 
 
 
@@ -241,7 +244,7 @@ Loading Environment from SPIFlash... SF: Detected XM25QH128B with page size 256 
 
 
 
-# I2C 模块
+# 【已完成】I2C 模块
 - configs
 	- CONFIG_I2C_DESIGNWARE_CORE=y
 	- CONFIG_I2C_DESIGNWARE_PLATFORM=y
@@ -256,9 +259,10 @@ Loading Environment from SPIFlash... SF: Detected XM25QH128B with page size 256 
 	- goxceed/develop2/platform/gxtools/test_cases/i2c-tools
 - 这套驱动支持 100k、400k、1MHz、3.4MHz，但是没有 gx 的套接层 i2c-gxlayer. c
 
+- 已完成 https://git.nationalchip.com/gerrit/#/c/127464/
 
 
-# IR 模块
+# 【已完成】IR 模块
 
 - configs
 	- CONFIG_GX_IRR=y 默认是 y
@@ -279,3 +283,12 @@ Loading Environment from SPIFlash... SF: Detected XM25QH128B with page size 256 
 测试代码：
 - platform/gxtools/test_cases/irrtest/irr_test. c
 - 编译：`arm-linux-uclibcgnueabihf-gcc -static -o irr.elf irr_test.c`
+
+
+- 已完成 https://git.nationalchip.com/gerrit/#/c/127044/
+
+
+
+# 【已完成】AXI-DMA
+- 已完成 https://git.nationalchip.com/gerrit/#/c/127464/
+

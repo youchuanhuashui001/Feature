@@ -259,7 +259,7 @@ index 6a2e163e..a75e7171 100644
 ## eCos
 
 
-## 如何从 bsp. cpp 到 ecos 中的 flash_init
+### 如何从 bsp. cpp 到 ecos 中的 flash_init
 - bsp. cpp 使用 MOD_SPINORFLASH、MOD_FLASHIO 来初始化 flash
 - 这些 MOD 实际来自 gxapi 中的宏定义，这些宏定义定义成为 cyg_对应的 flash 初始化类，在类的构造函数中会执行 spi、flash 的初始化
 ```c
@@ -269,6 +269,58 @@ index 6a2e163e..a75e7171 100644
 #define MOD_SPINANDFLASH(chip) CLASS_SPINANDFLASH(chip)
 ```
 
+
+### `block_device_register` 失败，报错没有可用的 `__DEV_TABLE__`
+- 使用宏来占位，实则在定义变量时会将这个变量放到 `.ecos.table.xxx.data` 段
+- 在使用的时候会遍历 `.ecos.table.xxx.data` 段，从其中找到一个未使用的，拿来用
+- device 在用的时候不是按顺序的，这也没关系，定义的时候定义了就可以拿来用
+```c
+#define EMPTY_DEVTAB_ENTRY(_l) 									\
+cyg_devtab_entry_t _l CYG_HAL_TABLE_ENTRY(devtab) ={                    \
+   NULL,                                                                   \
+   NULL,                                                                   \
+   NULL,                                                                   \
+   NULL,                                                                   \
+   NULL,                                                                   \
+   NULL,                                                                   \
+   CYG_DEVTAB_STATUS_EMPTY                                              \
+};
+
+#ifndef CYG_HAL_TABLE_ENTRY
+#define CYG_HAL_TABLE_ENTRY( _name ) \
+        CYGBLD_ATTRIB_SECTION(".ecos.table." __xstring(_name) ".data") \
+        CYGBLD_ATTRIB_USED
+#endif
+
+
+// Define table boundaries
+CYG_HAL_TABLE_BEGIN( __DEVTAB__, devtab );
+CYG_HAL_TABLE_END( __DEVTAB_END__, devtab );
+
+#ifndef CYG_HAL_TABLE_BEGIN
+#define CYG_HAL_TABLE_BEGIN( _label, _name )                                 \
+__asm__(".section \".ecos.table." __xstring(_name) ".begin\",\"aw\"\n"       \
+    ".globl " __xstring(CYG_LABEL_DEFN(_label)) "\n"                         \
+    ".type    " __xstring(CYG_LABEL_DEFN(_label)) ",object\n"                \
+    ".p2align " __xstring(CYGARC_P2ALIGNMENT) "\n"                           \
+__xstring(CYG_LABEL_DEFN(_label)) ":\n"                                      \
+    ".previous\n"                                                            \
+       )
+#endif
+
+#ifndef CYG_HAL_TABLE_END
+#define CYG_HAL_TABLE_END( _label, _name )                                   \
+__asm__(".section \".ecos.table." __xstring(_name) ".finish\",\"aw\"\n"      \
+    ".globl " __xstring(CYG_LABEL_DEFN(_label)) "\n"                         \
+    ".type    " __xstring(CYG_LABEL_DEFN(_label)) ",object\n"                \
+    ".p2align " __xstring(CYGARC_P2ALIGNMENT) "\n"                           \
+__xstring(CYG_LABEL_DEFN(_label)) ":\n"                                      \
+    ".previous\n"                                                            \
+       )
+#endif
+
+
+```
 
 
 
@@ -304,3 +356,8 @@ parent-node {
 ```diff
 
 ```
+
+
+
+## Virgo_MPW 硬件原理图
+https://git.nationalchip.com/redmine/issues/407711

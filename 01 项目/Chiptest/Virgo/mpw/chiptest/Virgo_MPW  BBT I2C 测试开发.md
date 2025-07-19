@@ -1,0 +1,3 @@
+- 用 gxapi 接口，但是只有 3 个 i2cdev
+- 怎么区分芯片，比如 canopus 3个 i2c，virgo 就有 4 个
+	- 直接将max改成4个，例如老的，open的话会失败，没关系

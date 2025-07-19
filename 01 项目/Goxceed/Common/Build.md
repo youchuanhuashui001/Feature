@@ -1173,7 +1173,7 @@ mkfs.ubifs -r root -m 0x1000 -e 0x3e000 -c 2048 -x none -o root.img
 mkfs.ubifs -r root -m 2048 -e 126976 -c 160 -x none -o root.img
 #-m最小输入输出大小为2KiB(2048bytes)，一般为页大小 
 #-e逻辑可擦除块大小为124KiB=(每块的页数-2)*页大小=（64-2）*2KiB=124KiB 
-#-c最多逻辑可擦除块数目为160(160*128KiB=20MiB),这个可根据ubi volume来设置，b并非指定文件系统的大小，而是限制其最大值
+#-c最多逻辑可擦除块数目为160(160*128KiB=20MiB),这个可根据ubi volume来设置，并非指定文件系统的大小，而是限制其最大值
 ```
   
 |         OPTIONS         |                          说明                           |            备注            |

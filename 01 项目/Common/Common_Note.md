@@ -204,11 +204,14 @@ riscv64-unknown-elf-objdump -h apus.elf
 riscv64-unknown-elf-objcopy -O binary apus.elf output_file --only-section .dump_section
 
 
-// 从 .lds 中直接用 section 的标号来 dump：
+// gxloader dump text 段，从 .lds 中直接用 section 的标号来 dump：
 // _stage2_text_start_、_stage2_text_end_
 
 // 具体的命令
 dump binary memory dump.file _sxip_text _exip_text
+
+
+
 ```
 
 
@@ -456,6 +459,11 @@ kbuild 系统直到正在构建一个外部模块，因为 `M=<dir>` 命令中�
 - MO=$BUILD_DIR
 	- 为外部模块指定单独的输出目录。
 
+
+
+
+# Linux shell 中自动获取 IP 地址
+- `udhcpc`
 
 
 
