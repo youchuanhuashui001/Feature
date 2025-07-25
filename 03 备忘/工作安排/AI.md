@@ -1,0 +1,22 @@
+# sagitta
+- [x] 给 dma 用的 buffer 需要 aligned cache_line，否则会出现 dma buffer 和其它数据共用同一个 cache line 的问题
+- [x] 做 dma 操作之前会先将 dma buffer clean & invalid 到内存，但是和它共用一条 cache line 的后面的代码会访问这个 cache line，导致把这里 dma buffer 又读到了 cache；等到 dma 操作完成后，cache line 的数据和内存的数据 (dma 搬过去的数据) 又不一样了；如果此时 invalid 就会丢失栈的其它部分，因为共用一条 cache line 的后面的代码会用这里来存东西，可能会被破坏，导致跑飞
+- [x] iodma 评审
+	- [x] 测试用例增加对接 ws2812 的功能测试
+	- [x] 增加输出带死区的 pwm 功能
+	- [x] 需要重新上传测试用例结果 [completion:: 2025-04-25]
+	- [ ] iodma 驱动轮询和中断分开
+- [x] ir 引脚复用的补丁上传 [completion:: 2025-04-27]
+- [x] 对接 ir
+- [x] 内封 flash，会封 8Mbit 的 P25Q80SU，这是宽电压的 flash，要确认下驱动是否支持，还要看下 bbt 是不是也用这款，如果用的话也要看看代码 [completion:: 2025-05-14]
+	- [x] 实际会用这一款的低压 1.8 版本，这款宽压的也有可能用到，bbt 也有可能会用到 [completion:: 2025-05-14]
+		- [x] 目前 bbt 程序还没开始写，所以先不管 [completion:: 2025-05-14]
+	- [x] 需要在 fpga 上跑一下，并且 bbt 程序看看也要支持这款 [completion:: 2025-05-14]
+	- [x] 确认更新完支持后是否需要更新 bootx [completion:: 2025-05-14]
+		- [x] 老的 P25Q80L 已支持，所以不用更新 bootx [completion:: 2025-05-14]
+	- [x] 还有一点比较奇怪，这款 flash 默认是支持的，但是为什么翔哥那边说跑不起来？
+		- [x] 由于硬件电源转换芯片焊接问题导致的，硬件重新焊接后没问题
+- [ ] scpu stage1 驱动有问题，读的时候默认把 dmacr 也就是 r 的 dma 打开了
+	- [ ] canopus stage1 使用 scpu 的 spl_spinor. c  通了：[123858](https://git.nationalchip.com/gerrit/123858 "Reload the change (Shortcut: R)")
+	- [ ] virgo mpw stage1 使用 scpu 的 spl_spinor. c 通了：[123771](https://git.nationalchip.com/gerrit/123771 "Reload the change (Shortcut: R)")
+

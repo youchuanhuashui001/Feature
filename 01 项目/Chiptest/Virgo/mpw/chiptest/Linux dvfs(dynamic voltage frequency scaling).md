@@ -416,13 +416,284 @@ Voltage Table Example:
 
 
 ## GPIO
+> 参考： https://docs.kernel.org/driver-api/gpio/driver.html
+
 - 目前使用 linux4.9 的老驱动，可以拉高拉低 gpio，后面使用 gpiolib
+- 复用成 pwm 的功能，就放在 dts 里面，probe 的时候就复用掉
 
 
-- consumer
+### Provider
+#### rk9.dtsi
+```d
+ 		gpio0: gpio0@ff210000 {
+ 			compatible = "rockchip,gpio-bank";
+ 			reg = <0x0 0xff210000 0x0 0x100>;
+ 			interrupts = <GIC_SPI 51 IRQ_TYPE_LEVEL_HIGH>;
+ 			clocks = <&cru PCLK_GPIO0>;
+
+			// 文档要求：每个 GPIO 控制器节点必须包含一个空的 gpio-controller 属性
+ 			gpio-controller;
+ 			#gpio-cells = <2>;
+ 
+ 			interrupt-controller;
+ 			#interrupt-cells = <2>;
+ 		};
+```
+- 定义 gpio 控制器，看起来并没有引用的地方
+```d
+bank：指的是一个 ip 模块；通常，每个 bank 在设备树中都作为一个单独的 gpio-controller 节点暴露出来
+ngpios：可选。指明了可用 GPIO 插槽中正在被使用的数量。
+gpio-line-names：可选。这是一个字符串数组，定义了 GPIO 控制器输出的 GPIO 线的名称。
+
+```
+
+### virgo_mpw.dtsi
+```d
+    gx_gpio: gx_gpio@fa400000 {
+        compatible = "nationalchip,gx-gpio";
+        #address-cells = <1>;
+        #size-cells = <1>;
+        reg-num = <4>;
+        reg = <0x0 0xfa400000 0x0 0x1000>,
+              <0x0 0xfa401000 0x0 0x1000>,
+              <0x0 0xfa402000 0x0 0x1000>,
+              <0x0 0xfa403000 0x0 0x1000>,
+              <0x0 0xf0404000 0x0 0x1000>;
+        clocks = <&apb2_0>;
+        interrupt-parent = <&gic>;
+        interrupts = <GIC_SPI 50 IRQ_TYPE_LEVEL_HIGH>,
+                     <GIC_SPI 51 IRQ_TYPE_LEVEL_HIGH>,
+                     <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>,
+                     <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>;
+        interrupt-names = "gx_gpio.irq0",
+                          "gx_gpio.irq1",
+                          "gx_gpio.irq2",
+                          "gx_gpio.irq3";
+        output_read_support = <1>;
+        gpio_clock = <198000000>;
+        status = "okay";
+    };
+
+
+    gpio0: gpio0@fa400000 {
+        compatible = "nationalchip,gpio-bank";
+        reg = <0x0 0xfa400000 0x0 0x1000>,
+        gpio-sram-base = <0xf0404000>;
+        //TODO:
+//        interrupt-parent = <&gic>;
+        interrupts = <GIC_SPI 50 IRQ_TYPE_LEVEL_HIGH>,
+        interrupt-names = "gx_gpio.irq0";
+        clocks = <&apb2_0>;
+        output_read_support = <1>;
+
+        gpio-controller;
+        #gpio-cells = <2>;
+
+        interrupt-controller;
+        interrput-cells = <2>;
+    };
+```
+
+
+#### rk-gpio.c
+
 ```c
+/**
+ * @dev: device of the gpio bank
+ * @reg_base: register base of the gpio bank
+ * @reg_pull: optional separate register for additional pull settings
+ * @clk: clock of the gpio bank
+ * @db_clk: clock of the gpio debounce
+ * @irq: interrupt of the gpio bank
+ * @saved_masks: Saved content of GPIO_INTEN at suspend time.
+ * @pin_base: first pin number
+ * @nr_pins: number of pins in this bank
+ * @name: name of the bank
+ * @bank_num: number of the bank, to account for holes
+ * @iomux: array describing the 4 iomux sources of the bank
+ * @drv: array describing the 4 drive strength sources of the bank
+ * @pull_type: array describing the 4 pull type sources of the bank
+ * @of_node: dt node of this bank
+ * @drvdata: common pinctrl basedata
+ * @domain: irqdomain of the gpio bank
+ * @gpio_chip: gpiolib chip
+ * @grange: gpio range
+ * @slock: spinlock for the gpio bank
+ * @route_mask: bits describing the routing pins of per bank
+ */
+struct rockchip_pin_bank {
+	struct device *dev;
+
+	void __iomem			*reg_base;
+	struct regmap			*regmap_pull;
+	struct clk			*clk;
+	struct clk			*db_clk;
+	int				irq;
+	u32				saved_masks;
+	u32				pin_base;
+	u8				nr_pins;
+	char				*name;
+	u8				bank_num;
+	struct rockchip_iomux		iomux[4];
+	struct rockchip_drv		drv[4];
+	enum rockchip_pin_pull_type	pull_type[4];
+	struct device_node		*of_node;
+	struct rockchip_pinctrl		*drvdata;
+	struct irq_domain		*domain;
+	struct gpio_chip		gpio_chip;
+	struct pinctrl_gpio_range	grange;
+	raw_spinlock_t			slock;
+	const struct rockchip_gpio_regs	*gpio_regs;
+	u32				gpio_type;
+	u32				toggle_edge_mode;
+	u32				recalced_mask;
+	u32				route_mask;
+};
+
+static const struct gpio_chip rockchip_gpiolib_chip = {
+	.request = gpiochip_generic_request,
+	.free = gpiochip_generic_free,
+	.set = rockchip_gpio_set,
+	.get = rockchip_gpio_get,
+	.get_direction	= rockchip_gpio_get_direction,
+	.direction_input = rockchip_gpio_direction_input,
+	.direction_output = rockchip_gpio_direction_output,
+	.set_config = rockchip_gpio_set_config,
+	.to_irq = rockchip_gpio_to_irq,
+	.owner = THIS_MODULE,
+};
+
+static int rockchip_gpio_probe(struct platform_device *pdev)
+{
+
+	bank->bank_num =  bank_id;
+	bank->dev = dev;
+
+	bank->reg_base = ioremap_resource(pdev, 0);
+
+	rockchip_gpio_get_ver(bank);
+
+	raw_spin_lock_init(&bank->slock);
+
+	bank->clk = devm_clk_get(dev, "bus");
+	clk_prepare_enable(bank->clk);
+
+	ret = rockchip_gpio_parse_irqs(pede, bank);
+	// not use
+	rockchip_gpio_init_cpuhp();
+
+	mutex_lock(&bank->deferred_lock);
+
+	// 关键的地方
+	ret = rockchip_gpiolib_register(bank);
+
+	// 关键的地方
+	ret = gpiochip_add_pin_range(gc, dev_name(pctldev->dev), 0,
+				     gc->base, gc->ngpio);
+
+	// 根据设备树中的 gpio 参数，配置gpio为输出或输入
+
+	mutex_unlock(&bank->deferred_lock);
+
+	platform_set_drvdata(pdev, bank);
+
+	return 0;
+}
+
+static int rockchip_interrupts_register(struct rockchip_pin_bank *bank)
+{
+
+	ret = irq_alloc_domain_generic_chips(bank->domain, 32, 1,
+					     "rockchip_gpio_irq",
+					     handle_level_irq,
+					     clr, 0, 0);
+
+	irq_set_chained_handler_and_data(bank->irq[i],
+					 rockchip_irq_demux,
+					 bank);
+}
+
+static int rockchip_gpiolib_register(struct rockchip_pin_bank *bank)
+{
+	struct gpio_chip *gc;
+
+	bank->gpio_chip = rockchip_gpiolib_chip;
+
+	// init struct gpio_chip;
+	gc = &bank->gpio_chip;
+	gc->base = bank->pin_base;
+	gc->ngpio = bank->nr_pins;
+	gc->label = bank->name;
+
+	ret = gpiochip_add_data(gc, bank);
 
 
+	// 注册中断相关
+	ret = rockchip_interrupts_register(bank);
+
+	return 0;
+}
+
+
+static struct platform_driver rockchip_gpio_driver = {
+	.probe		= rockchip_gpio_probe,
+	.remove		= rockchip_gpio_remove,
+	.driver		= {
+		.name	= "rockchip-gpio",
+		.of_match_table = rockchip_gpio_match,
+	},
+};
+```
+
+----------------
+
+probe 流程如下：
+- 定义 `struct gpio_chip`
+- 配置 gpio_chip 的一些参数和回调函数
+- 使能 clk
+- 通过 gpiochip_add_data 就将 struct gpio_chip 注册到了 gpio subsystem
+- 如果需要支持 irq，通过 irq_alloc_domain_generic_chips 注册到 gpio subsystem
+- 通过 gpiochip_add_pin_range 配置 gpio 的基地址和个数
+
+
+remove 流程如下：
+- 释放中断
+- 关掉 clk
+- `gpiochip_remove(&bank->gpio_chip);`
+
+
+### consumer-kernelspace
+
+```d
+// 在您的设备节点中
+my_device@cafebabe {
+    compatible = "my-vendor,my-device";
+    ...
+    // "reset-gpios" 是您自定义的属性名
+    // <&my_gpio_controller 5 GPIO_ACTIVE_LOW>
+    // 引用 my_gpio_controller 的第 5 个引脚，低电平有效
+    reset-gpios = <&my_gpio_controller 5 1>;
+};
+
+
+    gpiod_example {
+        compatible = "gpiod-example,test";
+
+        // 单个输出, 使用 gpio1 的第 14 脚
+        output-gpios = <&gpio1 14 GPIO_ACTIVE_HIGH>;
+
+
+        // 中断输入, 使用 gpio1 的第 16 脚
+        interrupt-gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
+    };
+```
+
+对于 api 使用，存在两个版本：
+- gpiod API
+	- 其实内部也是调用的基于整数的 GPIO API，建议使用这个
+- 基于整数的 GPIO API
+
+```c
 struct gpio_desc *gpiod_get(struct device *dev, const char *con_id, enum gpiod_flags flags);
 
 struct gpio_desc *gpiod_get_index(struct device *dev,
@@ -437,6 +708,21 @@ struct gpio_desc *gpiod_get_index_optional(struct device *dev,
                                            const char *con_id,
                                            unsigned int index,
                                            enum gpiod_flags flags)
+
+
+struct gpio_desc *reset_gpio;
+
+reset_gpio = devm_gpiod_get(dev, "reset", GPIOD_OUT_LOW);
+
+ret = gpiod_direction_output(reset_gpio, 0);
+
+ret = gpiod_set_value(reset_gpio, 1);
+
+
+ret = gpiod_direction_input(reset_gpio);
+status = gpiod_get_value;
+
+
 
 void gpiod_put(struct gpio_desc *desc)
 
@@ -454,11 +740,41 @@ void gpiod_set_value(struct gpio_desc *desc, int value);
 int gpiod_get_value_cansleep(const struct gpio_desc *desc)
 void gpiod_set_value_cansleep(struct gpio_desc *desc, int value)
 
-
-
 ```
 
-- 用户怎么玩？
+
+### userspace
+
+存在两种方式：字符设备接口以及 sysfs 接口(/sys/class/gpio)，推荐使用字符设备接口
+
+- 字符设备接口`/dev/gpiochipX`
+- libgpiod 库，使用 `/dev/gpiochipX` 设备的开源程序
+	- 安装 libgpiod、gpiod-tools
+
+
+
+- sysfs
+```shell
+$ echo 46 >  /sys/class/gpio/export
+[  235.550331] [gx_gpio_request] bank:1, offset:e
+[  235.557066] [gx_gpio_get_direction] bank:1, offset:e, data:1
+$ ls
+active_low  direction   power       uevent
+device      edge        subsystem   value
+$ cd ../
+$ ls
+export      gpio46      gpiochip32  gpiochip96
+gpio14      gpiochip0   gpiochip64  unexport
+$ cd gpio46/
+$ ls
+active_low  direction   power       uevent
+device      edge        subsystem   value
+```
+
+
+
+
+
 
 
 
@@ -563,6 +879,28 @@ pwm_disable(drvdata->pwm);
 	- `pws = <&pwm0 0 25000 0>`：表示pwm0、通道0、周期25000ns、极性0
 
 
+
+- sysfs 测试
+```shell
+$ echo 3 > export
+$ cd pwm3/
+$ ls
+capture     enable      polarity    uevent
+duty_cycle  period      power
+$ cat enable
+0
+$ cat capture
+cat: read error: Function not implemented
+$ cat duty_cycle
+0
+$ cat period
+0
+$ echo 10000 > period
+$ echo 5000 > duty_cycle
+$ echo 1 > enable
+
+```
+
 ## Regulator
 > - http://www.wowotech.net/pm_subsystem/regulator_framework_overview.html
 > - http://www.wowotech.net/pm_subsystem/regulator_driver.html
@@ -576,6 +914,24 @@ pwm_disable(drvdata->pwm);
 
 - 初始时 pwm 输出为 min_voltage
 
+
+- sysfs
+```shell
+$ cd /sys/device/platform/
+$ cd test_vol_user_ctl/
+$ ls
+driver           name             state            voltage
+driver_override  of_node          subsystem
+modalias         power            uevent
+$ cat name
+test_vol_userspace
+$ cat voltage
+1020000
+$ cat state
+enabled
+
+
+```
 
 # todo
 - [ ] 需要了解电压改变之后的生效时间
@@ -655,3 +1011,48 @@ lrwxrwxrwx    1 root     root           0 Jan 10 15:59 subsystem -> ../../../../
 - 设备树中添加属性`regulator-boot-on、regulator-always-on`可以看到 regulator 的输出了，默认输出值为最小电压所对应的占空比。
 - 使用 userspace_consumer，也就是一个应用者来测试
 	- 需要使用主线的 userspace_consumer.c 来测试，并且需要添加set_get voltage 接口
+
+
+
+
+## 【已解决】libgpiod 编译方法
+- gpio 采用 linux 的标准接口 gpiod，用户空间可以使用 libgpiod 来进行测试，libgpiod 尝试了好几个版本最后发现有一个版本可用
+- 其中 v2.1.1 版本的 libgpiod 用的是 linux 中的 gpiod_v2 版本接口，目前 4.19 用的是 v1 版本的接口，所以使用起来会出错
+- 其中 v1.4、v1.5、v1.6 版本的 libgpiod 在执行 configure 时都会报错 `libgpiod needs linux headers version >= v5.5.0`，因此不可用
+- 在 github 上找到一个帖子： [https://github.com/aquaticus/nexus433/issues/21](https://github.com/aquaticus/nexus433/issues/21) 上面说可以 v1.1.1 版本可用，实际编译下来确实可用！
+- 记录 v1.1.1 版本编译方法：  
+```shell
+# 用于生成 configure
+./autogen.sh --enable-tools
+
+# 配置脚本
+export CROSS_COMPILE=aarch64-none-linux-gnu-
+
+./configure \
+	--host=aarch64-none-linux-gnu \
+	--prefix=/home/tanxzh/tanxzh/tools/libgpio-1.1.1/test \
+	--enable-tools \
+	--enable-static \
+	--disable-shared \
+	--disable-bindings-cxx \
+
+# 将工具切成静态编译
+libgpiod-1.1.1/src/tools/Makefile.am 中的 AM_CFLAGS 添加 --static
+
+# 将 config.h 中的 #define malloc rpl_malloc 换成 #define malloc malloc
+
+# 编译和安装
+make
+```
+
+
+## 【已解决】gpio 硬件是否支持先配置电平值，再配置输出模式？
+配置输出模式的时候需要同步配置输出模式的初始电平，我们控制器支持先配置电平值，再配置成输出模式吗？
+linux 里面其它厂商大多都是先配置初始电平，再配置为输出模式；这样可以有效的避免毛刺，假如现在是输入模式，引脚上是低电平，先配成输出模式的话会导致内部上拉可能变成高电平，再配置电平的话，这期间会有一个短暂的高电平产生。
+
+- 支持
+
+
+## pwm 需要改成有步进值的类型
+- pwm-regulator 后续会使用 sar adc 回采电压，那么 pwm-regulator 的 set_voltage 接口需要做成一个闭环，设定电压、回采电压直到设置为准确的电压
+- 由于温度或者负载的改变，可能会导致电压改变，所以需要做一个定时器，1S 或其它时间来设定一次电压

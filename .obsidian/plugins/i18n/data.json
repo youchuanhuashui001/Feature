@@ -49,7 +49,11 @@
     "stayOriginalSelectors": [],
     "stayOriginalTags": [],
     "atomicBlockSelectors": [],
-    "atomicBlockTags": []
+    "atomicBlockTags": [],
+    "id": "obsidian.md",
+    "matches": "obsidian.md",
+    "mainFrameMinTextCount": 0,
+    "mainFrameMinWordCount": 0
   },
   "I18N_SHARE_MODE": true,
   "I18N_SHARE_TOKEN": "",

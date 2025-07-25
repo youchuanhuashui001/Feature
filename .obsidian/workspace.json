@@ -15,7 +15,7 @@
               "type": "markdown",
               "state": {
                 "file": "Home.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
               },
               "pinned": true,
@@ -24,42 +24,31 @@
             }
           },
           {
-            "id": "51ef32cefabe468d",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "kanban",
-              "state": {
-                "file": "工作安排.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    true,
-                    false,
-                    true,
-                    true,
-                    true
-                  ]
-                }
-              },
-              "pinned": true,
-              "icon": "lucide-trello",
-              "title": "工作安排"
-            }
-          },
-          {
-            "id": "1084dc8b11db1b2f",
+            "id": "6188addc2d7ba15d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md",
+                "file": "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Malloc(申请内存).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Linux dvfs(dynamic voltage frequency scaling)"
+              "title": "Malloc(申请内存)"
+            }
+          },
+          {
+            "id": "9afb7a3f7a60173e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/低功耗测试.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "低功耗测试"
             }
           },
           {
@@ -79,34 +68,6 @@
             }
           },
           {
-            "id": "f36346f0827f594b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Common/Common_Note.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Common_Note"
-            }
-          },
-          {
-            "id": "4555ba2511db6ea7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW GPIO 模块验证.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Virgo_MPW GPIO 模块验证"
-            }
-          },
-          {
             "id": "8794ea9dc71ce2d7",
             "type": "leaf",
             "state": {
@@ -121,31 +82,45 @@
             }
           },
           {
-            "id": "dbdab690080c74c0",
+            "id": "1932a18614ac93bf",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/2025-7/2025-07-18-星期五.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-07-18-星期五"
+              "title": "Linux dvfs(dynamic voltage frequency scaling)"
             }
           },
           {
-            "id": "e1894d8ed9ba41b4",
+            "id": "53ebc9c3cbbf7818",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/2025-7/2025-07-19-星期六.md",
+                "file": "00 日记/2025/2025-7/2025-07-25-星期五.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-07-19-星期六"
+              "title": "2025-07-25-星期五"
+            }
+          },
+          {
+            "id": "c7a6177c3b096199",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03 备忘/工作安排/STB.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "STB"
             }
           }
         ],
@@ -181,7 +156,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:Linux_Driver/Kernel_Fundamentals",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -233,7 +208,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "工作安排.md",
+                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/低功耗测试.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -243,7 +218,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "工作安排 的反向链接列表"
+              "title": "低功耗测试 的反向链接列表"
             }
           },
           {
@@ -299,13 +274,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md",
+                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/低功耗测试.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Linux dvfs(dynamic voltage frequency scaling) 的大纲"
+              "title": "低功耗测试 的大纲"
             }
           }
         ]
@@ -331,41 +306,47 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "1084dc8b11db1b2f",
+  "active": "9afb7a3f7a60173e",
   "lastOpenFiles": [
+    "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md",
+    "00 日记/2025/2025-7/2025-07-25-星期五.md",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW Flash_SPI 模块验证.md",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/低功耗测试.md",
+    "Home.md",
+    "03 备忘/工作安排/STB.md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Malloc(申请内存).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Completion(完成量).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Wait_Queue(等待队列).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Timer(内核定时器).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Tasklet(任务队列).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Spinlock(自旋锁).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Mutex(互斥锁).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Completion(完成量).md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1",
+    "00 日记/2025/2025-7/2025-07-24-星期四.md",
+    "06 资源/模板/日记模板.md",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW 芯片测试进度.md",
+    "工作安排.md",
+    "03 备忘/备忘录",
+    "03 备忘/工作安排/OTHER.md",
+    "03 备忘/工作安排/AI.md",
+    "02 学习/schedule/学习计划.md",
+    "00 日记/2025/工作安排.md",
+    "03 备忘/工作安排",
+    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE A55 调试环境.md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/PWM 子系统.md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/GPIO子系统.md",
+    "00 日记/2025/2025-7/2025-07-23-星期三.md",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md~",
+    "未命名.canvas",
     "07 临时/07_19/rk-gpio.c",
     "07 临时/07_19/rk9.dtsi",
     "07 临时/07_19",
-    "00 日记/2025/2025-7/2025-07-19-星期六.md",
-    "00 日记/2025/2025-7/2025-07-18-星期五.md",
-    "01 项目/Chiptest/Virgo/nre/设备树支持 SPINor、SPINand.md",
-    "工作安排.md",
-    "01 项目/Chiptest/Virgo/mpw/Virgo 启动出现 Receive FIFO Overflow.md",
-    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW Flash_SPI 模块验证.md",
-    "01 项目/Chiptest/Virgo/mpw/chiptest/低功耗测试.md",
-    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW 芯片测试进度.md",
-    "00 日记/2025/2025-7/2025-07-17-星期四.md",
-    "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md",
     "06 资源/image/Pasted image 20250717105828.png",
-    "00 日记/2025/2025-7/2025-07-16-星期三.md",
-    "00 日记/2025/2025-7/2025-07-15-星期二.md",
-    "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE A55 调试环境.md",
-    "00 日记/2025/2025-7/2025-07-14-星期一.md",
     "06 资源/image/Pasted image 20250715165835.png",
     "06 资源/image/Pasted image 20250714151800.png",
     "06 资源/image/Pasted image 20250714151753.png",
     "06 资源/image/Pasted image 20250714150922.png",
-    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW Time 模块验证.md",
-    "00 日记/2025/2025-7/2025-07-10-星期四.md",
-    "Home.md",
-    "00 日记/2025/2025-6/2025-06-30-星期一.md",
-    "00 日记/2025/2025-7/2025-07-05-星期六.md",
-    "00 日记/2025/2025-7/2025-07-07-星期一.md",
-    "00 日记/2025/2025-7/2025-07-08-星期二.md",
-    "00 日记/2025/2025-7/2025-07-09-星期三.md",
-    "01 项目/Goxceed/Redmine/如何将某个文件放到文件系统中打开.md",
-    "01 项目/Common/Common_Note.md",
-    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW GPIO 模块验证.md",
     "06 资源/image/Pasted image 20250707201811.png",
     "06 资源/image/d4efbac5e3315d9ca0d9f1b7b5571330.jpg",
     "06 资源/image/5aab6453f90ffaed301e76a451cd40f0.jpg",
@@ -373,12 +354,6 @@
     "06 资源/image/Pasted image 20250701140328.png",
     "00 日记/2025/2025-7",
     "Excalidraw",
-    "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma/Linux_axidma_driver.md~",
-    "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma/4913",
-    "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma",
-    "02 学习/Linux_Driver_Learning/02_驱动实践/uart/Linux_uart_driver.md~",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Spinlock(自旋锁).md~",
-    "02 学习/Linux_Driver_Learning/01_内核基础/设备模型",
-    "未命名.canvas"
+    "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma/Linux_axidma_driver.md~"
   ]
 }
