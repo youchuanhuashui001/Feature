@@ -2009,8 +2009,18 @@ designware spi ip 的 TX_AND_RX 模式，写数据的同时可以读数据。那
 - 程序执行的时间是一样的，单线和双线取数据的时候处理能力不同，单线取走一个字节数据需要 8 个 clk，而双线取走一个字节数据只需要 4 个 clk。
 - 所以相同 clk 个数的情况下，双线模式 cpu 处理数据比单线处理数据快一倍，因此单线会出现 Receive FIFO Overflow，而双线不会。
 
-
-
+- 上面的解释感觉不合理，现在怀疑是时钟延展，就是说单线和双线都会有这个问题，但是双线的时候会开启时钟延展。那么时钟延展就会把时钟拉下去，等数据可以
+```
+In case of write, if the FIFO becomes empty DWC_ssi will
+stretch the clock until FIFO has enough data to continue the
+transfer.
+In case of read, if the receive FIFO becomes full DWC_ssi will
+stop the clock until data has been read from the FIFO.
+```
+- 测试情况如下：
+	- 使用四线模式，cpu 读数据，但不开时钟延展，很快就出现了 Receive FIFO overflow
+	- 使用四线模式，cpu 读数据，打开时钟延展，不会出现
+- 结论：单线会出现 Receive FIFO overflow，双线和四线出现的可能性会更大，但由于 designwa spi ip 为 dual、quad 提供了时钟延展功能，而单线不支持此功能，因此双线、四线测试时才不会出现 Receive FIFO overflow 的问题。
 
 
 # 问题：

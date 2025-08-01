@@ -43,7 +43,12 @@ setenv bootargs 'console=ttyS0,115200 earlycon=uart8250,mmio32,0xFC880000 videom
 
 setenv bootargs 'console=ttyS0,115200 earlycon=uart8250,mmio32,0xFC880000 videomem=240m@0x61000000 vdpmem=16m@0x60000000 cma=1024M root=/dev/ram mtdparts=m25p80:1m@16m(MTD1),15m@17m(MTD2) mtdparts_end'
 
+
+setenv bootargs 'console=ttyS0,115200 earlycon=uart8250,mmio32,0xFC880000 videomem=240m@0x61000000 vdpmem=16m@0x60000000 cma=1024M root=/dev/ram mtdparts=m25p80:1m@16m(MTD1),15m@17m(MTD2),3m@32m(MTD3) mtdparts_end'
+
 setenv bootcmd "dhcp ${kernel_addr_r} ${tftpserver}:mpw/Image.lzma && tftp ${ramdisk_addr_r} ${tftpserver}:mpw/rootfs.cpio.uboot && booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr}" 
+
+setenv bootcmd "sf probe && sf read 2280000 1000000 a00000 && sf read 5000000 1a00000 3C7758 && booti ${kernel_addr_r} ${ramdisk_addr_r}:0x3c7758 ${fdt_addr}" 
 
 
 ./boot4 -b virgo-3502-D4-sflash-1500000.boot -c serialdown 0x0 ../../goxceed/platform/gxloader/output/loader-sflash.bin -d /dev/ttyUSB0
@@ -65,6 +70,7 @@ sf probe
 sf read 2280000 1000000 9bf8cc
 sf read 5000000 1a00000 3C7758
 booti ${kernel_addr_r} ${ramdisk_addr_r}:0x3c7758 ${fdt_addr}
+
 
 
 需要把原来的 rootfs 制作成 cpio，然后压缩

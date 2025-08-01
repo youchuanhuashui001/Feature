@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "e7a7b303c61786dc",
+            "id": "50e41b9337aac610",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -21,34 +21,6 @@
               "pinned": true,
               "icon": "lucide-file",
               "title": "Home"
-            }
-          },
-          {
-            "id": "6188addc2d7ba15d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Malloc(申请内存).md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Malloc(申请内存)"
-            }
-          },
-          {
-            "id": "9afb7a3f7a60173e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/低功耗测试.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "低功耗测试"
             }
           },
           {
@@ -96,21 +68,7 @@
             }
           },
           {
-            "id": "53ebc9c3cbbf7818",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00 日记/2025/2025-7/2025-07-25-星期五.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-07-25-星期五"
-            }
-          },
-          {
-            "id": "c7a6177c3b096199",
+            "id": "e74be061461afb84",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -122,9 +80,51 @@
               "icon": "lucide-file",
               "title": "STB"
             }
+          },
+          {
+            "id": "db456bce8f9cd8b6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/低功耗测试.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "低功耗测试"
+            }
+          },
+          {
+            "id": "1c0d1c8c73f3421f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE A55 调试环境.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Virgo_NRE A55 调试环境"
+            }
+          },
+          {
+            "id": "6100901304ebc98e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 日记/2025/2025-8/2025-08-01-星期五.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-08-01-星期五"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -156,7 +156,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:Linux_Driver/Kernel_Fundamentals",
+                "query": "leo",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -274,20 +274,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/低功耗测试.md",
+                "file": "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE A55 调试环境.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "低功耗测试 的大纲"
+              "title": "Virgo_NRE A55 调试环境 的大纲"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 277.5
+    "width": 277.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -306,37 +307,46 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "9afb7a3f7a60173e",
+  "active": "0b9e162c9e91de0f",
   "lastOpenFiles": [
+    "00 日记/2025/2025-8",
     "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md",
-    "00 日记/2025/2025-7/2025-07-25-星期五.md",
-    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW Flash_SPI 模块验证.md",
     "01 项目/Chiptest/Virgo/mpw/chiptest/低功耗测试.md",
-    "Home.md",
-    "03 备忘/工作安排/STB.md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Malloc(申请内存).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制/Completion(完成量).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Wait_Queue(等待队列).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Timer(内核定时器).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Tasklet(任务队列).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Spinlock(自旋锁).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Mutex(互斥锁).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1/Completion(完成量).md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1",
-    "00 日记/2025/2025-7/2025-07-24-星期四.md",
-    "06 资源/模板/日记模板.md",
-    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW 芯片测试进度.md",
-    "工作安排.md",
-    "03 备忘/备忘录",
-    "03 备忘/工作安排/OTHER.md",
-    "03 备忘/工作安排/AI.md",
-    "02 学习/schedule/学习计划.md",
-    "00 日记/2025/工作安排.md",
-    "03 备忘/工作安排",
     "01 项目/Chiptest/Virgo/nre/beta/Virgo_NRE A55 调试环境.md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/PWM 子系统.md",
-    "02 学习/Linux_Driver_Learning/01_内核基础/子系统/GPIO子系统.md",
-    "00 日记/2025/2025-7/2025-07-23-星期三.md",
+    "00 日记/2025/2025-8/2025-08-01-星期五.md",
+    "typora/note.md",
+    "01 项目/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/gx_timer_chiptest.md",
+    "01 项目/Goxceed/Redmine/GxAPI Linux I2C 接口修改.md",
+    "Home.md",
+    "00 日记/2025/2025-7/2025-07-31-星期四.md",
+    "01 项目/Goxceed/Redmine/GxAPI Linux I2C 接口修改.md~",
+    "01 项目/Common/IP/dw_spi ip.md",
+    "02 学习/Linux_Driver_Learning/02_驱动分析/i2c/Linux_i2c_driver.md",
+    "01 项目/Robots/Redmine/Apus 支持 Nor Flash DS25M4AE.md",
+    "06 资源/image/Pasted image 20250731202203.png",
+    "06 资源/image/Pasted image 20250731202145.png",
+    "06 资源/image/Pasted image 20250731202009.png",
+    "06 资源/image/Pasted image 20250731201008.png",
+    "06 资源/image/Pasted image 20250731200805.png",
+    "06 资源/image/Pasted image 20250731195649.png",
+    "06 资源/image/Pasted image 20250731194555.png",
+    "06 资源/image/Pasted image 20250731194108.png",
+    "03 备忘/工作安排/STB.md",
+    "01 项目/Goxceed/Redmine/未命名.md",
+    "01 项目/Common/Flash/Flash.md",
+    "00 日记/2025/2025-7/2025-07-30-星期三.md",
+    "01 项目/Robots/Common/Robots_Common_Note.md",
+    "06 资源/模板/Robots 支持 Nor Flash.md",
+    "01 项目/Goxceed/Redmine/支持深圳芯存并行 Nand.md",
+    "00 日记/2025/2025-7/2025-07-29-星期二.md",
+    "00 日记/2025/2025-7/2025-07-28-星期一.md",
+    "01 项目/Common/排查问题记录/GDB 调试 A55.md",
+    "00 日记/2025/2025-7/2025-07-26-星期六.md",
+    "00 日记/2025/2025-7/2025-07-25-星期五.md",
+    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW 芯片测试进度.md",
+    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1",
+    "03 备忘/备忘录",
+    "03 备忘/工作安排",
     "01 项目/Chiptest/Virgo/mpw/chiptest/Linux dvfs(dynamic voltage frequency scaling).md~",
     "未命名.canvas",
     "07 临时/07_19/rk-gpio.c",
@@ -344,16 +354,7 @@
     "07 临时/07_19",
     "06 资源/image/Pasted image 20250717105828.png",
     "06 资源/image/Pasted image 20250715165835.png",
-    "06 资源/image/Pasted image 20250714151800.png",
-    "06 资源/image/Pasted image 20250714151753.png",
-    "06 资源/image/Pasted image 20250714150922.png",
-    "06 资源/image/Pasted image 20250707201811.png",
-    "06 资源/image/d4efbac5e3315d9ca0d9f1b7b5571330.jpg",
-    "06 资源/image/5aab6453f90ffaed301e76a451cd40f0.jpg",
-    "06 资源/image/Pasted image 20250702142746.png",
-    "06 资源/image/Pasted image 20250701140328.png",
     "00 日记/2025/2025-7",
-    "Excalidraw",
-    "02 学习/Linux_Driver_Learning/02_驱动分析/axi-dma/Linux_axidma_driver.md~"
+    "Excalidraw"
   ]
 }

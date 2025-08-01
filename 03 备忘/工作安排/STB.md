@@ -31,9 +31,9 @@
 	- [ ] 事业部用的接口是 `io/i2c` 目录下的，`gx_i2c_tx、gx_i2c_rx`
 	- [ ] 需要增加 i2c 的测试代码
 	- [ ] 关注下 slave 不响应的时候，tx 接口不会失败，rx 接口会失败的问题
-- [ ] flash_spi 模块在 linux 4.19 reboot 的时候，会打印一遍 flash 的 id，好像是跑到了 gxmisc 里面
-	- [ ] 原因是 flash 在 remove 的时候会再读一下 flash id，但不知道为啥这么干
-		- [ ] 只是为了退出四字节地址模式；和雄哥确认后不需要再读 flash id了，可以直接根据 size 来决定是否退出四字节地址模式
+- [x] flash_spi 模块在 linux 4.19 reboot 的时候，会打印一遍 flash 的 id，好像是跑到了 gxmisc 里面 ✅ 2025-08-01
+	- [x] 原因是 flash 在 remove 的时候会再读一下 flash id，但不知道为啥这么干 ✅ 2025-08-01
+		- [x] 只是为了退出四字节地址模式；和雄哥确认后不需要再读 flash id了，可以直接根据 size 来决定是否退出四字节地址模式 ✅ 2025-08-01
 	- [ ] 还需要 suspend 和 resume 支持
 
 
@@ -47,6 +47,7 @@
 - [ ] I2C eCos 添加测试代码
 - [ ] Virgo_NRE ROM flash 驱动通过 magic  aa55 这种方式，先双线读，再单线读，就可以同时支持4线flash和8线flash
 	- [设备树支持 SPINor、SPINand]
+	- [ ] Virgo_NRE ROM 目前用的是双线模式读数据，还需要兼容单线读数据；测试时发现 GD 64MBit 的 flash 只支持单线和四线，不支持单线。但 rom 考虑的是只支持双线，所以就会起不来。
 
 
 - [ ] [[Virgo_MPW 芯片测试进度]]
@@ -63,7 +64,7 @@
 		- 等 uart 测试完后再换
 - [ ] Virgo_MPW 所有外设模块低功耗测试[[低功耗测试]]
 	- [ ] GPIO 功耗测试时，需要把内部上拉全部配成 0
-	- [ ] flash_spi linux 驱动需要去掉 remove 时候的读 id
+	- [x] flash_spi linux 驱动需要去掉 remove 时候的读 id ✅ 2025-08-01
 	- [ ] 需要测试开时钟时的功耗，以及关时钟时的功耗；以及 idle 模式的功耗，至于什么是 idle 需要向 soc 确认
 
 
@@ -91,3 +92,9 @@
 		- 因此不需要修改 i2c 原始驱动 https://git.nationalchip.com/gerrit/#/c/122907/2
 	- 查看 linux 中的 i2c device driver，tx 时均使用 1 个 msg，rx 时均使用 2 个 msg
 
+
+
+
+
+# Goxceed 版本发布
+- [ ] virgo-5.0.0 新增 PPI Nand：https://git.nationalchip.com/redmine/issues/413923?issue_count=305&issue_position=13&next_issue_id=406477&prev_issue_id=414085

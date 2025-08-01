@@ -116,6 +116,16 @@ block erase 擦除的地址范围包含写保护的地址就不会执行了
 
 ## SPINand Flash
 
+### ROM、Stage1 设计
+- rom 读 stage1 时不需要考虑坏块，stage1 读 stage2 的时候需要考虑坏块
+	- stage1 的地址是固定在0地址的，rom 只会从这个地址读数据；而 flash 在出厂的时候会确保 block0 是好块，所以不需要考虑坏块。
+	- stage2 的地址不是固定的，可能并不在第一个 block，可能在其它的 block，而从0地址到其它的 block 不一定是好块，所以需要考虑坏块。
+- 多备份问题：
+	- spinand 会产生跳变，即使 block0 是好块，如果纠错能力是4 bit，那么可能会出现跳变5bit、6bit的情况
+	- 这样的话 rom 读 stage1 可能会出现起不来的情况，stage1 读 stage2 也可能会出现起不来的情况，甚至后面 stage2 读 kernel 也会出现起不来的情况
+	- 因此考虑 stage1 多备份其实是没有什么意义的，因为 rom 读 stage1 读对了，但是 stage1 读 stage2 的时候有跳变，那么也起不来，要备份就 stage1、stage2 都备份
+	- 遇到启动不了的情况，也就是说跳变的 bit 太多了，那么就重新烧一遍
+- 对于跳坏块的功能，是另一件事情，指的是在擦写的过程中会出现失败的情况，这种时候就标记为坏块。下一次读取的时候就会根据坏块标记跳到下一个 block 读。
 
 
 
@@ -177,4 +187,50 @@ void NAND_CacheRead(uint32_t startPage, uint32_t numPages) {
     // 最后一页需要结束Cache read模式
     NAND_SendCommand(0x3F);    // 结束Cache read
 }
+```
+
+
+### nandcomtest 测试时有1bit或2bit 出错
+- 使用 nandcomtest 是发现在raw、auto_oob模式时会出现1bit或2bit错误
+- nfcv1
+	- auto_oob 模式写的时候先写 oob 区域，然后再写 main 区域，相当于 oob 区域的数据没有带 ecc，不会被纠正。所以 oob 区域可能出现跳变，导致数据错误。
+	- raw 模式写的时候先写 oob 区域，然后关掉 ecc 再写 main 区域，相当于 oob 区域和 main 区域都没有保护，不会被纠正。所以 main、oob 区域都可能出现跳变，导致数据错误
+- 修正方法：
+	- 在 nandcomtest 的比较逻辑中，如果只有1bit或2bit错误，则认为测试通过
+```c
+	if(mode != 0) {
+		p_src = p1;
+		p_dst = p3;
+		for(i = 0; i < oob_len; i++)
+		{
+			if((*p_src++) != (*p_dst++))
+			{
+
+				// 获取刚刚比较的不相同的两个字节的值
+				uint8_t read_val = *(p_src - 1);
+				uint8_t orig_val = *(p_dst - 1);
+
+				// 通过异或操作找出所有不同的 bit
+				uint8_t diff = read_val ^ orig_val;
+
+				// 计算不同的 bit 的数量 (汉明距离)
+				int bit_errors = 0;
+				while (diff > 0) {
+					diff &= (diff - 1); // Brian Kernighan's algorithm
+					bit_errors++;
+				}
+
+				// 如果 bit 错误数小于等于2 (即1-bit或2-bit跳变)，则认为是可纠正的错误
+				if (bit_errors <= 2) {
+					// 打印一条提示信息并继续，这不被视为致命错误
+					printf("INFO: Correctable OOB error at i=%d. Read=0x%02x, Orig=0x%02x, Bit Diffs=%d\n", i, read_val, orig_val, bit_errors);
+					continue;
+				}
+				while(1);
+				free(p1);
+				free(p3);
+				return -1;
+			}
+		}
+	}
 ```
