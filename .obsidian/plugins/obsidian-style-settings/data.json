@@ -14,5 +14,14 @@
   "blue-topaz-theme@@left-ribbon-style": "default-left-ribbon-style",
   "blue-topaz-theme@@scrollbar-style-option": "default-scrollbar",
   "blue-topaz-theme@@tab-title-bar-position": false,
-  "blue-topaz-theme@@view-button-front": false
+  "blue-topaz-theme@@view-button-front": false,
+  "id@@colorblind_protan-deutan": false,
+  "id@@colorblind_tritan": false,
+  "id@@h1-underline": false,
+  "zen@@window-font-size": 15,
+  "zen@@text-justify": false,
+  "zen@@action-button-on": true,
+  "id@@h2-color-theme@@dark": "#30D6B3",
+  "id@@h3-color-theme@@dark": "#73EE7D",
+  "id@@h4-color-theme@@dark": "#6D57CE"
 }

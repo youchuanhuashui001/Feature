@@ -180,7 +180,7 @@ state:0x61
 ## 测试串口长时间收发
 - UART0 测试ok
 - UART1 测试ok
-- UART2 测试中
+- UART2 测试ok
 
 
 

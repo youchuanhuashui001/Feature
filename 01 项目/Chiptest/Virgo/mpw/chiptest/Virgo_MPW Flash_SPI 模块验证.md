@@ -4,10 +4,9 @@ tags:
 ---
 # 验证进度：
 - 总验证点:: 8
-- 已完成:: 6
+- 已完成:: 8
 - 备注:: 需要把 gxloader 的工作频率提上去，linux4.9 也可以跑 50MHz
 	- gxloader 工作频率为 25MHz，uboot 也为 25MHz、linux4.19 也为 25MHz。
-	- 8线、多cs、spinand 没测
 
 
 # 关联问题号
@@ -73,6 +72,13 @@ program 16MiB elapse 9885ms, 1657 KB/S
 read 16MiB elapse 1356ms, 12082 KB/S
 erase 16MiB elapse 25468ms, 643 KB/S
 
+# 模块频率 297MHz 4分频 DMA 八线
+boot> flash speedtest
+erase flash size 16MiB
+program 16MiB elapse 9025ms, 1815 KB/S
+read 16MiB elapse 229ms, 71545 KB/S
+erase 16MiB elapse 23903ms, 685 KB/S
+
 
 # 模块频率 297MHz 6分频 DMA 八线
 boot> flash speedtest
@@ -98,10 +104,22 @@ read 16MiB elapse 2712ms, 6041 KB/S
 erase 16MiB elapse 25426ms, 644 KB/S
 
 
+# 模块频率 297MHz 8分频 DMA 八线
+boot> flash speedtest
+erase flash size 16MiB
+program 16MiB elapse 9282ms, 1765 KB/S
+read 16MiB elapse 455ms, 36008 KB/S
+erase 16MiB elapse 23931ms, 684 KB/S
+
 
 # mxic
 
-# 模块频率 297MHz  6分频 CPU 八线
+# 模块频率 396MHz 4分频 DMA 八线
+boot> flash speedtest
+erase flash size 16MiB
+program 16MiB elapse 11954ms, 1370 KB/S
+read 16MiB elapse 172ms, 95255 KB/S
+erase 16MiB elapse 56713ms, 288 KB/S
 
 
 
@@ -888,3 +906,38 @@ int spi_slave_of_to_plat(struct udevice *dev, struct dm_spi_slave_plat *plat)
 
 ## 【已解决】SPINand 启动 Linux4.9 时报访问了 0 地址
 - 更新了 gxmisc 库就好了
+
+
+
+## MXIC MX66UM2G45G 测试改动
+- gxmisc 打补丁： https://git.nationalchip.com/gerrit/#/c/119584/
+- gxloader 改动：引脚复用使用 GPIO_B01 ~ GPIO_B10
+```diff
+-- a/conf/virgo/3502-D4/boot.config
++++ b/conf/virgo/3502-D4/boot.config
+@@ -150,8 +150,8 @@ CONFIG_UART_TYPE = DW
+ CONFIG_MULPIN_VERIFY = y
+ 
+ # if you want to use quad/octal mode to read/write flash, please enable quad or octal
+-ENABLE_SPI_QUAD = y
+-ENABLE_SPI_OCTAL = n
++ENABLE_SPI_QUAD = n
++ENABLE_SPI_OCTAL = y
+ 
+ CONFIG_24M_XTAL = y
+ CONFIG_SARADC = n
+diff --git a/drivers/flash/flash.c b/drivers/flash/flash.c
+index cda294758..a331a20c1 100644
+--- a/drivers/flash/flash.c
++++ b/drivers/flash/flash.c
+@@ -34,7 +34,7 @@ inline int gxflash_init(void)
+ {
+        int magic = 0;
+        int ret     = -1;
+-       int cs = 0;
++       int cs = 1;
+ 
+ #ifdef CONFIG_ENABLE_EMMCFLASH
+        if (gx_sdmmc_init(GX_SDMMC_DEV_EMMC) == 0)
+
+```

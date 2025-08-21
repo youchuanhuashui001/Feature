@@ -1,3 +1,13 @@
+
+# 芯片特性
+- Apus：
+	- FPGA 阶段使用数字，芯片阶段包括模拟接收和模拟发射
+- Fornax：
+	- FPGA 阶段就有模拟，芯片阶段包括模拟接收和模拟发射
+- Sagitta：
+	- FPGA 阶段使用外围电路接收和发射，芯片阶段使用外围电路发射，使用内部模拟接收
+		- 客户觉得芯片内部的模拟发射驱动能力太弱，因此使用外围电路辅助发射
+
 # IR 控制器
 
 - 相关问题号：
@@ -611,7 +621,7 @@
 
 
 
-## RX
+### RX
 - 如何收数据？
 	- 使能相关的中断，使能 rx 开始接收，从 rx_buf 中取走数据
 - 如何收 Repeat？
@@ -727,3 +737,177 @@
 ## 自由模式下如果 txfifo num 为 0，将数据填到 txfifo 后可能无法发出
 - 先使能 tx，再往 txfifo 填数据，可能导致从 txfifo 取数据时略过 startbit 导致无法发出数据
 - 软件规避：使能 tx 之前，先往 txfifo 中填充至少一个数据。
+
+
+
+## 外围电路解析
+![[6ec55400f680b8ab5b0b1b9ceb6cc7e9 1.jpg]]
+NPN 导通条件： Vb＞Ve+0.7V
+PNP 导通条件： Vb＜Ve-0.7V
+### 发射
+![[Pasted image 20250808133341.png]]
+
+### 接收
+
+![[Pasted image 20250808133353.png]]
+
+
+- 测量 R65 电阻上的波形，也就是 IR_REC1 引脚上的波形
+- 也可以测量 C 极上的波形，一样的。
+	- 注意：需要查看三极管的封装图，有的管子单独那个脚是 C 极，有的单独的脚是 B 极。
+![[a66d00568f499a1e2c18aa50bef04474.jpg]]
+
+
+## 测试接口
+![[Pasted image 20250809111032.png]]
+正常发射：芯片的发射脚通过 o_irc_txd 到模拟部分的 tx 脚发出去
+正常接收：从模拟部分的 rx 脚收到数据，经过i_irc_rxd，再到 irc_rxd 就能收到数据
+旁路数字发射：数字PAD 过 irc_txd_pad，再过 o_irc_txd 给到模拟部分的 tx 脚发出去。   这里旁路数字发射指的是，把旁路的数字信号发射出去吧，看看要发的数据对不对
+旁路模拟发射：irc_txd 过 irc_txd_pad，再过 io matrix，通过数字 PAD 发出。                  这里旁路模拟发射指的是，用旁路的数字脚来模拟发射数据吧，看看发出的数据对不对
+旁路数字接收：模拟部分的 rx 脚收到的数据直接给到 ANA TEST。                                     这里旁路数字接收指的是，用旁路的数字脚来接收数据吧，看看收到的数据对不对
+旁路模拟接收：ANA TEST 脚的数据给到 i_irc_rxd ，再到 irc_rcd。                                   这里旁路模拟接收指的是，把旁路的数字信号接收进来吧，看看要收的数据对不对
+
+
+
+### 正常发射：
+- REG_IRC_TEST(0x40) 配置 irc_txd_sel = 1
+- REG_IRC_ANA(0x3C) 配置 ana_tx_en = 1，使能内部的发射模拟电路
+- 内部的数字信号 --> 调制器 --> 内部的模拟部分 --> 外部的引脚 --> 驱动 发射管
+
+### 正常接收：
+- REG_IRC_TEST(0x40) 配置 irc_rxd_sel = 1
+- REG_IRC_ANA(0x3C) 配置 ana_rx_en = 1，使能接收模拟电路
+- 可选配置：rx_isel、rx_vcmsel
+- 红外管 --> 外部的引脚 --> 内部的模拟电路 --> 解调 --> 去抖 --> 内部的数字部分 --> FIFO
+
+![[Pasted image 20250812142634.png]]
+
+
+### 旁路数字发射：irc_txd_sel = 0；ANA_TEST 配置为红外 TX 输入
+- 独立验证 内部的 TX 部分和外部驱动电路。
+- 可以直接在外部的 PAD 上灌带有载波的红外波形，查看是否能够正常驱动红外发射管。
+- **其实就是把内部的数字换成旁路的数字 PAD，然后用内部的模拟发射部分发出去，看看内部的模拟发射部分或者外部的驱动电路是否正常。**
+- REG_IRC_TEST(0x40) 配置 irc_txd_sel = 0
+- REG_IRC_ANA(0x3C) 配置 ana_tx_en = 1，使能内部的发射模拟电路
+- 外部引脚 --> IO Matrix --> irc_txd_pad --> irc_txd_sel = 0 --> o_irc_txd --> 内部的 TX 模拟部分 --> 外部的引脚 --> 驱动发射管。
+
+
+
+
+### 旁路模拟发射：
+- 独立验证 数字逻辑 的波形生成功能。
+- 通过把数字核心产生的信号直接输出到一个通用的 IO 口，完全绕过内部的 TX 模拟发射模块和外部的红外管。
+- REG_IRC_TEST(0x40) 配置应该没关系
+- REG_IRC_ANA(0x3C) 配置 ana_tx_en = 0，确保内部的模拟发射电路关闭。
+- 数字逻辑产生的波形 --> 调制 --> irc_tx_sel = 1 --> o_irc_txd --> 外部的测试引脚。
+- **其实就是把内部产生的数字逻辑放到一个PAD上发出去，看看内部的数字发射部分是否正常。**
+
+![[Pasted image 20250812142652.png]]
+
+- 代码配置：
+	- 0x40：发射配成 1，发射通道选择正常模式，内部数字接内部模拟
+	- 0x3C：ana_tx_en 配成0，表示不启用内部的模拟发射
+	- 引脚复用随便将一个引脚配置成 IRC_TX_TEST(O)
+		- 因为是发射的时候，这个引脚是输出模式
+```diff
+diff --git a/board/nationalchip/apus_nre_1v/pinmux.c b/board/nationalchip/apus_nre_1v/pinmux.c
+index ab2fc100..c496a717 100644
+--- a/board/nationalchip/apus_nre_1v/pinmux.c
++++ b/board/nationalchip/apus_nre_1v/pinmux.c
+@@ -57,7 +57,7 @@ static const GX_PIN_CONFIG pin_table[] = {
+     /* {13,  2  }, // P1_5 */
+     /* {14,  33 }, // P1_6 */
+     {15,  0  }, // P1_7
+-    {16,  29 }, // P2_0
++    {16,  126 }, // P2_0
+     {17,  10 }, // P2_1
+     {18,  97 }, // P2_2
+     {19,  98 }, // P2_3
+diff --git a/cmd/gx_ir_test.c b/cmd/gx_ir_test.c
+index c8977251..d406fc77 100644
+--- a/cmd/gx_ir_test.c
++++ b/cmd/gx_ir_test.c
+@@ -816,10 +816,10 @@ int gx_ir_test_send_std(GX_HAL_IR *ir_dev, uint8_t type)
+ 	uint32_t data[4] = {0x23456789,0xeeff1122,0x1b2b3b4b,0x90441c02};
+ 	memset(&tx, 0, sizeof(tx));
+ 	tx.type = type;
+-	tx.modulation_en = 1;
++	tx.modulation_en = 0;
+ 	tx.data = (void*)data;
+ 	tx.data_len = 4;
+-	gx_hal_ir_send_data_std(ir_dev, &tx, gx_mdelay, 0);
++	gx_hal_ir_send_data_std(ir_dev, &tx, gx_mdelay, 20);
+ 
+ 	return 0;
+ }
+diff --git a/drivers/hal/src/ir/gx_hal_ir.c b/drivers/hal/src/ir/gx_hal_ir.c
+index aa0f81e2..169994a9 100644
+--- a/drivers/hal/src/ir/gx_hal_ir.c
++++ b/drivers/hal/src/ir/gx_hal_ir.c
+@@ -338,12 +338,12 @@ int gx_hal_ir_send_data_std(GX_HAL_IR *ir_dev, const GX_HAL_IR_TX_CFG_T *tx,
+ 
+ 	gx_hal_ir_recv_close(ir_dev);
+ 	gx_hal_ir_get_ana_reg(ir_dev, &ana_reg);
+-	if(ir_dev->internal_ana_en && !ana_reg.field.tx_ana_en)
+-	{
++//	if(ir_dev->internal_ana_en && !ana_reg.field.tx_ana_en)
++//	{
+ 		ana_reg.field.rx_ana_en = 0;
+-		ana_reg.field.tx_ana_en = 1;
++		ana_reg.field.tx_ana_en = 0;
+ 		gx_hal_ir_set_ana_reg(ir_dev, &ana_reg);
+-	}
++//	}
+```
+- 默认发的波形是带载波的，现在把载波去掉了，逻辑分析仪抓到的波形是这样的
+![[Pasted image 20250812150117.png]]
+
+
+
+
+
+
+### 旁路数字接收：
+- 独立验证 数字逻辑核心的解码功能
+- REG_IRC_TEST(0x40) 配置 irc_rxd_sel = 0
+- REG_IRC_ANA(0x3C) 配置 ana_rx_en = 0
+- 外部引脚灌入带载波的红外波形 --> 解调 --> 去抖 --> 内部的数字部分 --> FIFO
+- **外部用一个引脚灌数字红外波形，数据不过内部模拟，直接给到内部数字部分，查看内部的数字部分能否接受正常**
+
+
+
+
+- 上面的说法感觉是错误的，在接收的时候，经由内部的模拟接收部分放大、滤波后的数据，通过 ANA TEST 引脚输出出来，查看内部的模拟接收部分是否正常。
+	- 此时 ANA TEST 是输出模式
+
+### 旁路模拟接收：
+- 独立验证 模拟部分的放大功能。
+- REG_IRC_TEST(0x40) 配置 irc_rxd_sel = 0
+- REG_IRC_ANA(0x3C) 配置 ana_rx_en = 1
+- REG_IRC_ANA(0x3C) 配置 rx_test_en = 1
+- 外部的红外光 --> 模拟脚 --> 内部的模拟接收部分 --> 测试引脚
+- **外部用一个引脚接收红外管的数据，数据不过内部数字部分，直接把模拟接收到的数据用一个引脚发出来，查看内部的模拟部分是否接受正常**
+
+
+
+
+
+- 上面的说法感觉是错误的，应该是外部有一个模拟接收的电路，遥控器发送红外波形，经过红外发射管之后的数据被外围电路放大、滤波，然后给到 ANA TEST 引脚 --> i_irc_rxd --> irc_rxd 给到内部数字部分
+	- 没有使用内部的模拟接收部分，采用外部的模拟接收电路，以及内部的数字接收部分。
+	- 此时 ANA TEST 是输入模式
+
+
+
+![[Pasted image 20250812142704.png]]
+
+
+
+
+# 什么时候需要配置反相？
+- 内部数字要求无信号时为低电平，如果模拟给数字的信号，IDLE时是高电平，那就需要反相
+
+
+
+# 发射时可以使用手机相机查看红外管是否有变红
+- 正常情况下，红外发射管导通的时候，使用手机相机查看可以看到红外发射管变红
+

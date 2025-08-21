@@ -324,6 +324,12 @@ __xstring(CYG_LABEL_DEFN(_label)) ":\n"                                      \
 
 
 
+
+### UART 对接时钟接口
+- uart 在起来的时候不是使用 `designerware_serial.c  dsw_serial_init_void`，而是使用`hal_dsw_serial_init`先初始化的，这个在arm的库里面调过来的，而这个时候gxloader就必须不能关闭时钟；因为时钟是通过 MOD_INIT 的方式注册的，这个时候时钟都还没有注册进来，打开时钟也没用，所以就放到 designware_serial.c 中开时钟吧。
+- 实际测试：在 `hal_dsw_serial_init` 中拿不到时钟句柄。
+
+
 # 设备树
 
 ### `#address-cells` 和 `#size-cells`

@@ -2,7 +2,6 @@
   "obsidian-excalidraw-plugin",
   "calendar",
   "dataview",
-  "i18n",
   "homepage",
   "obsidian-activity-history",
   "calendar-beta",
@@ -10,12 +9,10 @@
   "editing-toolbar",
   "obsidian-markmind",
   "vscode-editor",
-  "obsidian-vimrc-support",
   "copilot",
   "obsidian-style-settings",
   "templater-obsidian",
-  "obsidian-banners",
   "obsidian-custom-file-extensions-plugin",
-  "obsidian-kanban",
-  "obsidian-tasks-plugin"
+  "pkmer",
+  "i18n"
 ]

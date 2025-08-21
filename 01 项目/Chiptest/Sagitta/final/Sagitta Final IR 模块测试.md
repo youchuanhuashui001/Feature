@@ -225,6 +225,9 @@ Done(0),recv type: NEC , data: bf40fd02
 Done(10),recv type: NEC REPEAT, data: bf40fd02
 ```
 示波器抓取到的波形：
+![[a66d00568f499a1e2c18aa50bef04474 1.jpg]]
+
+
 引导码 + 0000 0010 1111 1101 0100 0000 1011 1111
 引导码 + 0 2 f d 4 0 b f
 - rc5 -- 5008

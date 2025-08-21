@@ -5,7 +5,8 @@
 	- [x] 测试用例增加对接 ws2812 的功能测试
 	- [x] 增加输出带死区的 pwm 功能
 	- [x] 需要重新上传测试用例结果 [completion:: 2025-04-25]
-	- [ ] iodma 驱动轮询和中断分开
+	- [x] iodma 驱动轮询和中断分开
+		- [x] 轮询不能实现4组寄存器循环的功能
 - [x] ir 引脚复用的补丁上传 [completion:: 2025-04-27]
 - [x] 对接 ir
 - [x] 内封 flash，会封 8Mbit 的 P25Q80SU，这是宽电压的 flash，要确认下驱动是否支持，还要看下 bbt 是不是也用这款，如果用的话也要看看代码 [completion:: 2025-05-14]
@@ -16,7 +17,8 @@
 		- [x] 老的 P25Q80L 已支持，所以不用更新 bootx [completion:: 2025-05-14]
 	- [x] 还有一点比较奇怪，这款 flash 默认是支持的，但是为什么翔哥那边说跑不起来？
 		- [x] 由于硬件电源转换芯片焊接问题导致的，硬件重新焊接后没问题
-- [ ] scpu stage1 驱动有问题，读的时候默认把 dmacr 也就是 r 的 dma 打开了
-	- [ ] canopus stage1 使用 scpu 的 spl_spinor. c  通了：[123858](https://git.nationalchip.com/gerrit/123858 "Reload the change (Shortcut: R)")
-	- [ ] virgo mpw stage1 使用 scpu 的 spl_spinor. c 通了：[123771](https://git.nationalchip.com/gerrit/123771 "Reload the change (Shortcut: R)")
+- [x] scpu stage1 驱动有问题，读的时候默认把 dmacr 也就是 r 的 dma 打开了
+	- [x] canopus stage1 使用 scpu 的 spl_spinor. c  通了：[123858](https://git.nationalchip.com/gerrit/123858 "Reload the change (Shortcut: R)")
+	- [x] virgo mpw stage1 使用 scpu 的 spl_spinor. c 通了：[123771](https://git.nationalchip.com/gerrit/123771 "Reload the change (Shortcut: R)")
+	- [x] 不考虑此代码了
 
