@@ -7,12 +7,12 @@
   "calendar-beta",
   "cm-editor-syntax-highlight-obsidian",
   "editing-toolbar",
-  "obsidian-markmind",
   "vscode-editor",
   "copilot",
   "obsidian-style-settings",
   "templater-obsidian",
   "obsidian-custom-file-extensions-plugin",
   "pkmer",
-  "i18n"
+  "i18n",
+  "open-in-new-tab"
 ]

@@ -1,0 +1,66 @@
+/*
+ * dts file for NationalChip Virgo MPW EVB M1-1
+ *
+ * Copyright (c) 2025 NationalChip Co., Ltd.
+ *
+ */
+
+/dts-v1/;
+
+#include "virgo-mpw-evb.dtsi"
+
+/ {
+    model = "NationalChip Virgo EVB M1-1";
+};
+
+&sdcard {
+    max-frequency = <200000000>;
+    bus-width = <4>;                // sd卡总线为4线
+    num-slots = <1>;                // 在主板上接入sd卡控制器的sd卡卡槽数目
+    supports-sd;                    // 支持sd卡标记
+    cap-sd-highspeed;               // 卡控制器支持sd高速卡标记
+    sd-uhs-sdr104;
+    virgo,dto-reg = <0xf0a06068>;
+    // vmmc-supply = <&sd_reg>;
+    virgo,sample-phase = <5>;
+    virgo,drive-phase = <1>;
+    no-sdio;
+    no-mmc;
+    status = "okay";
+};
+
+&emmc {
+    bus-width = <8>;
+    max-frequency = <200000000>;
+    supports-emmc;
+    non-removable;
+    keep-power-in-suspend;
+    cap-mmc-highspeed;
+    mmc-hs400-1_8v;
+    mmc-hs400-enhanced-strobe;
+    virgo,dto-reg = <0xf0a06050>;
+    // virgo,card-drv-strength-type = <3>;
+    // virgo,stb-phase = <0>;
+    virgo,sample-phase = <5>;
+    virgo,drive-phase = <0>;
+    no-sdio;
+    no-sd;
+    status = "okay";
+};
+
+&sdio0 {
+    bus-width = <4>;  //sd卡总线为4线
+    num-slots = <1>;  //在主板上接入sd卡控制器的sd卡卡槽数目
+    supports-sd;  //支持sd卡标记
+    cap-sd-highspeed;  //卡控制器支持sd高速卡标记
+    virgo,dto-reg = <0xf0a06070>;
+    non-removable;
+    //vmmc-supply = <&sd_reg>;
+    // max-frequency = <25000000>;
+    virgo,sample-phase = <4>;
+    virgo,drive-phase = <3>;
+    // no-sd;
+    no-mmc;
+    //no-1-8-v;  //注释掉会导致控制器默认按最高的sdr104来配置
+    status = "okay";
+};

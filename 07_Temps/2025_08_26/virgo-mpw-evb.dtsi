@@ -1,0 +1,133 @@
+/*
+ * common dtsi file for NationalChip Virgo MPW EVBs
+ *
+ * Copyright (c) 2025 NationalChip Co., Ltd.
+ *
+ */
+
+/dts-v1/;
+
+#include "virgo-mpw.dtsi"
+#include "virgo-mpw-cs600.dtsi"
+#include "virgo-mpw-goxceed.dtsi"
+#include "virgo-mpw-android.dtsi"
+
+/ {
+    model = "NationalChip Virgo EVB";
+    compatible = "nationalchip,virgo-mpw-evb", "nationalchip,virgo-mpw";
+
+    chosen {
+        stdout-path = "serial0:1500000n8";
+    };
+
+    secure-chosen {
+        stdout-path = "serial0:1500000n8";
+    };
+
+    memory@0 {
+        device_type = "memory";
+        reg = <0x0 0x0 0x0 0x80000000>;
+    };
+
+    reserved-memory {
+        ranges;
+        #address-cells = <2>;
+        #size-cells = <2>;
+        gxloader {
+            reg = <0x0 0x0 0x0 0xa0000>;
+            no-map;
+        };
+    };
+
+    vdd_cpu: regulator-cpu {
+        compatible = "pwm-regulator";
+        pwms = <&timer0 1 10000>;
+        regulator-min-microvolt = <850000>;
+        regulator-max-microvolt = <1050000>;
+        regulator-boot-on;
+        regulator-always-on;
+        regulator-name = "vdd-cpu";
+        voltage-table = <1050000 33>,
+                        <1000000 44>,
+                        < 950000 55>,
+                        < 900000 66>,
+                        < 850000 77>;
+    };
+
+    vdd_gpu: regulator-gpu {
+        compatible = "pwm-regulator";
+        pwms = <&timer0 2 10000>;
+        regulator-min-microvolt = <710000>;
+        regulator-max-microvolt = <1020000>;
+        regulator-boot-on;
+        regulator-always-on;
+        regulator-name = "vdd-gpu";
+        voltage-table = <1020000 0>,
+                        < 960000 20>,
+                        < 900000 40>,
+                        < 840000 60>,
+                        < 780000 80>,
+                        < 710000 100>;
+    };
+
+    vdd_pcie: regulator-pcie {
+        compatible = "regulator-fixed";
+        regulator-name = "vdd-pcie";
+        regulator-min-microvolt = <3300000>;
+        regulator-max-microvolt = <3300000>;
+        gpio = <&gpio1 11 GPIO_ACTIVE_HIGH>;
+        enable-active-high;
+    };
+};
+
+&cpu_opp_table {
+    /delete-node/ opp@1800;
+    /delete-node/ opp@1600;
+    /delete-node/ opp@1500;
+    /delete-node/ opp@1400;
+
+    /delete-node/ opp@1200;
+    /delete-node/ opp@1100;
+};
+
+&cpu0 {
+    cpu-supply = <&vdd_cpu>;
+};
+
+&cpu1 {
+    cpu-supply = <&vdd_cpu>;
+};
+
+&cpu2 {
+    cpu-supply = <&vdd_cpu>;
+};
+
+&cpu3 {
+    cpu-supply = <&vdd_cpu>;
+};
+
+&gpu {
+    mali-supply = <&vdd_gpu>;
+};
+
+&emmc {
+    bus-width = <8>;
+    max-frequency = <50000000>;
+    supports-emmc;
+    non-removable;
+    keep-power-in-suspend;
+    cap-mmc-highspeed;
+    sd-uhs-sdr50;
+    // mmc-ddr-3_3v;
+    // mmc-ddr-1_8v;
+    // mmc-hs400-1_8v;
+    // mmc-hs400-enhanced-strobe;
+    virgo,dto-reg = <0xf0a06050>;
+    virgo,card-drv-strength-type = <3>;
+    // virgo,stb-phase = <0>;
+    virgo,sample-phase = <2>;
+    virgo,drive-phase = <2>;
+    no-sdio;
+    no-sd;
+    status = "okay";
+};

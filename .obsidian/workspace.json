@@ -16,7 +16,7 @@
               "state": {
                 "file": "home_page.md",
                 "mode": "preview",
-                "source": true
+                "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
@@ -24,47 +24,17 @@
             }
           },
           {
-            "id": "63a5c0359580f4df",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW 芯片测试进度.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Virgo_MPW 芯片测试进度"
-            }
-          },
-          {
-            "id": "6e9dcf16e62002d2",
+            "id": "da3845365dd35755",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 日记/2025/2025-8/2025-08-21-星期四.md",
+                "file": "typora/note.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-08-21-星期四"
-            }
-          },
-          {
-            "id": "59ed4b6a692c130e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 项目/Chiptest/Sagitta/Nre/Sagitta IODMA、IR 添加 suspend、resume 功能.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Sagitta IODMA、IR 添加 suspend、resume 功能"
+              "title": "note"
             }
           }
         ]
@@ -99,7 +69,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#todo",
+                "query": "gdb .boot",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -134,7 +104,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 409.5
+    "width": 325
   },
   "right": {
     "id": "329513b606a31f86",
@@ -143,7 +113,7 @@
       {
         "id": "0ed646c319fb51cd",
         "type": "tabs",
-        "dimension": 23.637650389242744,
+        "dimension": 30.833333333333336,
         "children": [
           {
             "id": "2b8bf9e8dc642e68",
@@ -209,7 +179,7 @@
       {
         "id": "7baf7bde227a91ce",
         "type": "tabs",
-        "dimension": 76.36234961075725,
+        "dimension": 69.16666666666667,
         "children": [
           {
             "id": "3bfecc5090389071",
@@ -230,8 +200,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 277.5,
-    "collapsed": true
+    "width": 277.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -253,52 +222,52 @@
   },
   "active": "50e41b9337aac610",
   "lastOpenFiles": [
-    "03 备忘/工作安排/STB.md",
-    "03 备忘/工作安排/OTHER.md",
-    "03 备忘/工作安排/AI.md",
-    "01 项目/Goxceed/Redmine/Virgo ecos i2c 驱动读失败会报错，写失败不会报错.md",
-    "01 项目/Goxceed/Redmine/gen_spi 支持 gxvlink.md",
-    "01 项目/Chiptest/Virgo/nre/rom spi nor flash 倍速确认.md",
-    "01 项目/Chiptest/Virgo/mpw/外设模块低功耗测试.md",
-    "01 项目/Goxceed/Redmine/GPIO 添加 GXAPI 接口.md",
-    "01 项目/Goxceed/Redmine/DW_I2C msg.md",
-    "01 项目/Goxceed/Redmine/Linux MTD 分区.md",
-    "home_page.md",
-    "01 项目/Goxceed/Redmine/Goxceed 版本发布.md",
-    "02 学习/arch/ARM/AXI 总线学习.md",
-    "00 日记/2025/2025-8/2025-08-21-星期四.md",
-    "01 项目/Chiptest/Virgo/mpw/chiptest/Virgo_MPW 芯片测试进度.md",
-    "01 项目/Chiptest/Sagitta/Nre/Sagitta IODMA、IR 添加 suspend、resume 功能.md",
-    "06 资源/模板/日记模板.md",
-    "00 日记/2025/2025-8/2025-08-20-星期三.md",
-    "01 项目/Chiptest/Sagitta/Nre/Sagitta IR、IODMA 模块文档.md",
-    "01 项目/Common/IP/gx_ir_drv_test_use_driver-sagitta.c",
-    "01 项目/Chiptest/Sagitta/Nre/Sagitta NRE IR 模块验证.md",
-    "Untitled.md",
-    "欢迎.md",
-    "work.base",
-    "00 日记/2025/2025-8/2025-08-19-星期二.md",
-    "01 项目/Common/IP/ai_ir ip.md",
-    "01 项目/Goxceed/Redmine/支持 DM SPINand flash.md",
-    "01 项目/Chiptest/Sagitta/ir/Sagitta NRE FPGA IR 模块验证.md",
-    "06 资源/image/Pasted Image 20250819101929_398.png",
-    "06 资源/image/Pasted Image 20250819100958_693.png",
-    "06 资源/image/Sagitta IODMA 测试用例.xlsx",
-    "06 资源/image/Screenshot_2025-08-14-13-40-08.png",
-    "06 资源/image/Screenshot_2025-08-14-13-39-56.png",
-    "06 资源/image/Screenshot_2025-08-14-13-39-41 1.png",
-    "06 资源/image/Screenshot_2025-08-14-13-39-14 1.png",
-    "06 资源/image/Screenshot_2025-08-14-13-37-25.png",
-    "06 资源/image/Screenshot_2025-08-14-13-37-17.png",
-    "06 资源/image/Screenshot_2025-08-14-13-36-36.png",
-    "06 资源/image/Screenshot_2025-08-14-13-33-43.png",
-    "01 项目/Chiptest/Sagitta/Nre",
-    "01 项目/Chiptest/Sagitta/回归验证",
-    "01 项目/Robots/Redmine/WS2812 接口设计.md~",
-    "00 日记/2025/2025-8",
-    "01 项目/Goxceed/Redmine/GxAPI Linux I2C 接口修改.md~",
-    "02 学习/Linux_Driver_Learning/01_内核基础/核心机制 1",
-    "03 备忘/备忘录",
+    "07_Temps/6-5/flash_spi_readid/readid.c",
+    "07_Temps/5-9/gen_spi_to_axi_dma_notwork/spi_dma.c",
+    "07_Temps/5-9/gen_spi_to_axi_dma_notwork/gen_spi_dma.c",
+    "07_Temps/3-18/virgo_peri/serial_test.py",
+    "07_Temps/3-18/virgo_peri/serial_send.py",
+    "07_Temps/3-18/virgo_peri/rtc.h",
+    "07_Temps/3-18/virgo_peri/dw_rtc.c",
+    "07_Temps/3-18/virgo_peri/bootmenu.c",
+    "07_Temps/2-27/iodma/pinmux.c",
+    "07_Temps/2-27/iodma/main.c",
+    "07_Temps/2-27/iodma/gx_ws2812.c",
+    "07_Temps/2025_08_26/README.md",
+    "07_Temps/linux_mount_rootfs.excalidraw.md",
+    "07_Temps/Temp.md",
+    "07_Temps/Temp.excalidraw.md",
+    "06_Resources/image/选区_636.png",
+    "06_Resources/image/选区_635-1726889369132-2.png",
+    "06_Resources/image/选区_608.png",
+    "06_Resources/image/选区_593.png",
+    "06_Resources/image/选区_591.png",
+    "06_Resources/image/选区_590.png",
+    "06_Resources/image/选区_589.png",
+    "06_Resources/image/选区_536.png",
+    "06_Resources/image/选区_483.png",
+    "06_Resources/image/选区_482.png",
+    "06_Resources/模板/日记模板.md",
+    "06_Resources/模板/周小结生成提示词.md",
+    "06_Resources/模板/Robots 支持 Nor Flash.md",
+    "06_Resources/模板/Linux_xxx_driver.md",
+    "06_Resources/模板/GoXceed 支持 SPINand Flash.md",
+    "06_Resources/模板/GoXceed 支持 PPI Nand Flash.md",
+    "06_Resources/模板/GoXceed 支持 Nor Flash.md",
+    "05_Lifes/生态鱼缸.md",
+    "05_Lifes/小智 AI.md",
+    "05_Lifes/密码.md",
+    "05_Lifes/备忘录.md",
+    "04_Others/xmind/driver/dw_uart/8250_port.md",
+    "04_Others/xmind/driver/dw_uart/8250_dw.md",
+    "04_Others/xmind/driver/dw_uart/8250_core.md",
+    "04_Others/xmind/driver/dw_i2c/dw_i2c.md",
+    "04_Others/年终总结/2024年终总结.md",
+    "04_Others/年终总结/2023年终总结.md",
+    "04_Others/年终总结/2022年终总结.md",
+    "04_Others/ubuntu_back_config/Shell 背景颜色配置.md",
+    "04_Others/lazyvim/Lazyvim 常用功能按键映射.md",
+    "04_Others/cursor/cursor 增强配置.md",
     "未命名.canvas"
   ]
 }

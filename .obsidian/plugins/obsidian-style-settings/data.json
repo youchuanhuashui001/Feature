@@ -21,7 +21,10 @@
   "zen@@window-font-size": 15,
   "zen@@text-justify": false,
   "zen@@action-button-on": true,
-  "id@@h2-color-theme@@dark": "#30D6B3",
+  "id@@headers-one-color": false,
   "id@@h3-color-theme@@dark": "#73EE7D",
-  "id@@h4-color-theme@@dark": "#6D57CE"
+  "catppuccin-theme-settings@@catppuccin-theme-dark": "ctp-mocha",
+  "catppuccin-theme-settings@@catppuccin-theme-accents": "ctp-accent-blue",
+  "catppuccin-icon-styles@@ctp-icon-hide": false,
+  "catppuccin-interface-styles@@ctp-bold-folder-title": false
 }
