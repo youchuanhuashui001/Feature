@@ -14,12 +14,13 @@
 ## libgpiod
 
 ## tools/gpio
-- getio
-- setio
-- getlevel
-- setlevel
-- enable_trigger
-- disable_trigger
+- [[linux_gpio_driver]]
+	- getio
+	- setio
+	- getlevel
+	- setlevel
+	- enable_trigger
+	- disable_trigger
 
 # GXHal
 ## 如何兼容多种操作系统
@@ -27,6 +28,25 @@
 - 如何区分 Linux_OS 和 NO_OS
 
 ## 操作 IOCTL 的时候需要用到不同的宏，这个宏是内核决定的，需要在 include 中套接一层？
+
+
+## 获取电平和设置电平接口是否需要先将 GPIO 配置成输入和输出模式？
+
+## 中断如何处理？
+- 老的处理方式：
+	- 打开设备
+	- 执行 ioctl，配置gpio和edge
+	- 设置一个信号，只设置一次，这个信号能够代表所有的 gpio
+	- 设置回调函数
+		- 回调函数可以获取到是什么信号，根据这个信号找到 gpio 对应的 callback 来执行
+- 新的处理方式：
+	- 打开设备
+	- 执行 ioctl，配置 gpio和edge
+	- 设置回调函数
+	- 创建一个线程，每个 gpio 使能了都会注册一个专属的线程
+		- 线程中执行 poll 操作，等待触发event
+		- 触发event后通过read函数读取事件
+		- 如果正常，则执行callback
 
 
 ## 通路

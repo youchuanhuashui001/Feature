@@ -1,6 +1,6 @@
 {
-  "folder": "00 日记/2025/2025-9",
-  "template": "06 资源/模板/日记模板",
+  "folder": "00_Journals/2025/2025-9",
+  "template": "06_Resources/模板/日记模板",
   "autorun": true,
   "format": "YYYY-MM-DD-dddd"
 }

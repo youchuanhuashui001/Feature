@@ -80,6 +80,14 @@ https://blog.csdn.net/tang_vincent/article/details/144562576
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- vexpress_defconfig
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j$(nproc)
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- dtbs
+# or
+make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- vexpress_defconfig
+make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- realview_defconfig
+mcimx6ul-evk         Freescale i.MX6UL Evaluation Kit (Cortex A7)
+
+
+make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- -j$(nproc)
+make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- dtbs
 ```
 
 

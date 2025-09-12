@@ -24,20 +24,103 @@
             }
           },
           {
-            "id": "da3845365dd35755",
+            "id": "04b192ea29faeb9c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "typora/note.md",
+                "file": "01_Projects/Goxceed/Redmine/支持 DM SPINand flash.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "note"
+              "title": "支持 DM SPINand flash"
+            }
+          },
+          {
+            "id": "cfc982db7df279b6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02_Learning/linux/driver/devices/gpio/linux_gpio_driver.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "linux_gpio_driver"
+            }
+          },
+          {
+            "id": "c1d94824d3330df9",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "02_Learning/linux/driver/devices/gpio/gpio.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "gpio.excalidraw"
+            }
+          },
+          {
+            "id": "5575ba30b70ae25a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_Journals/2025/2025-8/2025-08-26-星期二.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-08-26-星期二"
+            }
+          },
+          {
+            "id": "0362d5e8b21fe0f0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "home_page.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "home_page"
+            }
+          },
+          {
+            "id": "e4b27a8c86afddb1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01_Projects/Goxceed/Common/Build.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Build"
+            }
+          },
+          {
+            "id": "7f35593c8f2c46fa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00_Journals/2025/2025-9/2025-09-12-星期五.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-09-12-星期五"
             }
           }
-        ]
+        ],
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -69,7 +152,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "gdb .boot",
+                "query": "耐5",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -100,7 +183,8 @@
               "title": "Copilot"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -187,13 +271,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "home_page.md",
+                "file": "00_Journals/2025/2025-9/2025-09-12-星期五.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "home_page 的大纲"
+              "title": "2025-09-12-星期五 的大纲"
             }
           }
         ]
@@ -220,8 +304,31 @@
       "obsidian-excalidraw-plugin:新建绘图文件": false
     }
   },
-  "active": "50e41b9337aac610",
+  "active": "7f35593c8f2c46fa",
   "lastOpenFiles": [
+    "00_Journals/2025/2025-8/2025-08-26-星期二.md",
+    "00_Journals/2025/2025-9/2025-09-12-星期五.md",
+    "01_Projects/Goxceed/Common/Build.md",
+    "01_Projects/Chiptest/Virgo/mpw/other_peri/fpga_mpw_final/gx_timer_chiptest.md",
+    "欢迎.md",
+    "02_Learning/linux/driver/devices/gpio/gpio.excalidraw.md",
+    "02_Learning/linux/driver/devices/gpio/linux_gpio_driver.md",
+    "home_page.md",
+    "01_Projects/Goxceed/Redmine/支持 DM SPINand flash.md",
+    "typora/note.md",
+    "01_Projects/Goxceed/Redmine/GPIO 添加 GXAPI 接口.md",
+    "01_Projects/Robots/Redmine/Robotos 驱动.md",
+    "00_Journals/2025/2025-9/2025-09-11-星期四.md",
+    "06 资源/image/Pasted Image 20250911191650_841.png",
+    "06 资源/image/Pasted Image 20250911162403_792.png",
+    "06 资源/image/Pasted Image 20250911162232_569.png",
+    "06 资源/image",
+    "06 资源",
+    "02_Learning/linux/qemu.md",
+    "00_Journals/2025/2025-9/2025-09-10-星期三.md",
+    "01_Projects/Chiptest/Virgo/mpw/chiptest/Virgo 3502 OTT 板级指示灯.md",
+    "01_Projects/Common/IP/axi_dma ip.md",
+    "02_Learning/linux/driver/devices/gpio/linux_gpio_driver.md~",
     "07_Temps/6-5/flash_spi_readid/readid.c",
     "07_Temps/5-9/gen_spi_to_axi_dma_notwork/spi_dma.c",
     "07_Temps/5-9/gen_spi_to_axi_dma_notwork/gen_spi_dma.c",
@@ -229,10 +336,6 @@
     "07_Temps/3-18/virgo_peri/serial_send.py",
     "07_Temps/3-18/virgo_peri/rtc.h",
     "07_Temps/3-18/virgo_peri/dw_rtc.c",
-    "07_Temps/3-18/virgo_peri/bootmenu.c",
-    "07_Temps/2-27/iodma/pinmux.c",
-    "07_Temps/2-27/iodma/main.c",
-    "07_Temps/2-27/iodma/gx_ws2812.c",
     "07_Temps/2025_08_26/README.md",
     "07_Temps/linux_mount_rootfs.excalidraw.md",
     "07_Temps/Temp.md",
@@ -244,30 +347,11 @@
     "06_Resources/image/选区_591.png",
     "06_Resources/image/选区_590.png",
     "06_Resources/image/选区_589.png",
-    "06_Resources/image/选区_536.png",
-    "06_Resources/image/选区_483.png",
-    "06_Resources/image/选区_482.png",
     "06_Resources/模板/日记模板.md",
     "06_Resources/模板/周小结生成提示词.md",
     "06_Resources/模板/Robots 支持 Nor Flash.md",
     "06_Resources/模板/Linux_xxx_driver.md",
     "06_Resources/模板/GoXceed 支持 SPINand Flash.md",
-    "06_Resources/模板/GoXceed 支持 PPI Nand Flash.md",
-    "06_Resources/模板/GoXceed 支持 Nor Flash.md",
-    "05_Lifes/生态鱼缸.md",
-    "05_Lifes/小智 AI.md",
-    "05_Lifes/密码.md",
-    "05_Lifes/备忘录.md",
-    "04_Others/xmind/driver/dw_uart/8250_port.md",
-    "04_Others/xmind/driver/dw_uart/8250_dw.md",
-    "04_Others/xmind/driver/dw_uart/8250_core.md",
-    "04_Others/xmind/driver/dw_i2c/dw_i2c.md",
-    "04_Others/年终总结/2024年终总结.md",
-    "04_Others/年终总结/2023年终总结.md",
-    "04_Others/年终总结/2022年终总结.md",
-    "04_Others/ubuntu_back_config/Shell 背景颜色配置.md",
-    "04_Others/lazyvim/Lazyvim 常用功能按键映射.md",
-    "04_Others/cursor/cursor 增强配置.md",
     "未命名.canvas"
   ]
 }

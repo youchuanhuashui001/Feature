@@ -47,7 +47,7 @@ views:
     filters:
       and:
         - file.hasTag("doing")
-        - '!file.inFolder("06 资源")'
+        - '!file.inFolder("06_Resources")'
     order:
       - file.name
       - file.tags

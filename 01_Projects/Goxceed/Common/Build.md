@@ -1834,3 +1834,28 @@ set $pc=0x00008000
 	  - `./build config -m gpio`
   - 编译 gxtest：`./build arm ecos virgo 3502 dbvs bin`
   - 编译完成后会生成整 bin，将整 bin 烧到 flash，启动之后会启动测试 shell
+
+## Linux4.19
+- 先整体编译所有工程，确保依赖项都被编译成功：
+```shell
+./make.sh gxtest-chiptest arm linux virgo 3502 dvbs bin
+```
+- 编译 u-boot
+```
+cd platform/u-boot
+make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- nationalchip_virgo_defconfig
+make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- -j8
+```
+-   挑选用例：
+	- 在 `gxtest/stb/goxceed` 目录下打开 `confs/def_config` 文件中的 `USE_SHELL_CLI_SHELL=y` 选项
+	  - `./build config -m gpio`
+  - 编译 gxtest：`./build arm ecos virgo 3502 dbvs bin 64`
+  - 编译完成后会生成整 bin，将整 bin 烧到 flash，启动之后会启动测试 shell
+
+
+
+
+
+>[!note]
+>需要先 repo sync 把所有代码都拉下来
+

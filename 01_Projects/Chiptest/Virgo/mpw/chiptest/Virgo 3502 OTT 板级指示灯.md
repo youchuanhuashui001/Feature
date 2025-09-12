@@ -1,5 +1,4 @@
-#doing
-#备注：gxloader需要周龙提供补丁，在PMU域正确操作LED
+
 
 - C08
 	- standby，待机
@@ -133,3 +132,9 @@ echo 500 > /sys/class/leds/led-status/delay_off
 
 ## 【已解决】USB两个引脚需要确保是高电平，不能有人修改
 - 这两个引脚默认是输入模式，需要 linux 时配置这两个引脚为输出模式，输出高电平
+
+
+## 【已解决】PMU 域控制 GPIOC08 拉低
+- 默认进入 PMU 域时会把所有 GPIO 拉低(SUSPEND 模式会把 GPIOC03 拉高)
+- LED 灯是低有效，所以现在其实已经控制了，因此不需要控制了
+- 如果是高有效，需要在 SUSPEND_GPIO_MASK 中处理 1<<8，SUSPEND_GPIO_DATA 中添加 1<<8 来拉高 GPIOC08
